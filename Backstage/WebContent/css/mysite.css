@@ -1,0 +1,57 @@
+@CHARSET "UTF-8";
+
+#wrapper{ /*定義最外框(id=wrapper)的格式，定義id使用#id名字*/
+          width: 960px;
+          height: 900px;
+
+          margin-left:auto; 
+          margin-right:auto; /*外框左右自動均分(置中)，置中使用margin*/
+        }
+#header {
+    width: 960px;
+    height: 70px;
+
+    margin-left:auto; 
+    margin-right:auto; 
+  }
+
+#header2 {
+    width: 960px;
+    height: 70px;
+
+    margin-left:auto; 
+    margin-right:auto; 
+  }
+
+#content {
+	width: 960px;
+    height: 800px;
+
+    margin-left:auto; 
+    margin-right:auto; 
+  }
+ /*login.jsp*/
+
+.other-color{background: #E6E6FA}
+
+h1{
+	font-family: monospace,Microsoft JhengHei,sans-serif,cursive,fantasy;
+}
+#login {
+	width: 400px;
+    height: 260px;
+    margin-left:auto; 
+    margin-right:auto; 
+  }
+
+
+ /*category.jsp*/
+#example{margin: auto; width:150px;}
+#AAAA{height: 250px;
+	table-layout:fixed;
+	word-wrap:break-word;
+	overflow:hidden;}
+.hiddenRow { padding: 0 !important;	}
+.glyphicon.glyphicon-plus{
+    font-size: 10px;
+}
