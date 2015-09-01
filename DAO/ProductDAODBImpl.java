@@ -197,7 +197,7 @@ public class ProductDAODBImpl implements ProductDAO {
         return -1;
     }
 
-    /*@Override
+    @Override
 	public int findByCategoryid(int category_id)
 	{
 		try {
@@ -222,7 +222,7 @@ public class ProductDAODBImpl implements ProductDAO {
         }
 		return -1;
 	}
-*/
+
 	@Override
 	public Product findByName(String product_name)
 	{
@@ -274,5 +274,6 @@ public class ProductDAODBImpl implements ProductDAO {
         }
 		return null;
 	}
+
 
 }

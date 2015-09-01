@@ -76,6 +76,13 @@ function check_data()//判斷欄位是否空白
 	   img2.src = "img/a1.png";
 	   flag = false;
    }
+	// ---------- value的值是否為0(ajax)----------
+   var dup = document.getElementById('dup');
+   if(dup.value=='0')
+   {
+      flag = false;
+   }
+   
 
    return flag;
 }

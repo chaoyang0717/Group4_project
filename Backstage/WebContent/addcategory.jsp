@@ -76,7 +76,6 @@ function updateData2(){
 	if(request2.readyState==4){
 		var dup2 = document.getElementById("dup2");
 		dup2.value = request2.responseText.trim();
-		
 		//把check判斷抓取的值回送給dup，修改dup的value在進行判斷。trim<--消除左右空白以免判斷錯誤
 		if (dup2.value == "1")//取得的值為1，則顯示打V的圖
 			{
@@ -91,7 +90,7 @@ function updateData2(){
 	}
 }
 
-function check_data()//判斷欄位是否空白
+function check11()//判斷欄位是否空白
 {
    var flag = true;
 
@@ -110,6 +109,13 @@ function check_data()//判斷欄位是否空白
 	   var img2 = document.getElementById("img2");
 	   img2.src = "img/a1.png";
 	   flag = false;
+   }
+// ---------- value的值是否為1(ajax)----------
+   var dup = document.getElementById('dup');
+   var dup2 = document.getElementById('dup2');
+   if(dup.value=='0' ||dup2.value=='0')
+   {
+      flag = false;
    }
 
    return flag;
@@ -154,7 +160,7 @@ function check_data()//判斷欄位是否空白
 							  <div class="panel-heading">種類新增</div>
 								<div class="panel-body">
 						
-							<form class="form-horizontal" name="category" action="categoryAddCode.jsp" method="post" onsubmit="return check_date();" >
+							<form class="form-horizontal" name="category" action="categoryAddCode.jsp" method="post" onsubmit="return check11();" >
 								<div class="form-group">
 							    	<label for="inputEmail3" class="col-sm-2 control-label">種類編號</label>
 							    <div class="col-sm-8">
