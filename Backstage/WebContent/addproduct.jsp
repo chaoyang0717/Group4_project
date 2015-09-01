@@ -80,12 +80,12 @@ function updateData4(){
 		if (dup2.value == "1")//取得的值為1，則顯示打V的圖
 			{
 			var img2 = document.getElementById("img2");
-			img2.src = "img/a0.png";
+			img2.src = "img/a1.png";
 			}
 		else
 			{
 			var img2 = document.getElementById("img2");
-			img2.src = "img/a1.png";
+			img2.src = "img/a0.png";
 			}
 	}
 }
@@ -113,7 +113,7 @@ function check22()//判斷欄位是否空白
 // ---------- value的值是否為1(ajax)----------
    var dup = document.getElementById('dup');
    var dup2 = document.getElementById('dup2');
-   if(dup.value=='0' ||dup2.value=='0')
+   if(dup.value=='0' ||dup2.value=='1')
    {
       flag = false;
    }
@@ -154,7 +154,7 @@ function check22()//判斷欄位是否空白
 						<div class="panel panel-default" width="60px">
 						  <div class="panel-heading">菜單新增</div>
 							<div class="panel-body">
-							<form class="form-horizontal" name="product" action="productAddCode.jsp" method="post" onsubmit="return check22();" >
+							<form class="form-horizontal" enctype="multipart/form-data" name="product" action="productAddCode.jsp" method="post" onsubmit="return check22();" >
 								<div class="form-group">
 							    	<label for="input3" class="col-sm-2 control-label">產品編號</label>
 							    <div class="col-sm-8">
@@ -202,7 +202,7 @@ function check22()//判斷欄位是否空白
 							  <div class="form-group">
 							    <label for="inputPassword4" class="col-sm-2 control-label">檔案上傳(b)</label>
 							    <div class="col-sm-8">
-							      <input type="text" class="form-control" id="filename_big" name="filename_big" placeholder="請上傳檔案">
+							      <input type="file" class="form-control" id="filename_big" name="filename_big" placeholder="請上傳檔案">
 							    </div>
 							  </div>
 							  <div class="form-group">
