@@ -21,38 +21,7 @@
 
 
 <script language="JavaScript">
-/*
-var request
-function getData(){ //加入Ajax判斷
-	
-	var acc=document.getElementById('find_product')//取得使用者輸入的值
-	alert(acc);
-	request=new XMLHttpRequest();//在記憶體內開啟一個網頁
-	request.open("GET", "category_DelCheck.jsp?id="+acc.value, true); //將名字的值傳入check的網頁判斷，有找到名字該網頁會顯示1(有重複)
-	// 這行是設定 request 要去哪取資料，尚未開始取
-	// 第三個參數打 true 可以想成，利用另外一個執行緒處理 Request
-	// 第三個參數打 false 可以想成，利用這一個執行緒處理 Request
-	
-	
-	request.onreadystatechange = updateData;
-	// 當記憶體中的瀏覽器狀態改變時，呼叫 updateData 這個 function
-	 
-	 request.send(null);// 發動 request 去取資料
-	
-}
 
-function updateData(){
-	var dupcc = document.getElementById("dupcc");
-		dupcc.value = request.responseText.trim();
-
-	
-}
-
-
-*/
-$(document).ready(function() {
-    $('#example').DataTable();
-} );
 </script>
 
 
@@ -160,7 +129,7 @@ $(document).ready(function() {
 								int end_num = loc*PAGE_RANGE+PAGE_RANGE;
 								int uplimit = (TotalPages > end_num) ? end_num : TotalPages;
 								int i=start_num;
-								if (TotalPages < end_num && start_num > PAGE_RANGE)
+								if (start_num > PAGE_RANGE)
 								{
 								%>
 									<td class="text-center"><a href="category.jsp?t=category&p=<%=i-PAGE_RANGE %>"><i class="glyphicon glyphicon-backward"></i></a></td>

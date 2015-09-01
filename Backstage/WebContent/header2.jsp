@@ -17,14 +17,15 @@
 </script>
 
 
+
 </head>
 <body>
 
-<ul class="nav nav-tabs">
-  <li role="presentation" class="active"><a href="product.jsp">菜單列表</a></li>
+<ul class="nav nav-tabs" id="myTab">
+  <li role="presentation"><a href="product.jsp">菜單列表</a></li>
   <li role="presentation"><a href="addproduct.jsp">菜單新增</a></li>
   <li role="presentation"><a href="category.jsp">種類列表</a></li>
-  <li role="presentation"><a href="addcategory.jsp#">種類新增</a></li>
+  <li role="presentation"><a href="addcategory.jsp">種類新增</a></li>
 </ul>
 	
 
