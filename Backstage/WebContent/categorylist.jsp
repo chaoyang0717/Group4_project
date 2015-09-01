@@ -38,7 +38,7 @@
 							
 									final int PAGE_SIZE = 5; //每頁顯示幾筆
 									int start_loc = (p - 1) * PAGE_SIZE + 1; //起始抓的筆數
-									CategoryDAO dao = new CategoryDAOImol();
+									CategoryDAO dao = new CategoryDAODBImpl();
 									ArrayList<Category> list = dao.getRangeCategory(start_loc, PAGE_SIZE);
 							
 									int TotalRows = dao.getSize(); //計算總筆數

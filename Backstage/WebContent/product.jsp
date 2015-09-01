@@ -90,8 +90,8 @@
 										for (Product p : mylist)
 										{
 									%>
-									<tr data-toggle="collapse" data-target="#tr<%=p.product_id%>" id="<%=p.product_id%>">
-										<td align="center">
+									<tr>
+										<td align="center" data-toggle="collapse" data-target="#tr<%=p.product_id%>" id="<%=p.product_id%>">
 										<a href="#" class="btn" id="<%=p.product_id%>"><i class="glyphicon glyphicon-plus"></i></a></td>
 										<td align="center"><%=p.product_id%></td>
 										<td align="center"><%=p.category_id%></td>
@@ -106,7 +106,7 @@
 										</td>
 									</tr>
 									<tr id="tr<%=p.product_id%>" class="collapse out">
-										<td colspan="7">摘要:<%=p.summary%><br/>上傳檔案(b):<%=p.filename_big%><br/>上傳檔案(b):<%=p.filename_small%></td>
+										<td colspan="7">摘要:<%=p.summary%><br/>檔案(b):<%=p.filename_big%><br/>檔案(s):<%=p.filename_small%></td>
 									</tr>
 									
 									<%
@@ -142,7 +142,7 @@
 								int p_end_num = p_loc*P_PAGE_RANGE+P_PAGE_RANGE;
 								int p_uplimit = (p_TotalPages > p_end_num) ? p_end_num : p_TotalPages;
 								int j=p_start_num;
-								if (p_TotalPages < p_end_num && p_start_num > P_PAGE_RANGE)
+								if (p_start_num > P_PAGE_RANGE)
 								{
 								%>
 									<td class="text-center"><a href="product.jsp?m=<%=j-P_PAGE_RANGE %>"><i class="glyphicon glyphicon-backward"></i></a></td>

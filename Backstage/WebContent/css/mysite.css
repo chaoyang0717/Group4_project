@@ -23,6 +23,11 @@
     margin-right:auto; 
   }
 
+.nav-tabs > li > a:hover {
+    color: black;
+}
+
+
 #content {
 	width: 960px;
     height: 800px;
