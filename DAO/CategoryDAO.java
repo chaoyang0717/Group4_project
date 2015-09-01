@@ -12,5 +12,7 @@ public interface CategoryDAO
 	public ArrayList<Category> getRangeCategory(int start,int size);
 	public int getSize();
 	
+	public Category findByName(String category_name);
+	
 	
 }

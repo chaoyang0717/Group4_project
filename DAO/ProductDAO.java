@@ -13,5 +13,8 @@ public interface ProductDAO
 	public int getSize();
 	
 	//刪除種類要確認是否有被product使用
-	public int findByCategoryid(int category_id);
+	//public int findByCategoryid(int category_id);
+	public Product findByName(String product_name);
+	public ArrayList<Product> getByCategoryId(int category_id);
+	
 }

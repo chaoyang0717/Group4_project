@@ -197,7 +197,7 @@ public class ProductDAODBImpl implements ProductDAO {
         return -1;
     }
 
-	@Override
+    /*@Override
 	public int findByCategoryid(int category_id)
 	{
 		try {
@@ -221,6 +221,58 @@ public class ProductDAODBImpl implements ProductDAO {
             e.printStackTrace();
         }
 		return -1;
+	}
+*/
+	@Override
+	public Product findByName(String product_name)
+	{
+		try {
+            Class.forName(DRIVE_NAME);
+            Connection conn = DriverManager.getConnection(CONN_STRING);
+
+            PreparedStatement pstmt = conn.prepareStatement("Select * from product where product_name = ?");
+            pstmt.setString(1, product_name);
+            ResultSet rs = pstmt.executeQuery();
+            if (rs.next()) {
+                Product p = new Product(rs.getString(1), rs.getInt(2), rs.getString(3), rs.getString(4), rs.getInt(5), rs.getString(6), rs.getString(7), rs.getString(8));
+                return p;
+            } else {
+                return null;
+            }
+
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+	}
+
+	public ArrayList<Product> getByCategoryId(int category_id)
+	{
+		try {
+            Class.forName(DRIVE_NAME);
+            Connection conn = DriverManager.getConnection(CONN_STRING);
+            
+            PreparedStatement pstmt = conn.prepareStatement("Select * from product where category_id=?");
+            pstmt.setInt(1, category_id);
+            ResultSet rs = pstmt.executeQuery();
+
+            ArrayList<Product> mylist = new ArrayList();
+
+            while (rs.next()) {
+                mylist.add(new Product(rs.getString(1), rs.getInt(2), rs.getString(3), rs.getString(4), rs.getInt(5), rs.getString(6), rs.getString(7), rs.getString(8)));
+            }
+            rs.close();
+            pstmt.close();
+            conn.close();
+            return mylist;
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+		return null;
 	}
 
 }

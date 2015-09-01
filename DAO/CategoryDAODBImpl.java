@@ -217,4 +217,35 @@ public class CategoryDAODBImpl implements CategoryDAO
 		return -1;
 	}
 
+	@Override
+	public Category findByName(String category_name)
+	{
+		try
+		{
+			Class.forName(DRIVE_NAME);
+			Connection conn = DriverManager.getConnection(CONN_STRING);
+
+			PreparedStatement pstmt = conn.prepareStatement("Select * from category where category_name = ?");
+            pstmt.setString(1, category_name);
+            ResultSet rs = pstmt.executeQuery();
+            if (rs.next())
+            {
+            	Category c = new Category(rs.getInt(1), rs.getString(2), rs.getString(3));
+                return c;
+            }
+            else
+            {
+                return null;
+            }
+            
+		} catch (ClassNotFoundException e)
+		{
+			e.printStackTrace();
+		} catch (SQLException e)
+		{
+			e.printStackTrace();
+		}
+		return null;
+	}
+
 }
