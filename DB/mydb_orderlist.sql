@@ -24,8 +24,7 @@ DROP TABLE IF EXISTS `orderlist`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `orderlist` (
   `idOrderList` int(11) NOT NULL AUTO_INCREMENT,
-  `order_id` varchar(8) DEFAULT NULL,
-  `member_id` varchar(8) DEFAULT NULL,
+  `order_id` int(11) DEFAULT NULL,
   `product_id` varchar(8) DEFAULT NULL,
   `product_name_ch` varchar(45) DEFAULT NULL,
   `price` int(11) DEFAULT NULL,
@@ -52,4 +51,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-09-02 15:08:52
+-- Dump completed on 2015-09-02 16:36:38

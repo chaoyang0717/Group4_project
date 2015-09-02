@@ -1,4 +1,5 @@
-package order.member;
+//package edu.pccu.student;
+package order.category;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -23,7 +24,7 @@ public class MemberDAODBImpl implements MemberDAO{
             Connection conn = DriverManager.getConnection(CONN_STRING);
             PreparedStatement pstmt = conn.prepareStatement("Insert into member (member_id,member_account,member_password,member_tel,member_email) values (?,?,?,?,?)");
             pstmt.setString(1, member.member_id);
-            pstmt.setString(2, member.member_account);
+            pstmt.setString(2, member.member_account);//account=email
             pstmt.setString(3, member.member_password);
             pstmt.setString(4, member.member_tel);
             pstmt.setString(5, member.member_email);
