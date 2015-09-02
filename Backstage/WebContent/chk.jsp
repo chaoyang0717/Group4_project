@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" import="order.category.*"%>
+    pageEncoding="UTF-8" import="order.category.*;"%>
 
 <% 	
 	request.setCharacterEncoding("utf-8"); 
@@ -17,7 +17,7 @@
 		session.setAttribute("Login", "ok");
 
 	}else{
-
+		
 		response.sendRedirect("login.jsp");
 		session.setAttribute("ATT", "fail");
 
