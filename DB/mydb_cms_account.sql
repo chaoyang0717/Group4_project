@@ -24,7 +24,7 @@ DROP TABLE IF EXISTS `cms_account`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `cms_account` (
   `account` varchar(8) NOT NULL,
-  `password` varchar(20) DEFAULT NULL,
+  `password` varchar(100) DEFAULT NULL,
   `emp_id` int(11) DEFAULT NULL,
   `per_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`account`)
@@ -37,7 +37,7 @@ CREATE TABLE `cms_account` (
 
 LOCK TABLES `cms_account` WRITE;
 /*!40000 ALTER TABLE `cms_account` DISABLE KEYS */;
-INSERT INTO `cms_account` VALUES ('abc','123',1,1),('admin','1234',1,1);
+INSERT INTO `cms_account` VALUES ('abc','193a3ea6779e06d7015e1aa585d989f2',1,1),('admin','fd8069eab736fb5e6c3d1e9c24a0e23c',1,1);
 /*!40000 ALTER TABLE `cms_account` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -50,4 +50,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-09-02 15:08:51
+-- Dump completed on 2015-09-02 17:49:44
