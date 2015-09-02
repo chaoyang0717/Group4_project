@@ -250,7 +250,7 @@ jQuery(document).ready(function(){
 		<%if((i)<list.size()){
 		%>
 		<p><h3><%=list.get(i).product_name%></h3></p><br/>
-		<p><a href="upload/<%=list.get(i).filename_big%>" rel="lightbox" title="<%=list.get(i).product_name%>" ><img src="upload/<%=list.get(i).filename_small%>" /></p><br/></a>
+		<p><img src="<%=list.get(i).filename_small%>" /></p><br/>
 		<p><h4>金額<span class="glyphicon glyphicon-usd" aria-hidden="true"><%=list.get(i).price%></span></h4></p><br/>
 		<p><h4><%=list.get(i).summary%></h4></p><br/>
 		<input type='button' value='-' class='qtyminus' field='quantity_1' />
@@ -267,7 +267,7 @@ jQuery(document).ready(function(){
 		<td>
 		<% if((i+1)<list.size()){%>
 		<p><h3><%=list.get(i+1).product_name%></h3></p><br/>
-		<p><a href="upload/<%=list.get(i+1).filename_big%>" rel="lightbox" title="<%=list.get(i+1).product_name%>" ><img src="upload/<%=list.get(i+1).filename_small%>" /></p><br/></a>
+		<p><%=list.get(i+1).filename_small%></p><br/>
 		<p><h4>金額<span class="glyphicon glyphicon-usd" aria-hidden="true"><%=list.get(i).price%></span></h4></p><br/>
 		<p><h4><%=list.get(i+1).summary%></h4></p><br/>
 		<input type='button' value='-' class='qtyminus' field='quantity_1' />
@@ -286,7 +286,7 @@ jQuery(document).ready(function(){
 		<td>
 		<%if((i+2)<list.size()){%>
 		<p><h3><%=list.get(i+2).product_name%></h3></p><br/>
-		<p><a href="upload/<%=list.get(i+2).filename_big%>" rel="lightbox" title="<%=list.get(i+2).product_name%>" ><img src="upload/<%=list.get(i+2).filename_small%>" /></p><br/></a>
+		<p><%=list.get(i+2).filename_small%></p><br/>
 		<p><h4>金額<span class="glyphicon glyphicon-usd" aria-hidden="true"><%=list.get(i).price%></span></h4></p><br/>
 		<p><h4><%=list.get(i+2).summary%></h4></p><br/>
 		<input type='button' value='-' class='qtyminus' field='quantity_1' />
@@ -331,7 +331,7 @@ jQuery(document).ready(function(){
 		<%if((i)<list2.size()){
 		%>
 		<p><h3><%=list2.get(i).product_name%></h3></p><br/>
-		<p><a href="upload/<%=list2.get(i).filename_big%>" rel="lightbox" title="<%=list2.get(i).product_name%>" ><img src="upload/<%=list2.get(i).filename_small%>" /></p><br/></a>
+		<p><%=list2.get(i).filename_small%></p><br/>
 		<p><h4>金額<span class="glyphicon glyphicon-usd" aria-hidden="true"><%=list2.get(i).price%></span></h4></p><br/>
 		<p><h4><%=list2.get(i).summary%></h4></p><br/>
 		<input type='button' value='-' class='qtyminus' field='quantity_1' />
@@ -348,7 +348,7 @@ jQuery(document).ready(function(){
 		<td>
 		<% if((i+1)<list2.size()){%>
 		<p><h3><%=list2.get(i+1).product_name%></h3></p><br/>
-		<p><a href="upload/<%=list2.get(i+1).filename_big%>" rel="lightbox" title="<%=list2.get(i+1).product_name%>" ><img src="upload/<%=list2.get(i+1).filename_small%>" /></p><br/></a>
+		<p><%=list2.get(i+1).filename_small%></p><br/>
 		<p><h4>金額<span class="glyphicon glyphicon-usd" aria-hidden="true"><%=list2.get(i).price%></span></h4></p><br/>
 		<p><h4><%=list2.get(i+1).summary%></h4></p><br/>
 		<input type='button' value='-' class='qtyminus' field='quantity_1' />
@@ -367,7 +367,7 @@ jQuery(document).ready(function(){
 		<td>
 		<%if((i+2)<list2.size()){%>
 		<p><h3><%=list2.get(i+2).product_name%></h3></p><br/>
-		<p><a href="upload/<%=list2.get(i+2).filename_big%>" rel="lightbox" title="<%=list2.get(i+2).product_name%>" ><img src="upload/<%=list2.get(i+2).filename_small%>" /></p><br/></a>
+		<p><%=list2.get(i+2).filename_small%></p><br/>
 		<p><h4>金額<span class="glyphicon glyphicon-usd" aria-hidden="true"><%=list2.get(i).price%></span></h4></p><br/>
 		<p><h4><%=list2.get(i+2).summary%></h4></p><br/>
 		<input type='button' value='-' class='qtyminus' field='quantity_1' />
@@ -412,7 +412,7 @@ jQuery(document).ready(function(){
 		<%if((i)<list3.size()){
 		%>
 		<p><h3><%=list3.get(i).product_name%></h3></p><br/>
-		<p><a href="upload/<%=list3.get(i).filename_big%>" rel="lightbox" title="<%=list3.get(i).product_name%>" ><img src="upload/<%=list3.get(i).filename_small%>" /></p><br/></a>
+		<p><%=list3.get(i).filename_small%></p><br/>
 		<p><h4>金額<span class="glyphicon glyphicon-usd" aria-hidden="true"><%=list3.get(i).price%></span></h4></p><br/>
 		<p><h4><%=list3.get(i).summary%></h4></p><br/>
 		<input type='button' value='-' class='qtyminus' field='quantity_1' />
@@ -429,7 +429,7 @@ jQuery(document).ready(function(){
 		<td>
 		<% if((i+1)<list3.size()){%>
 		<p><h3><%=list3.get(i+1).product_name%></h3></p><br/>
-		<p><a href="upload/<%=list3.get(i+1).filename_big%>" rel="lightbox" title="<%=list3.get(i+1).product_name%>" ><img src="upload/<%=list3.get(i+1).filename_small%>" /></p><br/></a>
+		<p><%=list3.get(i+1).filename_small%></p><br/>
 		<p><h4>金額<span class="glyphicon glyphicon-usd" aria-hidden="true"><%=list3.get(i).price%></span></h4></p><br/>
 		<p><h4><%=list3.get(i+1).summary%></h4></p><br/>
 		<input type='button' value='-' class='qtyminus' field='quantity_1' />
@@ -448,7 +448,7 @@ jQuery(document).ready(function(){
 		<td>
 		<%if((i+2)<list3.size()){%>
 		<p><h3><%=list3.get(i+2).product_name%></h3></p><br/>
-		<p><a href="upload/<%=list3.get(i+2).filename_big%>" rel="lightbox" title="<%=list3.get(i+2).product_name%>" ><img src="upload/<%=list3.get(i+2).filename_small%>" /></p><br/></a>
+		<p><%=list3.get(i+2).filename_small%></p><br/>
 		<p><h4>金額<span class="glyphicon glyphicon-usd" aria-hidden="true"><%=list3.get(i).price%></span></h4></p><br/>
 		<p><h4><%=list3.get(i+2).summary%></h4></p><br/>
 		<input type='button' value='-' class='qtyminus' field='quantity_1' />
@@ -493,7 +493,7 @@ jQuery(document).ready(function(){
 		<%if((i)<list4.size()){
 		%>
 		<p><h3><%=list4.get(i).product_name%></h3></p><br/>
-		<p><a href="upload/<%=list4.get(i).filename_big%>" rel="lightbox" title="<%=list4.get(i).product_name%>" ><img src="upload/<%=list4.get(i).filename_small%>" /></p><br/></a>
+		<p><%=list4.get(i).filename_small%></p><br/>
 		<p><h4>金額<span class="glyphicon glyphicon-usd" aria-hidden="true"><%=list4.get(i).price%></span></h4></p><br/>
 		<p><h4><%=list4.get(i).summary%></h4></p><br/>
 		<input type='button' value='-' class='qtyminus' field='quantity_1' />
@@ -510,7 +510,7 @@ jQuery(document).ready(function(){
 		<td>
 		<% if((i+1)<list4.size()){%>
 		<p><h3><%=list4.get(i+1).product_name%></h3></p><br/>
-		<p><a href="upload/<%=list4.get(i+1).filename_big%>" rel="lightbox" title="<%=list4.get(i+1).product_name%>" ><img src="upload/<%=list4.get(i+1).filename_small%>" /></p><br/></a>
+		<p><%=list4.get(i+1).filename_small%></p><br/>
 		<p><h4>金額<span class="glyphicon glyphicon-usd" aria-hidden="true"><%=list4.get(i).price%></span></h4></p><br/>
 		<p><h4><%=list4.get(i+1).summary%></h4></p><br/>
 		<input type='button' value='-' class='qtyminus' field='quantity_1' />
@@ -529,7 +529,7 @@ jQuery(document).ready(function(){
 		<td>
 		<%if((i+2)<list4.size()){%>
 		<p><h3><%=list4.get(i+2).product_name%></h3></p><br/>
-		<p><a href="upload/<%=list4.get(i+2).filename_big%>" rel="lightbox" title="<%=list4.get(i+2).product_name%>" ><img src="upload/<%=list4.get(i+2).filename_small%>" /></p><br/></a>
+		<p><%=list4.get(i+2).filename_small%></p><br/>
 		<p><h4>金額<span class="glyphicon glyphicon-usd" aria-hidden="true"><%=list4.get(i).price%></span></h4></p><br/>
 		<p><h4><%=list4.get(i+2).summary%></h4></p><br/>
 		<input type='button' value='-' class='qtyminus' field='quantity_1' />
@@ -698,19 +698,15 @@ jQuery(document).ready(function(){
              <div class=row>
                <div class=col-md-4>
                  <h3>簡介</h3>
-                 <p>Java與Web整合程式設計師班</p>
-                 <p>專題題目:線上點餐系統</p>
-                 <p>選定的餐點是義式料理</p>
+                 <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.</p>
                </div>
                <div class=col-md-4>
                  <h3>理念</h3>
-                 <p>"線上點餐系統"讓消費者可以經由網路在任何地方，透過網頁呈現方式，可以方便快速的在線上點餐，並可選擇外送或自取。</p>                
+                 <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.</p>                
                </div>
                <div class=col-md-4>
                <h3>成員</h3>
-               <p>文化大學推廣部建國分部 R202教室</p>
-               <p>林秀玲、黃芷萱、黃朝暘、鐘欣志</p>
-               <p>劉建宏、林靖凱、何宗庭</p>
+               <p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
                </div>
              </div>
           </div>

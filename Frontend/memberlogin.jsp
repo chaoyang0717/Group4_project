@@ -33,15 +33,6 @@ li:before {
   width: 1.2em; /* same as padding-left set on li */
   margin-left: 0px; /* same as padding-left set on li */
 }​
-table, th, td {
-    border-collapse: collapse;
-    border-width: 10px;
-    width: 300px;
-    text-align:center;
-    word-break: break-all;
-    
-}
-
 
 </style>
 
@@ -60,7 +51,7 @@ var request
 function getData(){ //加入Ajax判斷
 	var memAcc=document.getElementById('memAcc')//取得使用者輸入的值
 	request=new XMLHttpRequest();//在記憶體內開啟一個網頁
-	request.open("GET", "mem_nameChk.jsp?name="+memAcc.value, true); //將名字的值傳入check的網頁判斷，有找到名字該網頁會顯示1(有重複)
+	request.open("GET", "login_nameCheck.jsp?name="+memAcc.value, true); //將名字的值傳入check的網頁判斷，有找到名字該網頁會顯示1(有重複)
 	// 這行是設定 request 要去哪取資料，尚未開始取
 	// 第三個參數打 true 可以想成，利用另外一個執行緒處理 Request
 	// 第三個參數打 false 可以想成，利用這一個執行緒處理 Request
@@ -130,14 +121,14 @@ $(document).ready( function () {
 </script>
 
 <script type="text/javascript">             //使用Javascript加入id的value內容至點餐單
-function add() {
+function add(id) {
       var ul = document.getElementById("list");
       var li = document.createElement("li");
-      var msg = document.getElementById("id");
-      li.appendChild(document.createTextNode(msg.value));
+      var msg = document.getElementById("Append_"+id);
       //li.innerHTML ="<button type='submit' onclick='del()'>X</button>";
-      //var quantity =document.getElementById("quantity_"+id);
-      //li.appendChild(document.createTextNode(msg[0].value+" 數量 : "+quantity.value));
+      var quantity =document.getElementById("quantity_"+id);
+      li.appendChild(document.createTextNode(msg.value+" 數量 : "+quantity.value));
+
       ul.appendChild(li);
     }
 function del(){
@@ -243,20 +234,15 @@ jQuery(document).ready(function(){
 			ProductDAO dao=new ProductDAODBImpl();
 			ArrayList<Product> list=dao.getByCategoryId(1);
 			for (int i = 0; i < list.size(); i+=2) { %>
-	<center>
-	<table>
+	<table >
 		<tr>
 		<td>
 		<%if((i)<list.size()){
 		%>
 		<p><h3><%=list.get(i).product_name%></h3></p><br/>
-		<p><a href="upload/<%=list.get(i).filename_big%>" rel="lightbox" title="<%=list.get(i).product_name%>" ><img src="upload/<%=list.get(i).filename_small%>" /></p><br/></a>
-		<p><h4>金額<span class="glyphicon glyphicon-usd" aria-hidden="true"><%=list.get(i).price%></span></h4></p><br/>
+		<p><%=list.get(i).filename_big%></p><br/>
+		<p><h4><%=list.get(i).price%></h4></p><br/>
 		<p><h4><%=list.get(i).summary%></h4></p><br/>
-		<input type='button' value='-' class='qtyminus' field='quantity_1' />
-        <input type='text' id='quantity_1' name="quantity_1" value='0' size="3" />
-        <input type='button' value='+' class='qtyplus' field='quantity_1' />
-		<button type="submit" id="<%=list.get(i).product_id%>" onclick="add()" value="<%=list.get(i).product_name%>"><i class="fa fa-cart-plus fa-2x"></i></button>
 	<%}else{%>
 		<p></p><br/>
 		<p></p><br/>
@@ -267,13 +253,9 @@ jQuery(document).ready(function(){
 		<td>
 		<% if((i+1)<list.size()){%>
 		<p><h3><%=list.get(i+1).product_name%></h3></p><br/>
-		<p><a href="upload/<%=list.get(i+1).filename_big%>" rel="lightbox" title="<%=list.get(i+1).product_name%>" ><img src="upload/<%=list.get(i+1).filename_small%>" /></p><br/></a>
-		<p><h4>金額<span class="glyphicon glyphicon-usd" aria-hidden="true"><%=list.get(i).price%></span></h4></p><br/>
+		<p><%=list.get(i+1).filename_big%></p><br/>
+		<p><h4><%=list.get(i+1).price%></h4></p><br/>
 		<p><h4><%=list.get(i+1).summary%></h4></p><br/>
-		<input type='button' value='-' class='qtyminus' field='quantity_1' />
-        <input type='text' id='quantity_1' name="quantity_1" value='0' size="3" />
-        <input type='button' value='+' class='qtyplus' field='quantity_1' />
-		<button type="submit" id="<%=list.get(i).product_id%>" onclick="add()" value="<%=list.get(i).product_name%>"><i class="fa fa-cart-plus fa-2x"></i></button>
 		
 		<%}else{%>
 
@@ -286,13 +268,9 @@ jQuery(document).ready(function(){
 		<td>
 		<%if((i+2)<list.size()){%>
 		<p><h3><%=list.get(i+2).product_name%></h3></p><br/>
-		<p><a href="upload/<%=list.get(i+2).filename_big%>" rel="lightbox" title="<%=list.get(i+2).product_name%>" ><img src="upload/<%=list.get(i+2).filename_small%>" /></p><br/></a>
-		<p><h4>金額<span class="glyphicon glyphicon-usd" aria-hidden="true"><%=list.get(i).price%></span></h4></p><br/>
+		<p><%=list.get(i+2).filename_big%></p><br/>
+		<p><h4><%=list.get(i+2).price%></h4></p><br/>
 		<p><h4><%=list.get(i+2).summary%></h4></p><br/>
-		<input type='button' value='-' class='qtyminus' field='quantity_1' />
-        <input type='text' id='quantity_1' name="quantity_1" value='0' size="3" />
-        <input type='button' value='+' class='qtyplus' field='quantity_1' />
-		<button type="submit" id="<%=list.get(i).product_id%>" onclick="add()" value="<%=list.get(i).product_name%>"><i class="fa fa-cart-plus fa-2x"></i></button>
 		
 		<%}else{%>
 
@@ -309,255 +287,10 @@ jQuery(document).ready(function(){
 		
 			
 </table>
-</center>
 </div>
 </div>
 </div>
-
-<h2><div class="bg-primary"> 義大利麵 Pasta</div></h2>
-
-       <div style="display: block;">
-       <div class=container>
-<div class="row">
-
-			<% 
-			ProductDAO dao2=new ProductDAODBImpl();
-			ArrayList<Product> list2=dao2.getByCategoryId(2);
-			for (int i = 0; i < list2.size(); i+=2) { %>
-	<center>
-	<table>
-		<tr>
-		<td>
-		<%if((i)<list2.size()){
-		%>
-		<p><h3><%=list2.get(i).product_name%></h3></p><br/>
-		<p><a href="upload/<%=list2.get(i).filename_big%>" rel="lightbox" title="<%=list2.get(i).product_name%>" ><img src="upload/<%=list2.get(i).filename_small%>" /></p><br/></a>
-		<p><h4>金額<span class="glyphicon glyphicon-usd" aria-hidden="true"><%=list2.get(i).price%></span></h4></p><br/>
-		<p><h4><%=list2.get(i).summary%></h4></p><br/>
-		<input type='button' value='-' class='qtyminus' field='quantity_1' />
-        <input type='text' id='quantity_1' name="quantity_1" value='0' size="3" />
-        <input type='button' value='+' class='qtyplus' field='quantity_1' />
-		<button type="submit" id="<%=list2.get(i).product_id%>" onclick="add()" value="<%=list2.get(i).product_name%>"><i class="fa fa-cart-plus fa-2x"></i></button>
-	<%}else{%>
-		<p></p><br/>
-		<p></p><br/>
-		<p></p><br/>
-		<p></p><br/>
-		<%} %>
-		</td>
-		<td>
-		<% if((i+1)<list2.size()){%>
-		<p><h3><%=list2.get(i+1).product_name%></h3></p><br/>
-		<p><a href="upload/<%=list2.get(i+1).filename_big%>" rel="lightbox" title="<%=list2.get(i+1).product_name%>" ><img src="upload/<%=list2.get(i+1).filename_small%>" /></p><br/></a>
-		<p><h4>金額<span class="glyphicon glyphicon-usd" aria-hidden="true"><%=list2.get(i).price%></span></h4></p><br/>
-		<p><h4><%=list2.get(i+1).summary%></h4></p><br/>
-		<input type='button' value='-' class='qtyminus' field='quantity_1' />
-        <input type='text' id='quantity_1' name="quantity_1" value='0' size="3" />
-        <input type='button' value='+' class='qtyplus' field='quantity_1' />
-		<button type="submit" id="<%=list2.get(i).product_id%>" onclick="add()" value="<%=list2.get(i).product_name%>"><i class="fa fa-cart-plus fa-2x"></i></button>
-		
-		<%}else{%>
-
-		<p></p><br/>
-		<p></p><br/>
-		<p></p><br/>
-		<p></p><br/>
-		<%} %>
-		</td>
-		<td>
-		<%if((i+2)<list2.size()){%>
-		<p><h3><%=list2.get(i+2).product_name%></h3></p><br/>
-		<p><a href="upload/<%=list2.get(i+2).filename_big%>" rel="lightbox" title="<%=list2.get(i+2).product_name%>" ><img src="upload/<%=list2.get(i+2).filename_small%>" /></p><br/></a>
-		<p><h4>金額<span class="glyphicon glyphicon-usd" aria-hidden="true"><%=list2.get(i).price%></span></h4></p><br/>
-		<p><h4><%=list2.get(i+2).summary%></h4></p><br/>
-		<input type='button' value='-' class='qtyminus' field='quantity_1' />
-        <input type='text' id='quantity_1' name="quantity_1" value='0' size="3" />
-        <input type='button' value='+' class='qtyplus' field='quantity_1' />
-		<button type="submit" id="<%=list2.get(i).product_id%>" onclick="add()" value="<%=list2.get(i).product_name%>"><i class="fa fa-cart-plus fa-2x"></i></button>
-		
-		<%}else{%>
-
-		<p></p><br/>
-		<p></p><br/>
-		<p></p><br/>
-		<p></p><br/>
-		<%
-			}%>
-		</td>	
-		</tr>
-			
-		<%} %>
-		
-			
-</table>
-</center>
-</div>
-</div>
-</div>
-
-<h2><div class="bg-primary"> 主餐 Rice</div></h2>
-
-       <div style="display: block;">
-       <div class=container>
-<div class="row">
-
-			<% 
-			ProductDAO dao3=new ProductDAODBImpl();
-			ArrayList<Product> list3=dao3.getByCategoryId(3);
-			for (int i = 0; i < list3.size(); i+=2) { %>
-	<center>
-	<table>
-		<tr>
-		<td>
-		<%if((i)<list3.size()){
-		%>
-		<p><h3><%=list3.get(i).product_name%></h3></p><br/>
-		<p><a href="upload/<%=list3.get(i).filename_big%>" rel="lightbox" title="<%=list3.get(i).product_name%>" ><img src="upload/<%=list3.get(i).filename_small%>" /></p><br/></a>
-		<p><h4>金額<span class="glyphicon glyphicon-usd" aria-hidden="true"><%=list3.get(i).price%></span></h4></p><br/>
-		<p><h4><%=list3.get(i).summary%></h4></p><br/>
-		<input type='button' value='-' class='qtyminus' field='quantity_1' />
-        <input type='text' id='quantity_1' name="quantity_1" value='0' size="3" />
-        <input type='button' value='+' class='qtyplus' field='quantity_1' />
-		<button type="submit" id="<%=list3.get(i).product_id%>" onclick="add()" value="<%=list3.get(i).product_name%>"><i class="fa fa-cart-plus fa-2x"></i></button>
-	<%}else{%>
-		<p></p><br/>
-		<p></p><br/>
-		<p></p><br/>
-		<p></p><br/>
-		<%} %>
-		</td>
-		<td>
-		<% if((i+1)<list3.size()){%>
-		<p><h3><%=list3.get(i+1).product_name%></h3></p><br/>
-		<p><a href="upload/<%=list3.get(i+1).filename_big%>" rel="lightbox" title="<%=list3.get(i+1).product_name%>" ><img src="upload/<%=list3.get(i+1).filename_small%>" /></p><br/></a>
-		<p><h4>金額<span class="glyphicon glyphicon-usd" aria-hidden="true"><%=list3.get(i).price%></span></h4></p><br/>
-		<p><h4><%=list3.get(i+1).summary%></h4></p><br/>
-		<input type='button' value='-' class='qtyminus' field='quantity_1' />
-        <input type='text' id='quantity_1' name="quantity_1" value='0' size="3" />
-        <input type='button' value='+' class='qtyplus' field='quantity_1' />
-		<button type="submit" id="<%=list3.get(i).product_id%>" onclick="add()" value="<%=list3.get(i).product_name%>"><i class="fa fa-cart-plus fa-2x"></i></button>
-		
-		<%}else{%>
-
-		<p></p><br/>
-		<p></p><br/>
-		<p></p><br/>
-		<p></p><br/>
-		<%} %>
-		</td>
-		<td>
-		<%if((i+2)<list3.size()){%>
-		<p><h3><%=list3.get(i+2).product_name%></h3></p><br/>
-		<p><a href="upload/<%=list3.get(i+2).filename_big%>" rel="lightbox" title="<%=list3.get(i+2).product_name%>" ><img src="upload/<%=list3.get(i+2).filename_small%>" /></p><br/></a>
-		<p><h4>金額<span class="glyphicon glyphicon-usd" aria-hidden="true"><%=list3.get(i).price%></span></h4></p><br/>
-		<p><h4><%=list3.get(i+2).summary%></h4></p><br/>
-		<input type='button' value='-' class='qtyminus' field='quantity_1' />
-        <input type='text' id='quantity_1' name="quantity_1" value='0' size="3" />
-        <input type='button' value='+' class='qtyplus' field='quantity_1' />
-		<button type="submit" id="<%=list3.get(i).product_id%>" onclick="add()" value="<%=list3.get(i).product_name%>"><i class="fa fa-cart-plus fa-2x"></i></button>
-		
-		<%}else{%>
-
-		<p></p><br/>
-		<p></p><br/>
-		<p></p><br/>
-		<p></p><br/>
-		<%
-			}%>
-		</td>	
-		</tr>
-			
-		<%} %>
-		
-			
-</table>
-</center>
-</div>
-</div>
-</div>
-
-<h2><div class="bg-primary"> 飲料 Drink</div></h2>
-
-       <div style="display: block;">
-       <div class=container>
-<div class="row">
-
-			<% 
-			ProductDAO dao4=new ProductDAODBImpl();
-			ArrayList<Product> list4=dao4.getByCategoryId(4);
-			for (int i = 0; i < list4.size(); i+=2) { %>
-	<center>
-	<table>
-		<tr>
-		<td>
-		<%if((i)<list4.size()){
-		%>
-		<p><h3><%=list4.get(i).product_name%></h3></p><br/>
-		<p><a href="upload/<%=list4.get(i).filename_big%>" rel="lightbox" title="<%=list4.get(i).product_name%>" ><img src="upload/<%=list4.get(i).filename_small%>" /></p><br/></a>
-		<p><h4>金額<span class="glyphicon glyphicon-usd" aria-hidden="true"><%=list4.get(i).price%></span></h4></p><br/>
-		<p><h4><%=list4.get(i).summary%></h4></p><br/>
-		<input type='button' value='-' class='qtyminus' field='quantity_1' />
-        <input type='text' id='quantity_1' name="quantity_1" value='0' size="3" />
-        <input type='button' value='+' class='qtyplus' field='quantity_1' />
-		<button type="submit" id="<%=list4.get(i).product_id%>" onclick="add()" value="<%=list4.get(i).product_name%>"><i class="fa fa-cart-plus fa-2x"></i></button>
-	<%}else{%>
-		<p></p><br/>
-		<p></p><br/>
-		<p></p><br/>
-		<p></p><br/>
-		<%} %>
-		</td>
-		<td>
-		<% if((i+1)<list4.size()){%>
-		<p><h3><%=list4.get(i+1).product_name%></h3></p><br/>
-		<p><a href="upload/<%=list4.get(i+1).filename_big%>" rel="lightbox" title="<%=list4.get(i+1).product_name%>" ><img src="upload/<%=list4.get(i+1).filename_small%>" /></p><br/></a>
-		<p><h4>金額<span class="glyphicon glyphicon-usd" aria-hidden="true"><%=list4.get(i).price%></span></h4></p><br/>
-		<p><h4><%=list4.get(i+1).summary%></h4></p><br/>
-		<input type='button' value='-' class='qtyminus' field='quantity_1' />
-        <input type='text' id='quantity_1' name="quantity_1" value='0' size="3" />
-        <input type='button' value='+' class='qtyplus' field='quantity_1' />
-		<button type="submit" id="<%=list4.get(i).product_id%>" onclick="add()" value="<%=list4.get(i).product_name%>"><i class="fa fa-cart-plus fa-2x"></i></button>
-		
-		<%}else{%>
-
-		<p></p><br/>
-		<p></p><br/>
-		<p></p><br/>
-		<p></p><br/>
-		<%} %>
-		</td>
-		<td>
-		<%if((i+2)<list4.size()){%>
-		<p><h3><%=list4.get(i+2).product_name%></h3></p><br/>
-		<p><a href="upload/<%=list4.get(i+2).filename_big%>" rel="lightbox" title="<%=list4.get(i+2).product_name%>" ><img src="upload/<%=list4.get(i+2).filename_small%>" /></p><br/></a>
-		<p><h4>金額<span class="glyphicon glyphicon-usd" aria-hidden="true"><%=list4.get(i).price%></span></h4></p><br/>
-		<p><h4><%=list4.get(i+2).summary%></h4></p><br/>
-		<input type='button' value='-' class='qtyminus' field='quantity_1' />
-        <input type='text' id='quantity_1' name="quantity_1" value='0' size="3" />
-        <input type='button' value='+' class='qtyplus' field='quantity_1' />
-		<button type="submit" id="<%=list4.get(i).product_id%>" onclick="add()" value="<%=list4.get(i).product_name%>"><i class="fa fa-cart-plus fa-2x"></i></button>
-		
-		<%}else{%>
-
-		<p></p><br/>
-		<p></p><br/>
-		<p></p><br/>
-		<p></p><br/>
-		<%
-			}%>
-		</td>	
-		</tr>
-			
-		<%} %>
-		
-			
-</table>
-</center>
-</div>
-</div>
-</div>
-
-<!-- 網頁假資料做樣版用 
+       
        <h2><div class="bg-primary"> 義大利麵 Pasta</div></h2>
        <div style="display: block;">
        <div class=container>
@@ -572,8 +305,8 @@ jQuery(document).ready(function(){
            <span class="glyphicon glyphicon-usd" aria-hidden="true">123</span>
            </h4>&nbsp;&nbsp;
            <input type='button' value='-' class='qtyminus' field='quantity_1' />
-           <input type='text' id='quantity_1' name="quantity_1" value='0' size="3" />
-           <input type='button' value='+' class='qtyplus' field='quantity_1' />
+            <input type='text' id='quantity_1' name="quantity_1" value='0' size="3" />
+            <input type='button' value='+' class='qtyplus' field='quantity_1' />
            <button type="submit" id="Append_1" onclick="add(1)" value="義大利麵A"><i class="fa fa-cart-plus fa-2x"></i></button>
             
          </div>
@@ -587,8 +320,8 @@ jQuery(document).ready(function(){
            <span class="glyphicon glyphicon-usd" aria-hidden="true">123</span>
            </h4>&nbsp;&nbsp;
            <input type='button' value='-' class='qtyminus' field='quantity_2' />
-           <input type='text' id='quantity_2' name="quantity_2" value='0' size="3" />
-           <input type='button' value='+' class='qtyplus' field='quantity_2' />
+            <input type='text' id='quantity_2' name="quantity_2" value='0' size="3" />
+            <input type='button' value='+' class='qtyplus' field='quantity_2' />
            <button type="submit" id="Append_2" onclick="add(2)" value="義大利麵B"><i class="fa fa-cart-plus fa-2x"></i></button>
          </div>
          <div class="col-xs-6 col-lg-4">
@@ -655,9 +388,254 @@ jQuery(document).ready(function(){
       </div>
        </div>
        </div>
--->
+       <p>
+       <h2><div class="bg-primary"> 披薩 Pizza</div></h2>
+       <div style="display: none;">
+       <div class=container>
+        <div class="row">
+         <div class="col-xs-6 col-lg-4">  
+           <h3>披薩A</h3>
+           <p>
+           <img src="images_s/pizza01.jpg" width="150" height="94" />
+           </p>
+           <h4>簡介</h4>
+            <h4>金額&nbsp;
+           <span class="glyphicon glyphicon-usd" aria-hidden="true">123</span>
+           </h4>&nbsp;&nbsp;
+           <input type='button' value='-' class='qtyminus' field='quantity_7' />
+            <input type='text' id='quantity_7' name="quantity_7" value='0' size="3" />
+            <input type='button' value='+' class='qtyplus' field='quantity_7' />
+           <button type="submit" id="Append_7" onclick="add(7)" value="披薩A"><i class="fa fa-cart-plus fa-2x"></i></button>
+         </div>
+         <div class="col-xs-6 col-lg-4">  
+           <h3>披薩B</h3>
+           <p>
+           <img src="images_s/pizza02.jpg" width="150" height="94" />
+           </p>
+           <h4>簡介</h4>
+           <h4>金額&nbsp;
+           <span class="glyphicon glyphicon-usd" aria-hidden="true">123</span>
+           </h4>&nbsp;&nbsp;
+           <input type='button' value='-' class='qtyminus' field='quantity_8' />
+            <input type='text' id='quantity_8' name="quantity_8" value='0' size="3" />
+            <input type='button' value='+' class='qtyplus' field='quantity_8' />
+           <button type="submit" id="Append_8" onclick="add(8)" value="披薩B"><i class="fa fa-cart-plus fa-2x"></i></button>
+         </div>
+         <div class="col-xs-6 col-lg-4">  
+           <h3>披薩C</h3>
+           <p>
+           <img src="images_s/pizza03.jpg" width="150" height="94" />
+           </p>
+           <h4>簡介</h4>
+            <h4>金額&nbsp;
+           <span class="glyphicon glyphicon-usd" aria-hidden="true">123</span>
+           </h4>&nbsp;&nbsp;
+           <input type='button' value='-' class='qtyminus' field='quantity_9' />
+            <input type='text' id='quantity_9' name="quantity_9" value='0' size="3" />
+            <input type='button' value='+' class='qtyplus' field='quantity_9' />
+           <button type="submit" id="Append_9" onclick="add(9)" value="披薩C"><i class="fa fa-cart-plus fa-2x"></i></button>
+         </div>
+         </div>
+         <div class="row">
+         <div class="col-xs-6 col-lg-4">  
+           <h3>披薩D</h3>
+           <p>
+           <img src="images_s/pizza04.jpg" width="150" height="94" />
+           </p>
+           <h4>簡介</h4>
+           <h4>金額&nbsp;
+           <span class="glyphicon glyphicon-usd" aria-hidden="true">123</span>
+           </h4>&nbsp;&nbsp;
+            <input type='button' value='-' class='qtyminus' field='quantity_10' />
+            <input type='text' id='quantity_10' name="quantity_10" value='0' size="3" />
+            <input type='button' value='+' class='qtyplus' field='quantity_10' />
+           <button type="submit" id="Append_10" onclick="add(10)" value="披薩D"><i class="fa fa-cart-plus fa-2x"></i></button>
+         </div>
+         <div class="col-xs-6 col-lg-4">  
+           <h3>披薩E</h3>
+           <p>
+           <img src="images_s/pizza05.jpg" width="150" height="94" />
+           </p>
+           <h4>簡介</h4>
+           <h4>金額&nbsp;
+           <span class="glyphicon glyphicon-usd" aria-hidden="true">123</span>
+           </h4>&nbsp;&nbsp;
+           <input type='button' value='-' class='qtyminus' field='quantity_11' />
+            <input type='text' id='quantity_11' name="quantity_11" value='0' size="3" />
+            <input type='button' value='+' class='qtyplus' field='quantity_11' />
+            <button type="submit" id="Append_11" onclick="add(11)" value="披薩E"><i class="fa fa-cart-plus fa-2x"></i></button>
+         </div>
+         <div class="col-xs-6 col-lg-4">  
+           <h3>披薩F</h3>
+           <p>
+           <img src="images_s/pizza06.jpg" width="150" height="94" />
+           </p>
+           <h4>簡介</h4>
+           <h4>金額&nbsp;
+           <span class="glyphicon glyphicon-usd" aria-hidden="true">123</span>
+           </h4>&nbsp;&nbsp;
+           <input type='button' value='-' class='qtyminus' field='quantity_12' />
+            <input type='text' id='quantity_12' name="quantity_12" value='0' size="3" />
+            <input type='button' value='+' class='qtyplus' field='quantity_12' />
+           <button type="submit" id="Append_12" onclick="add(12)" value="披薩F"><i class="fa fa-cart-plus fa-2x"></i></button>
+         </div>
+         </div>
+         <div class="row">
+         <div class="col-xs-6 col-lg-4">  
+           <h3>披薩G</h3>
+           <p>
+           <img src="images_s/pizza07.jpg" width="150" height="94" />
+           </p>
+           <h4>簡介</h4>
+            <h4>金額&nbsp;
+           <span class="glyphicon glyphicon-usd" aria-hidden="true">123</span>
+           </h4>&nbsp;&nbsp;
+           <input type='button' value='-' class='qtyminus' field='quantity_13' />
+            <input type='text' id='quantity_13' name="quantity_13" value='0' size="3" />
+            <input type='button' value='+' class='qtyplus' field='quantity_13' />
+           <button type="submit" id="Append_13" onclick="add(13)" value="披薩G"><i class="fa fa-cart-plus fa-2x"></i></button>
+         </div>
+       </div>
+       </div>
+       </div>
        <p>  
-   
+       <h2><div class="bg-primary"> 飲料 - 茶類或咖啡 </div></h2>
+       <div style="display: none;">
+       <div class=container>
+       <div class="row">
+         <div class="col-xs-6 col-lg-4">  
+           <h3>飲料A</h3>
+           <p>
+           <img src="images_s/drink_01.jpg" width="150" height="94" />
+           </p>
+           <h4>簡介</h4>
+            <h4>金額&nbsp;
+           <span class="glyphicon glyphicon-usd" aria-hidden="true">123</span>
+           </h4>&nbsp;&nbsp;
+           <input type='button' value='-' class='qtyminus' field='quantity_14' />
+            <input type='text' id='quantity_14' name="quantity_14" value='0' size="3" />
+            <input type='button' value='+' class='qtyplus' field='quantity_14' />
+           <button type="submit" id="Append_14" onclick="add(14)" value="飲料A"><i class="fa fa-cart-plus fa-2x"></i></button>
+         </div>
+         <div class="col-xs-6 col-lg-4">  
+           <h3>飲料B</h3>
+           <p>
+           <img src="images_s/drink_02.jpg" width="150" height="94" />
+           </p>
+           <h4>簡介</h4>
+            <h4>金額&nbsp;
+           <span class="glyphicon glyphicon-usd" aria-hidden="true">123</span>
+           </h4>&nbsp;&nbsp;
+           <input type='button' value='-' class='qtyminus' field='quantity_15' />
+            <input type='text' id='quantity_15' name="quantity_15" value='0' size="3" />
+            <input type='button' value='+' class='qtyplus' field='quantity_15' />
+           <button type="submit" id="Append_15" onclick="add(15)" value="飲料B"><i class="fa fa-cart-plus fa-2x"></i></button>
+         </div>
+         <div class="col-xs-6 col-lg-4">  
+           <h3>飲料C</h3>
+           <p>
+           <img src="images_s/drinK_03.jpg" width="150" height="94" />
+           </p>
+           <h4>簡介</h4>
+            <h4>金額&nbsp;
+           <span class="glyphicon glyphicon-usd" aria-hidden="true">123</span>
+           </h4>&nbsp;&nbsp;
+           <input type='button' value='-' class='qtyminus' field='quantity_16' />
+            <input type='text' id='quantity_16' name="quantity_16" value='0' size="3" />
+            <input type='button' value='+' class='qtyplus' field='quantity_16' />
+           <button type="submit" id="Append_16" onclick="add(16)" value="飲料C"><i class="fa fa-cart-plus fa-2x"></i></button>
+         </div>
+         </div>
+         <div class="row">
+         <div class="col-xs-6 col-lg-4">  
+           <h3>飲料D</h3>
+           <p>
+           <img src="images_s/drink_05.jpg" width="150" height="94" />
+           </p>
+           <h4>簡介</h4>
+            <h4>金額&nbsp;
+           <span class="glyphicon glyphicon-usd" aria-hidden="true">123</span>
+           </h4>&nbsp;&nbsp;
+           <input type='button' value='-' class='qtyminus' field='quantity_17' />
+            <input type='text' id='quantity_17' name="quantity_17" value='0' size="3" />
+            <input type='button' value='+' class='qtyplus' field='quantity_17' />
+           <button type="submit" id="Append_17" onclick="add(17)" value="飲料D"><i class="fa fa-cart-plus fa-2x"></i></button>
+         </div>
+         <div class="col-xs-6 col-lg-4">  
+           <h3>飲料E</h3>
+           <p>
+           <img src="images_s/drink_06.jpg" width="150" height="94" />
+           </p>
+           <h4>簡介</h4>
+            <h4>金額&nbsp;
+           <span class="glyphicon glyphicon-usd" aria-hidden="true">123</span>
+           </h4>&nbsp;&nbsp;
+           <input type='button' value='-' class='qtyminus' field='quantity_18' />
+            <input type='text' id='quantity_18' name="quantity_18" value='0' size="3" />
+            <input type='button' value='+' class='qtyplus' field='quantity_18' />
+           <button type="submit" id="Append_18" onclick="add(18)" value="飲料E"><i class="fa fa-cart-plus fa-2x"></i></button>
+         </div>
+         <div class="col-xs-6 col-lg-4">  
+           <h3>飲料F</h3>
+           <p>
+           <img src="images_s/drink_07.jpg" width="150" height="94" />
+           </p>
+           <h4>簡介</h4>
+            <h4>金額&nbsp;
+           <span class="glyphicon glyphicon-usd" aria-hidden="true">123</span>
+           </h4>&nbsp;&nbsp;
+           <input type='button' value='-' class='qtyminus' field='quantity_19' />
+            <input type='text' id='quantity_19' name="quantity_19" value='0' size="3" />
+            <input type='button' value='+' class='qtyplus' field='quantity_19' />
+           <button type="submit" id="Append_19" onclick="add(19)" value="飲料F"><i class="fa fa-cart-plus fa-2x"></i></button>
+         </div>
+         </div>
+         <div class="row">
+         <div class="col-xs-6 col-lg-4">  
+           <h3>飲料G</h3>
+           <p>
+           <img src="images_s/drink_08.jpg" width="150" height="94" />
+           </p>
+           <h4>簡介</h4>
+            <h4>金額&nbsp;
+           <span class="glyphicon glyphicon-usd" aria-hidden="true">123</span>
+           </h4>&nbsp;&nbsp;
+           <input type='button' value='-' class='qtyminus' field='quantity_20' />
+            <input type='text' id='quantity_20' name="quantity_20" value='0' size="3" />
+            <input type='button' value='+' class='qtyplus' field='quantity_20' />
+           <button type="submit" id="Append_20" onclick="add(20)" value="飲料G"><i class="fa fa-cart-plus fa-2x"></i></button>
+         </div>
+         <div class="col-xs-6 col-lg-4">  
+           <h3>飲料H</h3>
+           <p>
+           <img src="images_s/drink_09.jpg" width="150" height="94" />
+           </p>
+           <h4>簡介</h4>
+            <h4>金額&nbsp;
+           <span class="glyphicon glyphicon-usd" aria-hidden="true">123</span>
+           </h4>&nbsp;&nbsp;
+           <input type='button' value='-' class='qtyminus' field='quantity_21' />
+            <input type='text' id='quantity_21' name="quantity_21" value='0' size="3" />
+            <input type='button' value='+' class='qtyplus' field='quantity_21' />
+           <button type="submit" id="Append_21" onclick="add(21)" value="飲料H"><i class="fa fa-cart-plus fa-2x"></i></button>
+         </div>
+         <div class="col-xs-6 col-lg-4">  
+           <h3>飲料I</h3>
+           <p>
+           <img src="images_s/drink_10.jpg" width="150" height="94"  />
+           </p>
+            <h4>簡介</h4>
+            <h4>金額&nbsp;
+           <span class="glyphicon glyphicon-usd" aria-hidden="true">123</span>
+           </h4>&nbsp;&nbsp;
+           <input type='button' value='-' class='qtyminus' field='quantity_22' />
+            <input type='text' id='quantity_22' name="quantity_22" value='0' size="3" />
+            <input type='button' value='+' class='qtyplus' field='quantity_22' />
+           <button type="submit" id="Append_22" onclick="add(22)" value="飲料I"><i class="fa fa-cart-plus fa-2x"></i></button>
+         </div>
+         </div>
+       </div>
+       </div>
      </div>
      
      <div class="span-3 last" id="shopping-cart">    <!-- 使用 Sticky -->
@@ -670,8 +648,7 @@ jQuery(document).ready(function(){
              <p><li><font color="Red">已加入的餐點 :</font>
              </li></p>
            </ul>
-           </h4>
-        <form>   
+           </h4>   
         <h4><i class="fa fa-motorcycle"></i>
         <td><select name="s1" id="s1">
             <option value="X" SELECTED>請選擇外送或自取</option>
@@ -682,9 +659,8 @@ jQuery(document).ready(function(){
         <hr><footer></footer>
         <h4> 金額總計: </h4>   
         <hr><footer></footer>   
-        <button input type="submit" class="btn btn-success">確認送出</button> 
+        <button type="button" class="btn btn-success">確認送出</button> 
         <button type="button" class="btn btn-success" onclick="del()">清除清單</button> 
-        </form>
         <hr><footer></footer>   
       </div>              <!-- 使用 Sticky 結尾-->
      
@@ -698,19 +674,15 @@ jQuery(document).ready(function(){
              <div class=row>
                <div class=col-md-4>
                  <h3>簡介</h3>
-                 <p>Java與Web整合程式設計師班</p>
-                 <p>專題題目:線上點餐系統</p>
-                 <p>選定的餐點是義式料理</p>
+                 <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.</p>
                </div>
                <div class=col-md-4>
                  <h3>理念</h3>
-                 <p>"線上點餐系統"讓消費者可以經由網路在任何地方，透過網頁呈現方式，可以方便快速的在線上點餐，並可選擇外送或自取。</p>                
+                 <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.</p>                
                </div>
                <div class=col-md-4>
                <h3>成員</h3>
-               <p>文化大學推廣部建國分部 R202教室</p>
-               <p>林秀玲、黃芷萱、黃朝暘、鐘欣志</p>
-               <p>劉建宏、林靖凱、何宗庭</p>
+               <p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
                </div>
              </div>
           </div>
@@ -801,9 +773,9 @@ jQuery(document).ready(function(){
         <h4 class="modal-title" id="myModalLabel">使用說明</h4>
       </div>
       <div class="modal-body">
-        <br><h3>由於時程緊迫</h3></br>
-        <br><h3>來不及做使用說明</h3></br>
-        <br><h3>請見諒</h3></br>
+        <br><h3>由於時程緊迫，來不及做使用說明</h3></br>
+        <br><h3>反正這個網頁很好懂很容易使用</h3></br>
+        <br><h3>應該不用多做使用說明了吧( ^.＜ ) 啾咪</h3></br>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
