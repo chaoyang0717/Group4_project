@@ -208,7 +208,7 @@ function check22()//判斷欄位是否空白
 							  <div class="form-group">
 							    <label for="inputPassword4" class="col-sm-2 control-label">檔案上傳(s)</label>
 							    <div class="col-sm-8">
-							      <input type="text" class="form-control" id="filename_small" name="filename_small" placeholder="請上傳檔案">
+							      <input type="file" class="form-control" id="filename_small" name="filename_small" placeholder="請上傳檔案">
 							    </div>
 							  </div>
 	

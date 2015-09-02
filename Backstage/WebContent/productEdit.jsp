@@ -67,7 +67,7 @@
 									
 									%>
 									
-									<form name="form1" class="form-horizontal" action="productEditCode.jsp" method="post">
+									<form name="form1" class="form-horizontal" enctype="multipart/form-data" action="productEditCode.jsp" method="post">
 									<div class="form-group">
 									    	<label for="input3" class="col-sm-2 control-label">產品編號</label>
 									    <div class="col-sm-10">
@@ -107,13 +107,13 @@
 									  <div class="form-group">
 									    <label for="inputPassword4" class="col-sm-2 control-label">檔案上傳(b)</label>
 									    <div class="col-sm-10">
-									      <input type="text" class="form-control" id="filename_big" name="filename_big" value="<%=stu.filename_big%>">
+									      <input type="file" class="form-control" id="filename_big" name="filename_big" value="<%=stu.filename_big%>">
 									    </div>
 									  </div>
 									  <div class="form-group">
 									    <label for="inputPassword4" class="col-sm-2 control-label">檔案上傳(s)</label>
 									    <div class="col-sm-10">
-									      <input type="text" class="form-control" id="filename_small" name="filename_small" value="<%=stu.filename_big%>">
+									      <input type="file" class="form-control" id="filename_small" name="filename_small" value="<%=stu.filename_big%>">
 									    </div>
 									  </div>
 									  <div class="form-group">
