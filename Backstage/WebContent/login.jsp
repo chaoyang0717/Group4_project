@@ -80,6 +80,7 @@ function check_data()//判斷欄位是否空白
    var dup = document.getElementById('dup');
    if(dup.value=='0')
    {
+	  
       flag = false;
    }
    

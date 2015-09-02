@@ -17,6 +17,8 @@ public class BackAccountDAODBImpl implements BackAccountDAO
 	@Override
 	public void add(BackAccount backAccount)
 	{
+		MD5 md=new MD5();
+		String str=md.changepwd(backAccount.password);
 		try
 		{
 			Class.forName(DRIVE_NAME);
@@ -25,7 +27,7 @@ public class BackAccountDAODBImpl implements BackAccountDAO
 			PreparedStatement pstmt = conn.prepareStatement(
 					"Insert into cms_account (account, password,emp_id,per_id) values (?,?,?,?)");
 			pstmt.setString(1, backAccount.account);
-			pstmt.setString(2, backAccount.password);
+			pstmt.setString(2, str);
 			pstmt.setInt(3, backAccount.emp_id);
 			pstmt.setInt(4, backAccount.per_id);
 			pstmt.executeUpdate();
@@ -43,8 +45,10 @@ public class BackAccountDAODBImpl implements BackAccountDAO
 	}
 
 	@Override
-	public void updeat(BackAccount backAccount)
+	public void updata(BackAccount backAccount)
 	{
+		MD5 md=new MD5();
+		String str=md.changepwd(backAccount.password);
 		try
 		{
 			Class.forName(DRIVE_NAME);
@@ -53,7 +57,7 @@ public class BackAccountDAODBImpl implements BackAccountDAO
 			PreparedStatement pstmt = conn.prepareStatement(
 					"Update cms_account Set password=?,emp_id=?,per_id=? where account=?");
 			
-			pstmt.setString(1, backAccount.password);
+			pstmt.setString(1, str);
 			pstmt.setInt(2, backAccount.emp_id);
 			pstmt.setInt(3, backAccount.per_id);
 			pstmt.setString(4, backAccount.account);
