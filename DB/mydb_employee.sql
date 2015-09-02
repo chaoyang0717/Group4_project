@@ -29,8 +29,7 @@ CREATE TABLE `employee` (
   `sex` varchar(2) DEFAULT NULL COMMENT '性別',
   `birth` varchar(10) DEFAULT NULL COMMENT '出生日期',
   `available` varchar(10) DEFAULT NULL COMMENT '任用日期',
-  PRIMARY KEY (`emp_id`),
-  KEY `FP_idx` (`post_id`)
+  PRIMARY KEY (`emp_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='員工資料表';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -52,4 +51,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-08-31 17:34:19
+-- Dump completed on 2015-09-02 15:08:55

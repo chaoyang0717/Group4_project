@@ -27,9 +27,7 @@ CREATE TABLE `cms_account` (
   `password` varchar(20) DEFAULT NULL,
   `emp_id` int(11) DEFAULT NULL,
   `per_id` int(11) DEFAULT NULL,
-  PRIMARY KEY (`account`),
-  KEY `empid_idx` (`emp_id`),
-  KEY `perid_idx` (`per_id`)
+  PRIMARY KEY (`account`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='後台登入帳號';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -52,4 +50,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-08-31 17:34:16
+-- Dump completed on 2015-09-02 15:08:51
