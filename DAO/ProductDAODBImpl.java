@@ -42,22 +42,20 @@ public class ProductDAODBImpl implements ProductDAO {
     }
 
     @Override
-    public void upDate(Product product) {
+    public void upDate(Product product) { //只更新資料，不更新檔案
         try {
             Class.forName(DRIVE_NAME);
             Connection conn = DriverManager.getConnection(CONN_STRING);
 
             PreparedStatement pstmt = conn.prepareStatement(
-                    "Update product Set category_id=?, product_name=?,product_name_en=?,price=?,summary=?,filename_big=?,filename_small=? where product_id=?");
+                    "Update product Set category_id=?, product_name=?,product_name_en=?,price=?,summary=? where product_id=?");
 
             pstmt.setInt(1, product.category_id);
             pstmt.setString(2, product.product_name);
             pstmt.setString(3, product.product_name_en);
             pstmt.setInt(4, product.price);
             pstmt.setString(5, product.summary);
-            pstmt.setString(6, product.filename_big);
-            pstmt.setString(7, product.filename_small);
-            pstmt.setString(8, product.product_id);
+            pstmt.setString(6, product.product_id);
             pstmt.executeUpdate();
 
             pstmt.close();
@@ -69,6 +67,31 @@ public class ProductDAODBImpl implements ProductDAO {
         }
 
     }
+    
+    @Override
+	public void upDateFile(Product product)
+	{
+		try {
+            Class.forName(DRIVE_NAME);
+            Connection conn = DriverManager.getConnection(CONN_STRING);
+
+            PreparedStatement pstmt = conn.prepareStatement(
+                    "Update product Set filename_big=?, filename_small=? where product_id=?");
+
+            pstmt.setString(1, product.filename_big);
+            pstmt.setString(2, product.filename_small);
+            pstmt.setString(3, product.product_id);
+            pstmt.executeUpdate();
+
+            pstmt.close();
+            conn.close();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+		
+	}
 
     @Override
     public void remove(Product product) {
@@ -257,9 +280,10 @@ public class ProductDAODBImpl implements ProductDAO {
             PreparedStatement pstmt = conn.prepareStatement("Select * from product where category_id=?");
             pstmt.setInt(1, category_id);
             ResultSet rs = pstmt.executeQuery();
-
+            
             ArrayList<Product> mylist = new ArrayList();
-
+            
+           
             while (rs.next()) {
                 mylist.add(new Product(rs.getString(1), rs.getInt(2), rs.getString(3), rs.getString(4), rs.getInt(5), rs.getString(6), rs.getString(7), rs.getString(8)));
             }
@@ -274,6 +298,8 @@ public class ProductDAODBImpl implements ProductDAO {
         }
 		return null;
 	}
+
+	
 
 
 }

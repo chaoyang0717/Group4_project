@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" import="order.category.*,java.util.*"%>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -162,8 +163,8 @@ function check11()//判斷欄位是否空白
 						
 							<form class="form-horizontal" name="category" action="categoryAddCode.jsp" method="post" onsubmit="return check11();" >
 								<div class="form-group">
-							    	<label for="inputEmail3" class="col-sm-2 control-label">種類編號</label>
-							    <div class="col-sm-8">
+							    	<label for="inputEmail3" class="col-sm-4 control-label">種類編號</label>
+							    <div class="col-sm-6">
 							      <input type="text" class="form-control" id="category_id" name="category_id" placeholder="請輸入編號" onblur="getData1()" >
 							      <input type="hidden" id="dup" value="1" />
 							    </div>
@@ -172,8 +173,8 @@ function check11()//判斷欄位是否空白
 					            </div>
 							  </div>
 							  <div class="form-group">
-							    <label for="inputPassword3" class="col-sm-2 control-label">種類名稱</label>
-							    <div class="col-sm-8">
+							    <label for="inputPassword3" class="col-sm-4 control-label">種類名稱</label>
+							    <div class="col-sm-6">
 							      <input type="text" class="form-control" id="category_name" name="category_name" placeholder="請輸入中文名稱" onblur="getData2()">
 							      <input type="hidden" id="dup2" value="1" />
 							    </div>
@@ -182,8 +183,8 @@ function check11()//判斷欄位是否空白
 				                </div>
 							  </div>
 							  <div class="form-group">
-							    <label for="inputPassword4" class="col-sm-2 control-label">英文名稱</label>
-							    <div class="col-sm-8">
+							    <label for="inputPassword4" class="col-sm-4 control-label">英文名稱</label>
+							    <div class="col-sm-6">
 							      <input type="text" class="form-control" id="category_name_en" name="category_name_en" placeholder="請輸入英文名稱">
 							      
 							    </div>

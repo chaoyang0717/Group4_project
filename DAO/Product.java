@@ -1,5 +1,7 @@
 package order.category;
 
+import java.util.ArrayList;
+
 public class Product
 {
 	public String product_id;
@@ -10,6 +12,7 @@ public class Product
 	public String summary;
 	public String filename_big;
 	public String filename_small;
+	public ArrayList<Product> plist;
 	
 	public Product(String product_id, int category_id, String product_name, String product_name_en, int price,
 			String summary, String filename_big, String filename_small)
@@ -22,9 +25,25 @@ public class Product
 		this.summary = summary;
 		this.filename_big = filename_big;
 		this.filename_small = filename_small;
+		plist = new ArrayList<Product>();
 	}
 	
+	public Product(String product_id, int category_id, String product_name, String product_name_en, int price,
+			String summary)
+	{
+		this.product_id = product_id;
+		this.category_id = category_id;
+		this.product_name = product_name;
+		this.product_name_en = product_name_en;
+		this.price = price;
+		this.summary = summary;
+	}
 	
-	
+	public Product(String product_id,String filename_big, String filename_small)
+	{
+		this.product_id = product_id;
+		this.filename_big = filename_big;
+		this.filename_small = filename_small;
+	}
 	
 }

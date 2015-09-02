@@ -6,6 +6,7 @@ public interface ProductDAO
 {
 	public void add(Product product);
 	public void upDate(Product product);
+	public void upDateFile(Product product);
 	public void remove(Product product);
 	public Product findById(String product_id);
 	public ArrayList<Product> getAllProduct();

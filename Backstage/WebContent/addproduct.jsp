@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" import="order.category.*,java.util.*"%>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -156,8 +157,8 @@ function check22()//判斷欄位是否空白
 							<div class="panel-body">
 							<form class="form-horizontal" enctype="multipart/form-data" name="product" action="productAddCode.jsp" method="post" onsubmit="return check22();" >
 								<div class="form-group">
-							    	<label for="input3" class="col-sm-2 control-label">產品編號</label>
-							    <div class="col-sm-8">
+							    	<label for="input3" class="col-sm-4 control-label">產品編號</label>
+							    <div class="col-sm-6">
 							      <input type="text" class="form-control" id="product_id" name="product_id" placeholder="請輸入編號" onblur="getData3()" >
 							      <input type="hidden" id="dup" value="1" />
 							    </div>
@@ -166,8 +167,8 @@ function check22()//判斷欄位是否空白
 					            </div>
 							  </div>
 							  <div class="form-group">
-							    <label for="input3" class="col-sm-2 control-label">種類編號</label>
-							    <div class="col-sm-8">
+							    <label for="input3" class="col-sm-4 control-label">種類編號</label>
+							    <div class="col-sm-6">
 							      <input type="text" class="form-control" id="category_id" name="category_id" placeholder="請輸入種類" onblur="getData4()">
 							      <input type="hidden" id="dup2" value="1" />
 							    </div>
@@ -176,38 +177,38 @@ function check22()//判斷欄位是否空白
 				                </div>
 							  </div>
 							  <div class="form-group">
-							    <label for="inputPassword4" class="col-sm-2 control-label">產品名稱</label>
-							    <div class="col-sm-8">
+							    <label for="inputPassword4" class="col-sm-4 control-label">產品名稱</label>
+							    <div class="col-sm-6">
 							      <input type="text" class="form-control" id="product_name" name="product_name" placeholder="請輸入名稱">
 							    </div>
 							  </div>
 							  <div class="form-group">
-							    <label for="inputPassword4" class="col-sm-2 control-label">英文名稱</label>
-							    <div class="col-sm-8">
+							    <label for="inputPassword4" class="col-sm-4 control-label">英文名稱</label>
+							    <div class="col-sm-6">
 							      <input type="text" class="form-control" id="product_name_en" name="product_name_en" placeholder="請輸入英文名稱">
 							    </div>
 							  </div>
 							  <div class="form-group">
-							    <label for="inputPassword4" class="col-sm-2 control-label">價格</label>
-							    <div class="col-sm-8">
+							    <label for="inputPassword4" class="col-sm-4 control-label">價格</label>
+							    <div class="col-sm-6">
 							      <input type="text" class="form-control" id="price" name="price" placeholder="請輸入價格">
 							    </div>
 							  </div>
 							  <div class="form-group">
-							    <label for="inputPassword4" class="col-sm-2 control-label">產品說明</label>
-							    <div class="col-sm-8">
+							    <label for="inputPassword4" class="col-sm-4 control-label">產品說明</label>
+							    <div class="col-sm-6">
 							      <input type="text" class="form-control" id="summary" name="summary" placeholder="請輸入說明">
 							    </div>
 							  </div>
 							  <div class="form-group">
-							    <label for="inputPassword4" class="col-sm-2 control-label">檔案上傳(b)</label>
-							    <div class="col-sm-8">
+							    <label for="inputPassword4" class="col-sm-4 control-label">檔案上傳(b)</label>
+							    <div class="col-sm-6">
 							      <input type="file" class="form-control" id="filename_big" name="filename_big" placeholder="請上傳檔案">
 							    </div>
 							  </div>
 							  <div class="form-group">
-							    <label for="inputPassword4" class="col-sm-2 control-label">檔案上傳(s)</label>
-							    <div class="col-sm-8">
+							    <label for="inputPassword4" class="col-sm-4 control-label">檔案上傳(s)</label>
+							    <div class="col-sm-6">
 							      <input type="file" class="form-control" id="filename_small" name="filename_small" placeholder="請上傳檔案">
 							    </div>
 							  </div>

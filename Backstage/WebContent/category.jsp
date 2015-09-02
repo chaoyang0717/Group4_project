@@ -129,17 +129,18 @@
 								int end_num = loc*PAGE_RANGE+PAGE_RANGE;
 								int uplimit = (TotalPages > end_num) ? end_num : TotalPages;
 								int i=start_num;
-								if (start_num > PAGE_RANGE)
-								{
-								%>
-									<td class="text-center"><a href="category.jsp?t=category&p=<%=i-PAGE_RANGE %>"><i class="glyphicon glyphicon-backward"></i></a></td>
-									
-								<%
-								}else{
-								%>
-									<td class="text-center"><i class="glyphicon glyphicon-backward"></i></td>
-								<%
-								}
+								
+									if (start_num > PAGE_RANGE)
+									{
+									%>
+										<td class="text-center"><a href="category.jsp?t=category&p=<%=i-PAGE_RANGE %>"><i class="glyphicon glyphicon-backward"></i></a></td>
+										
+									<%
+									}else{
+									%>
+										<td class="text-center"><i class="glyphicon glyphicon-backward"></i></td>
+									<%
+									}
 								
 								for (;i<=uplimit;i++) {
 								%>
@@ -152,17 +153,19 @@
 								<% } %>
 							<%		
 								}
-								if (TotalPages > end_num)
-								{
-								%>
-									<td class="text-center"><a href="category.jsp?t=category&p=<%=i %>"><i class="glyphicon glyphicon-forward"></i></a></td>
-								<%
-								}else{
+								
+								
+									if (TotalPages > end_num)
+									{
 									%>
-									<td class="text-center"><i class="glyphicon glyphicon-forward"></i></td>
-								<%
-								}
-					
+										<td class="text-center"><a href="category.jsp?t=category&p=<%=i %>"><i class="glyphicon glyphicon-forward"></i></a></td>
+									<%
+									}else{
+										%>
+										<td class="text-center"><i class="glyphicon glyphicon-forward"></i></td>
+									<%
+									}
+								
 								
 							%>
 							

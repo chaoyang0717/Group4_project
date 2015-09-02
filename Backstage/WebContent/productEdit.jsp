@@ -11,7 +11,73 @@
 <script src="bootstrap/js/bootstrap.min.js"></script>
 <script src="bootstrap/js/jquery.js"></script>
 <link rel="stylesheet" href="css/mysite.css">
+<script language="JavaScript">
 
+
+var request6
+
+function getData6(){ //加入Ajax判斷
+	var category_id=document.getElementById('category_id')//取得使用者輸入的值
+	request6=new XMLHttpRequest();//在記憶體內開啟一個網頁
+	request6.open("GET", "product_cidCheck.jsp?cid="+category_id.value, true); //將名字的值傳入check的網頁判斷
+	// 這行是設定 request 要去哪取資料，尚未開始取
+	// 第三個參數打 true 可以想成，利用另外一個執行緒處理 Request
+	// 第三個參數打 false 可以想成，利用這一個執行緒處理 Request
+
+	var img2 = document.getElementById("img2");//抓取資料時，顯示運作中的圖
+	img2.src = "img/wait.gif";
+
+	request6.onreadystatechange = updateData6;
+	// 當記憶體中的瀏覽器狀態改變時，呼叫 updateData 這個 function
+
+	 request6.send(null);
+	
+}
+
+
+function updateData6(){
+	
+	if(request6.readyState==4){
+		var dup2 = document.getElementById("dup2");
+		dup2.value = request6.responseText.trim();
+		//把check判斷抓取的值回送給dup，修改dup的value在進行判斷。trim<--消除左右空白以免判斷錯誤
+		if (dup2.value == "1")//取得的值為1，則顯示打V的圖
+			{
+			var img2 = document.getElementById("img2");
+			img2.src = "img/a1.png";
+			}
+		else
+			{
+			var img2 = document.getElementById("img2");
+			img2.src = "img/a0.png";
+			}
+	}
+}
+
+function check44()//判斷欄位是否空白
+{
+   var flag = true;
+
+
+   // ---------- Check ----------
+   var product_id = document.getElementById('product_id');
+   if(product_id.value=='')
+   {
+	   var img1 = document.getElementById("img1");
+	   img1.src = "img/a1.png";
+	   flag = false;
+   }
+// ---------- value的值是否為1(ajax)----------
+   var dup2 = document.getElementById('dup2');
+   if(dup2.value=='1')
+   {
+      flag = false;
+   }
+
+   return flag;
+}
+
+</script>
 </head>
 <body>
 
@@ -67,53 +133,57 @@
 									
 									%>
 									
-									<form name="form1" class="form-horizontal" enctype="multipart/form-data" action="productEditCode.jsp" method="post">
-									<div class="form-group">
-									    	<label for="input3" class="col-sm-2 control-label">產品編號</label>
-									    <div class="col-sm-10">
-									      <input type="text" class="form-control" id="product_id" name="product_id" value="<%=stu.product_id%>" readonly width="60px" >
+									<form name="form1" class="form-horizontal" action="productEditCode.jsp" method="post" onsubmit="return check44();">
+										<div class="form-group">
+									    	<label for="input3" class="col-sm-4 control-label">產品編號</label>
+									    <div class="col-sm-6">
+									      	<input type="text" class="form-control" id="product_id" name="product_id" value="<%=stu.product_id%>" readonly>
 									    </div>
-									  </div>
+									  	</div>
 									<div class="form-group">
-										<label for="input3" class="col-sm-2 control-label">種類編號</label>
-									    <div class="col-sm-10">
-									      <input type="text" class="form-control" id="category_id" name="category_id" value="<%=stu.category_id%>">
+										<label for="input3" class="col-sm-4 control-label">種類編號</label>
+									    <div class="col-sm-6">
+									      <input type="text" class="form-control" id="category_id" name="category_id" value="<%=stu.category_id%>" onblur="getData6()">
+									    	<input type="hidden" id="dup2" value="1" />
 									    </div>
+									    <div class="col-sm-2">
+						                	<img id="img2" src="img/aa.png" style="width:25px;height:25px;margin-top:5px;"/>
+						                </div>
 									  </div>
 									  <div class="form-group">
-									    <label for="inputPassword4" class="col-sm-2 control-label">產品名稱</label>
-									    <div class="col-sm-10">
+									    <label for="inputPassword4" class="col-sm-4 control-label">產品名稱</label>
+									    <div class="col-sm-6">
 									      <input type="text" class="form-control" id="product_name" name="product_name" value="<%=stu.product_name%>">
 									    </div>
 									  </div>
 									  <div class="form-group">
-									    <label for="inputPassword4" class="col-sm-2 control-label">英文名稱</label>
-									    <div class="col-sm-10">
+									    <label for="inputPassword4" class="col-sm-4 control-label">英文名稱</label>
+									    <div class="col-sm-6">
 									      <input type="text" class="form-control" id="product_name_en" name="product_name_en" value="<%=stu.product_name_en%>">
 									    </div>
 									  </div>
 									  <div class="form-group">
-									    <label for="inputPassword4" class="col-sm-2 control-label">價格</label>
-									    <div class="col-sm-10">
+									    <label for="inputPassword4" class="col-sm-4 control-label">價格</label>
+									    <div class="col-sm-6">
 									      <input type="text" class="form-control" id="price" name="price" value="<%=stu.price%>">
 									    </div>
 									  </div>
 									  <div class="form-group">
-									    <label for="inputPassword4" class="col-sm-2 control-label">產品說明</label>
-									    <div class="col-sm-10">
+									    <label for="inputPassword4" class="col-sm-4 control-label">產品說明</label>
+									    <div class="col-sm-6">
 									      <input type="text" class="form-control" id="summary" name="summary" value="<%=stu.summary%>">
 									    </div>
 									  </div>
 									  <div class="form-group">
-									    <label for="inputPassword4" class="col-sm-2 control-label">檔案上傳(b)</label>
-									    <div class="col-sm-10">
-									      <input type="file" class="form-control" id="filename_big" name="filename_big" value="<%=stu.filename_big%>">
+									    <label for="inputPassword4" class="col-sm-4 control-label">檔案名稱(b)</label>
+									    <div class="col-sm-6">
+									      <input type="text" class="form-control" id="filename_big" name="filename_big" value="<%=stu.filename_big%>" readonly>
 									    </div>
 									  </div>
 									  <div class="form-group">
-									    <label for="inputPassword4" class="col-sm-2 control-label">檔案上傳(s)</label>
-									    <div class="col-sm-10">
-									      <input type="file" class="form-control" id="filename_small" name="filename_small" value="<%=stu.filename_big%>">
+									    <label for="inputPassword4" class="col-sm-4 control-label">檔案名稱(s)</label>
+									    <div class="col-sm-6">
+									      <input type="text" class="form-control" id="filename_small" name="filename_small" value="<%=stu.filename_big%>" readonly>
 									    </div>
 									  </div>
 									  <div class="form-group">
@@ -123,10 +193,49 @@
 									  </div>
 									 </form>
 							</div>
+							
 						<div class="col-md-2"></div>
 						</div>
-
+					</div>
 			</div>
+					<div class="row">
+						<div class="col-md-2"></div>
+						<div class="col-md-8">
+							<div class="panel panel-default" width="60px">
+							  	<div class="panel-heading">檔案重新上傳</div>
+								<div class="panel-body">
+									<form name="form2" class="form-horizontal" enctype="multipart/form-data" action="productEditCode_upload.jsp" method="post">
+									  	<div class="form-group">
+
+									    <div class="col-sm-10">
+									      <input type="hidden" class="form-control" id="product_id2" name="product_id2" value="<%=stu.product_id%>">
+									    </div>
+									  </div>
+									  
+									  <div class="form-group">
+									    <label for="inputPassword4" class="col-sm-2 control-label">檔案上傳(b)</label>
+									    <div class="col-sm-8">
+									      <input type="file" class="form-control" id="filename_big" name="filename_big" value="<%=stu.filename_big%>">
+									    </div>
+									  </div>
+									  <div class="form-group">
+									    <label for="inputPassword4" class="col-sm-2 control-label">檔案上傳(s)</label>
+									    <div class="col-sm-8">
+									      <input type="file" class="form-control" id="filename_small" name="filename_small" value="<%=stu.filename_big%>" >
+									    </div>
+									  </div>
+									  <div class="form-group">
+									    <div class="col-sm-offset-2 col-sm-10">
+									      <button type="submit" class="btn btn-default"> 上 傳 </button>
+									    </div>
+									  </div>
+									
+									</form>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-2"></div>
+						</div>
 		  </div>
 		  <div class="col-md-1"></div>
 		</div>

@@ -2,13 +2,14 @@
     pageEncoding="UTF-8" import="order.category.*"%>
     
     <!-- 加入需要的函式庫 -->
-<%@ page import="java.io.File"%>
+<%@ page import="java.io.*"%>
 <%@ page import="java.util.Iterator"%>
 <%@ page import="java.util.List"%>
 <%@ page import="org.apache.commons.fileupload.*"%>
 <%@ page import="org.apache.commons.fileupload.disk.DiskFileItemFactory"%>
 <%@ page import="org.apache.commons.fileupload.servlet.ServletFileUpload"%>
 <%@ page import="org.apache.commons.io.FilenameUtils"%>
+<%@ page import="org.apache.commons.fileupload.util.Streams"%>
 
 <%	
 		String product_id="";
@@ -21,53 +22,63 @@
 		String filename_small="";
 
 		request.setCharacterEncoding("utf-8");
-		String saveDirectory = application.getRealPath("/upload");
-		//out.println(saveDirectory);		// 設定好絕對路徑
-		boolean isMultipart = ServletFileUpload.isMultipartContent(request);
-		//out.println("<br />isMultipart="+isMultipart+"<br>");
+		String saveDirectory = "C:/eclipse/JavaWeb0824/WebContent/upload";
+	    File dir = new File(saveDirectory);
+	    if (!dir.exists()) {
+	    	boolean success = dir.mkdir();
+	        //if (success) {
+	        //    System.out.println("Directory: " + saveDirectory + " created");
+	        //} 
+	    }
+	    
+	    //out.println("file.encoding=" + System.getProperty("file.encoding") + "<br>");
+	        
+	    // Solve Chinese filename problem: use original form encoding
+	    String encoding = "UTF-8";
+	    request.setCharacterEncoding(encoding);
+	    
+	    // Check that we have a file upload request
+	    boolean isMultipart = ServletFileUpload.isMultipartContent(request);
+	    out.println("isMultipart=" + isMultipart + "<br>");
+	    
+	    // Create a new file upload handler
+	    ServletFileUpload upload = new ServletFileUpload();
+
+	    //Create a progress listener
+	    ProgressListener progressListener = new ProgressListener(){
+	       private long megaBytes = -1;
+	       public void update(long pBytesRead, long pContentLength, int pItems) {
+	           long mBytes = pBytesRead / 1000000;
+	           if (megaBytes == mBytes) {
+	               return;
+	           }
+	           megaBytes = mBytes;
+	           System.out.println("We are currently reading item " + pItems);
+	           if (pContentLength == -1) {
+	               System.out.println("So far, " + pBytesRead + " bytes have been read.");
+	           } else {
+	               System.out.println("So far, " + pBytesRead + " of " + pContentLength
+	                                  + " bytes have been read.");
+	           }
+	       }
+	    };
+	    upload.setProgressListener(progressListener);
 
 		
-		// Create a factory for disk-based file items
-		FileItemFactory factory = new DiskFileItemFactory();
-		
-		// Create a new file upload handler
-		ServletFileUpload upload = new ServletFileUpload(factory);
-		
-		//Create a progress listener
-		ProgressListener progressListener = new ProgressListener(){
-		   private long megaBytes = -1;
-		   public void update(long pBytesRead, long pContentLength, int pItems) {
-		       long mBytes = pBytesRead / 1000000;
-		       if (megaBytes == mBytes) {
-		           return;
-		       }
-		       megaBytes = mBytes;
-		       System.out.println("We are currently reading item " + pItems);
-		       if (pContentLength == -1) {
-		           System.out.println("So far, " + pBytesRead + " bytes have been read.");
-		       } else {
-		           System.out.println("So far, " + pBytesRead + " of " + pContentLength
-		                              + " bytes have been read.");
-		       }
-		   }
-		};
-		upload.setProgressListener(progressListener);
-		
 		// Parse the request
-		List /* FileItem */ items = upload.parseRequest(request);
-		
-		// Process the uploaded items
-		Iterator iter = items.iterator(); 
-		while (iter.hasNext()) {
-		    FileItem item = (FileItem) iter.next();
+		// Parse the request
+	    FileItemIterator iter = upload.getItemIterator(request);
+	    while (iter.hasNext()) {
+	        FileItemStream item = iter.next();
+	        String name = item.getFieldName();
+	        InputStream stream = item.openStream();
 		
 		    if (item.isFormField()) { //判斷表單是否為text類型
 		        // Process a regular form field
 		        //processFormField(item);
 		       // out.println("<p>a FormField</p>");
 		        
-		        String name = item.getFieldName();
-		        String value = item.getString("UTF-8");
+		        String value = Streams.asString(stream, encoding);
 		        if(name.compareTo("product_id")==0){
 		        	product_id=value;
 		        }
@@ -100,8 +111,7 @@
 		        String fieldName = item.getFieldName();
 		        String fileName = item.getName();
 		        String contentType = item.getContentType();
-		        boolean isInMemory = item.isInMemory();
-		        long sizeInBytes = item.getSize();
+
 		        
 		        //out.println("fieldName="+fieldName+"<br>");
 		        //out.println("fileName="+fileName+"<br>");
@@ -118,8 +128,9 @@
 			        	filename_small=fileName;
 			        }
 		            //out.println("fileName saved="+fileName+"<br>");
-		            File uploadedFile = new File(saveDirectory, fileName);
-		            item.write(uploadedFile);
+			        File uploadedFile = new File(saveDirectory, fileName);
+	                FileOutputStream uploadedFileStream =new FileOutputStream(uploadedFile);
+	                Streams.copy(stream, uploadedFileStream, true);
 		        }
 		        
 		    }
