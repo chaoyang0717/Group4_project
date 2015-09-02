@@ -1,4 +1,5 @@
-package order.member;
+//package edu.pccu.student;
+package order.category;
 
 public class Member {
     public String member_id;
