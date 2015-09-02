@@ -23,7 +23,7 @@ DROP TABLE IF EXISTS `order`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `order` (
-  `order_id` varchar(8) NOT NULL,
+  `order_id` int(11) NOT NULL AUTO_INCREMENT,
   `member_id` varchar(8) DEFAULT NULL,
   `customer_name` varchar(20) DEFAULT NULL,
   `customer_tel` varchar(20) DEFAULT NULL,
@@ -52,4 +52,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-09-02 15:08:57
+-- Dump completed on 2015-09-02 16:36:39
