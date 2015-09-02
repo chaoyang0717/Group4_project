@@ -249,34 +249,32 @@ jQuery(document).ready(function(){
 		<td>
 		<%if((i)<list.size()){
 		%>
-		<p><h3><%=list.get(i).product_name%></h3></p><br/>
-		<p><a href="upload/<%=list.get(i).filename_big%>" rel="lightbox" title="<%=list.get(i).product_name%>" ><img src="upload/<%=list.get(i).filename_small%>" /></p><br/></a>
-		<p><h4>金額<span class="glyphicon glyphicon-usd" aria-hidden="true"><%=list.get(i).price%></span></h4></p><br/>
-		<p><h4><%=list.get(i).summary%></h4></p><br/>
+		<h3><%=list.get(i).product_name%></h3><br/>
+		<a href="upload/<%=list.get(i).filename_big%>" rel="lightbox" title="<%=list.get(i).product_name%>" ><img src="upload/<%=list.get(i).filename_small%>" /><br/></a>
+		<h4>金額<span class="glyphicon glyphicon-usd" aria-hidden="true"><%=list.get(i).price%></span></h4><br/>
+		<h4><%=list.get(i).summary%></h4><br/>
 		<input type='button' value='-' class='qtyminus' field='quantity_1' />
         <input type='text' id='quantity_1' name="quantity_1" value='0' size="3" />
         <input type='button' value='+' class='qtyplus' field='quantity_1' />
 		<button type="submit" id="<%=list.get(i).product_id%>" onclick="add()" value="<%=list.get(i).product_name%>"><i class="fa fa-cart-plus fa-2x"></i></button>
-	<%}else{%>
+	    <%}else{%>
 		<p></p><br/>
-		<p></p><br/>
+	    <p></p><br/>
 		<p></p><br/>
 		<p></p><br/>
 		<%} %>
 		</td>
 		<td>
 		<% if((i+1)<list.size()){%>
-		<p><h3><%=list.get(i+1).product_name%></h3></p><br/>
-		<p><a href="upload/<%=list.get(i+1).filename_big%>" rel="lightbox" title="<%=list.get(i+1).product_name%>" ><img src="upload/<%=list.get(i+1).filename_small%>" /></p><br/></a>
-		<p><h4>金額<span class="glyphicon glyphicon-usd" aria-hidden="true"><%=list.get(i).price%></span></h4></p><br/>
-		<p><h4><%=list.get(i+1).summary%></h4></p><br/>
+		<h3><%=list.get(i+1).product_name%></h3><br/>
+		<a href="upload/<%=list.get(i+1).filename_big%>" rel="lightbox" title="<%=list.get(i+1).product_name%>" ><img src="upload/<%=list.get(i+1).filename_small%>" /><br/></a>
+		<h4>金額<span class="glyphicon glyphicon-usd" aria-hidden="true"><%=list.get(i).price%></span></h4><br/>
+		<h4><%=list.get(i+1).summary%></h4><br/>
 		<input type='button' value='-' class='qtyminus' field='quantity_1' />
         <input type='text' id='quantity_1' name="quantity_1" value='0' size="3" />
         <input type='button' value='+' class='qtyplus' field='quantity_1' />
 		<button type="submit" id="<%=list.get(i).product_id%>" onclick="add()" value="<%=list.get(i).product_name%>"><i class="fa fa-cart-plus fa-2x"></i></button>
-		
 		<%}else{%>
-
 		<p></p><br/>
 		<p></p><br/>
 		<p></p><br/>
@@ -285,17 +283,15 @@ jQuery(document).ready(function(){
 		</td>
 		<td>
 		<%if((i+2)<list.size()){%>
-		<p><h3><%=list.get(i+2).product_name%></h3></p><br/>
-		<p><a href="upload/<%=list.get(i+2).filename_big%>" rel="lightbox" title="<%=list.get(i+2).product_name%>" ><img src="upload/<%=list.get(i+2).filename_small%>" /></p><br/></a>
-		<p><h4>金額<span class="glyphicon glyphicon-usd" aria-hidden="true"><%=list.get(i).price%></span></h4></p><br/>
-		<p><h4><%=list.get(i+2).summary%></h4></p><br/>
+		<h3><%=list.get(i+2).product_name%></h3><br/>
+		<a href="upload/<%=list.get(i+2).filename_big%>" rel="lightbox" title="<%=list.get(i+2).product_name%>" ><img src="upload/<%=list.get(i+2).filename_small%>" /><br/></a>
+		<h4>金額<span class="glyphicon glyphicon-usd" aria-hidden="true"><%=list.get(i).price%></span></h4><br/>
+		<h4><%=list.get(i+2).summary%></h4><br/>
 		<input type='button' value='-' class='qtyminus' field='quantity_1' />
         <input type='text' id='quantity_1' name="quantity_1" value='0' size="3" />
         <input type='button' value='+' class='qtyplus' field='quantity_1' />
-		<button type="submit" id="<%=list.get(i).product_id%>" onclick="add()" value="<%=list.get(i).product_name%>"><i class="fa fa-cart-plus fa-2x"></i></button>
-		
+		<button type="submit" id="<%=list.get(i).product_id%>" onclick="add()" value="<%=list.get(i).product_name%>"><i class="fa fa-cart-plus fa-2x"></i></button>		
 		<%}else{%>
-
 		<p></p><br/>
 		<p></p><br/>
 		<p></p><br/>
@@ -330,14 +326,14 @@ jQuery(document).ready(function(){
 		<td>
 		<%if((i)<list2.size()){
 		%>
-		<p><h3><%=list2.get(i).product_name%></h3></p><br/>
-		<p><a href="upload/<%=list2.get(i).filename_big%>" rel="lightbox" title="<%=list2.get(i).product_name%>" ><img src="upload/<%=list2.get(i).filename_small%>" /></p><br/></a>
-		<p><h4>金額<span class="glyphicon glyphicon-usd" aria-hidden="true"><%=list2.get(i).price%></span></h4></p><br/>
-		<p><h4><%=list2.get(i).summary%></h4></p><br/>
+		<h3><%=list2.get(i).product_name%></h3><br/>
+		<a href="upload/<%=list2.get(i).filename_big%>" rel="lightbox" title="<%=list2.get(i).product_name%>" ><img src="upload/<%=list2.get(i).filename_small%>" /><br/></a>
+		<h4>金額<span class="glyphicon glyphicon-usd" aria-hidden="true"><%=list2.get(i).price%></span></h4><br/>
+		<h4><%=list2.get(i).summary%></h4><br/>
 		<input type='button' value='-' class='qtyminus' field='quantity_1' />
         <input type='text' id='quantity_1' name="quantity_1" value='0' size="3" />
         <input type='button' value='+' class='qtyplus' field='quantity_1' />
-		<button type="submit" id="<%=list2.get(i).product_id%>" onclick="add()" value="<%=list2.get(i).product_name%>"><i class="fa fa-cart-plus fa-2x"></i></button>
+		<button type="submit" id="<%=list2.get(i).product_id%>" onclick="add()" value="<%=list2.get(i).product_name%>"><i class="fa fa-cart-plus fa-2x"></i></button>		
 	<%}else{%>
 		<p></p><br/>
 		<p></p><br/>
@@ -347,10 +343,10 @@ jQuery(document).ready(function(){
 		</td>
 		<td>
 		<% if((i+1)<list2.size()){%>
-		<p><h3><%=list2.get(i+1).product_name%></h3></p><br/>
-		<p><a href="upload/<%=list2.get(i+1).filename_big%>" rel="lightbox" title="<%=list2.get(i+1).product_name%>" ><img src="upload/<%=list2.get(i+1).filename_small%>" /></p><br/></a>
-		<p><h4>金額<span class="glyphicon glyphicon-usd" aria-hidden="true"><%=list2.get(i).price%></span></h4></p><br/>
-		<p><h4><%=list2.get(i+1).summary%></h4></p><br/>
+		<h3><%=list2.get(i+1).product_name%></h3><br/>
+		<a href="upload/<%=list2.get(i+1).filename_big%>" rel="lightbox" title="<%=list2.get(i+1).product_name%>" ><img src="upload/<%=list2.get(i+1).filename_small%>" /><br/></a>
+		<h4>金額<span class="glyphicon glyphicon-usd" aria-hidden="true"><%=list2.get(i).price%></span></h4><br/>
+		<h4><%=list2.get(i+1).summary%></h4><br/>
 		<input type='button' value='-' class='qtyminus' field='quantity_1' />
         <input type='text' id='quantity_1' name="quantity_1" value='0' size="3" />
         <input type='button' value='+' class='qtyplus' field='quantity_1' />
@@ -366,17 +362,15 @@ jQuery(document).ready(function(){
 		</td>
 		<td>
 		<%if((i+2)<list2.size()){%>
-		<p><h3><%=list2.get(i+2).product_name%></h3></p><br/>
-		<p><a href="upload/<%=list2.get(i+2).filename_big%>" rel="lightbox" title="<%=list2.get(i+2).product_name%>" ><img src="upload/<%=list2.get(i+2).filename_small%>" /></p><br/></a>
-		<p><h4>金額<span class="glyphicon glyphicon-usd" aria-hidden="true"><%=list2.get(i).price%></span></h4></p><br/>
-		<p><h4><%=list2.get(i+2).summary%></h4></p><br/>
+		<h3><%=list2.get(i+2).product_name%></h3></p><br/>
+		<a href="upload/<%=list2.get(i+2).filename_big%>" rel="lightbox" title="<%=list2.get(i+2).product_name%>" ><img src="upload/<%=list2.get(i+2).filename_small%>" /><br/></a>
+		<h4>金額<span class="glyphicon glyphicon-usd" aria-hidden="true"><%=list2.get(i).price%></span></h4><br/>
+		<h4><%=list2.get(i+2).summary%></h4><br/>
 		<input type='button' value='-' class='qtyminus' field='quantity_1' />
         <input type='text' id='quantity_1' name="quantity_1" value='0' size="3" />
         <input type='button' value='+' class='qtyplus' field='quantity_1' />
 		<button type="submit" id="<%=list2.get(i).product_id%>" onclick="add()" value="<%=list2.get(i).product_name%>"><i class="fa fa-cart-plus fa-2x"></i></button>
-		
 		<%}else{%>
-
 		<p></p><br/>
 		<p></p><br/>
 		<p></p><br/>
@@ -411,10 +405,10 @@ jQuery(document).ready(function(){
 		<td>
 		<%if((i)<list3.size()){
 		%>
-		<p><h3><%=list3.get(i).product_name%></h3></p><br/>
-		<p><a href="upload/<%=list3.get(i).filename_big%>" rel="lightbox" title="<%=list3.get(i).product_name%>" ><img src="upload/<%=list3.get(i).filename_small%>" /></p><br/></a>
-		<p><h4>金額<span class="glyphicon glyphicon-usd" aria-hidden="true"><%=list3.get(i).price%></span></h4></p><br/>
-		<p><h4><%=list3.get(i).summary%></h4></p><br/>
+		<h3><%=list3.get(i).product_name%></h3><br/>
+		<a href="upload/<%=list3.get(i).filename_big%>" rel="lightbox" title="<%=list3.get(i).product_name%>" ><img src="upload/<%=list3.get(i).filename_small%>" /><br/></a>
+		<h4>金額<span class="glyphicon glyphicon-usd" aria-hidden="true"><%=list3.get(i).price%></span></h4><br/>
+		<h4><%=list3.get(i).summary%></h4><br/>
 		<input type='button' value='-' class='qtyminus' field='quantity_1' />
         <input type='text' id='quantity_1' name="quantity_1" value='0' size="3" />
         <input type='button' value='+' class='qtyplus' field='quantity_1' />
@@ -428,10 +422,10 @@ jQuery(document).ready(function(){
 		</td>
 		<td>
 		<% if((i+1)<list3.size()){%>
-		<p><h3><%=list3.get(i+1).product_name%></h3></p><br/>
-		<p><a href="upload/<%=list3.get(i+1).filename_big%>" rel="lightbox" title="<%=list3.get(i+1).product_name%>" ><img src="upload/<%=list3.get(i+1).filename_small%>" /></p><br/></a>
-		<p><h4>金額<span class="glyphicon glyphicon-usd" aria-hidden="true"><%=list3.get(i).price%></span></h4></p><br/>
-		<p><h4><%=list3.get(i+1).summary%></h4></p><br/>
+		<h3><%=list3.get(i+1).product_name%></h3><br/>
+		<a href="upload/<%=list3.get(i+1).filename_big%>" rel="lightbox" title="<%=list3.get(i+1).product_name%>" ><img src="upload/<%=list3.get(i+1).filename_small%>" /><br/></a>
+		<h4>金額<span class="glyphicon glyphicon-usd" aria-hidden="true"><%=list3.get(i).price%></span></h4><br/>
+		<h4><%=list3.get(i+1).summary%></h4><br/>
 		<input type='button' value='-' class='qtyminus' field='quantity_1' />
         <input type='text' id='quantity_1' name="quantity_1" value='0' size="3" />
         <input type='button' value='+' class='qtyplus' field='quantity_1' />
@@ -447,10 +441,10 @@ jQuery(document).ready(function(){
 		</td>
 		<td>
 		<%if((i+2)<list3.size()){%>
-		<p><h3><%=list3.get(i+2).product_name%></h3></p><br/>
-		<p><a href="upload/<%=list3.get(i+2).filename_big%>" rel="lightbox" title="<%=list3.get(i+2).product_name%>" ><img src="upload/<%=list3.get(i+2).filename_small%>" /></p><br/></a>
-		<p><h4>金額<span class="glyphicon glyphicon-usd" aria-hidden="true"><%=list3.get(i).price%></span></h4></p><br/>
-		<p><h4><%=list3.get(i+2).summary%></h4></p><br/>
+		<h3><%=list3.get(i+2).product_name%></h3><br/>
+		<a href="upload/<%=list3.get(i+2).filename_big%>" rel="lightbox" title="<%=list3.get(i+2).product_name%>" ><img src="upload/<%=list3.get(i+2).filename_small%>" /><br/></a>
+		<h4>金額<span class="glyphicon glyphicon-usd" aria-hidden="true"><%=list3.get(i).price%></span></h4><br/>
+		<h4><%=list3.get(i+2).summary%></h4><br/>
 		<input type='button' value='-' class='qtyminus' field='quantity_1' />
         <input type='text' id='quantity_1' name="quantity_1" value='0' size="3" />
         <input type='button' value='+' class='qtyplus' field='quantity_1' />
@@ -492,10 +486,10 @@ jQuery(document).ready(function(){
 		<td>
 		<%if((i)<list4.size()){
 		%>
-		<p><h3><%=list4.get(i).product_name%></h3></p><br/>
-		<p><a href="upload/<%=list4.get(i).filename_big%>" rel="lightbox" title="<%=list4.get(i).product_name%>" ><img src="upload/<%=list4.get(i).filename_small%>" /></p><br/></a>
-		<p><h4>金額<span class="glyphicon glyphicon-usd" aria-hidden="true"><%=list4.get(i).price%></span></h4></p><br/>
-		<p><h4><%=list4.get(i).summary%></h4></p><br/>
+		<h3><%=list4.get(i).product_name%></h3><br/>
+		<a href="upload/<%=list4.get(i).filename_big%>" rel="lightbox" title="<%=list4.get(i).product_name%>" ><img src="upload/<%=list4.get(i).filename_small%>" /><br/></a>
+		<h4>金額<span class="glyphicon glyphicon-usd" aria-hidden="true"><%=list4.get(i).price%></span></h4><br/>
+		<h4><%=list4.get(i).summary%></h4><br/>
 		<input type='button' value='-' class='qtyminus' field='quantity_1' />
         <input type='text' id='quantity_1' name="quantity_1" value='0' size="3" />
         <input type='button' value='+' class='qtyplus' field='quantity_1' />
@@ -509,10 +503,10 @@ jQuery(document).ready(function(){
 		</td>
 		<td>
 		<% if((i+1)<list4.size()){%>
-		<p><h3><%=list4.get(i+1).product_name%></h3></p><br/>
-		<p><a href="upload/<%=list4.get(i+1).filename_big%>" rel="lightbox" title="<%=list4.get(i+1).product_name%>" ><img src="upload/<%=list4.get(i+1).filename_small%>" /></p><br/></a>
-		<p><h4>金額<span class="glyphicon glyphicon-usd" aria-hidden="true"><%=list4.get(i).price%></span></h4></p><br/>
-		<p><h4><%=list4.get(i+1).summary%></h4></p><br/>
+		<h3><%=list4.get(i+1).product_name%></h3><br/>
+		<a href="upload/<%=list4.get(i+1).filename_big%>" rel="lightbox" title="<%=list4.get(i+1).product_name%>" ><img src="upload/<%=list4.get(i+1).filename_small%>" /><br/></a>
+		<h4>金額<span class="glyphicon glyphicon-usd" aria-hidden="true"><%=list4.get(i).price%></span></h4><br/>
+		<h4><%=list4.get(i+1).summary%></h4><br/>
 		<input type='button' value='-' class='qtyminus' field='quantity_1' />
         <input type='text' id='quantity_1' name="quantity_1" value='0' size="3" />
         <input type='button' value='+' class='qtyplus' field='quantity_1' />
@@ -528,10 +522,10 @@ jQuery(document).ready(function(){
 		</td>
 		<td>
 		<%if((i+2)<list4.size()){%>
-		<p><h3><%=list4.get(i+2).product_name%></h3></p><br/>
-		<p><a href="upload/<%=list4.get(i+2).filename_big%>" rel="lightbox" title="<%=list4.get(i+2).product_name%>" ><img src="upload/<%=list4.get(i+2).filename_small%>" /></p><br/></a>
-		<p><h4>金額<span class="glyphicon glyphicon-usd" aria-hidden="true"><%=list4.get(i).price%></span></h4></p><br/>
-		<p><h4><%=list4.get(i+2).summary%></h4></p><br/>
+		<h3><%=list4.get(i+2).product_name%></h3><br/>
+		<a href="upload/<%=list4.get(i+2).filename_big%>" rel="lightbox" title="<%=list4.get(i+2).product_name%>" ><img src="upload/<%=list4.get(i+2).filename_small%>" /><br/></a>
+		<h4>金額<span class="glyphicon glyphicon-usd" aria-hidden="true"><%=list4.get(i).price%></span></h4><br/>
+		<h4><%=list4.get(i+2).summary%></h4><br/>
 		<input type='button' value='-' class='qtyminus' field='quantity_1' />
         <input type='text' id='quantity_1' name="quantity_1" value='0' size="3" />
         <input type='button' value='+' class='qtyplus' field='quantity_1' />
