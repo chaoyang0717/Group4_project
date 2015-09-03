@@ -15,8 +15,9 @@
 <title>點餐後台管理</title>
 <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
 <link rel="stylesheet" href="bootstrap/css/bootstrap-theme.min.css">
-<script src="jquery/jquery.js"></script>
+<link rel="stylesheet" href="bootstrap/css/bootstrap-modal.css">
 <script src="bootstrap/js/bootstrap.min.js"></script>
+<script src="bootstrap/js/jquery.js"></script>
 <link rel="stylesheet" href="css/mysite.css">
 
 
@@ -112,33 +113,32 @@
 										</td>
 									</tr>
 									<tr class="child2_<%=order.order_id%>">
-											<table class="table">
+											
+										<td colspan="7">
+										<% 
+											for(OrderList list:order.Detail){
+											%>
+										產品編號:<%=list.product_id%><br/>產品名稱:<%=list.product_id%><br/>價錢:<%=list.price%><br/>數量:<%=list.quantity%><br/>
+										***********************************	<br/>
+											<!-- <table class="table">
 											<tr >
 												<td style="text-align:center;">產品編號</td>
 												<td style="text-align:center;">產品名稱</td>
 												<td style="text-align:center;">價錢</td>
 												<td style="text-align:center;">數量</td>
-												<td style="text-align:center;">Operate</td>
 											</tr>
-											<% 
-											for(OrderList list:order.Detail){
-											%>
+
 											
 											<tr>
-												<td align="center"><%=list.product_id%></td>
-												<td align="center"><%=list.product_name_ch%></td>
-												<td align="center"><%=list.price%></td>
-												<td align="center"><%=list.quantity%></td>
-												<td align="center">
-													<a href="back_orderlistEdit.jsp?id=<%=list.product_id%>">
-													<i class="glyphicon glyphicon-edit"></i></a>
-													<a href="back_orderlistCode.jsp?id=<%=list.product_id%>" onclick="return confirm('確認刪除?')">
-													<i class="glyphicon glyphicon-remove"></i></a>
-												</td>
+												<td align="center"><%//=list.product_id%></td>
+												<td align="center"><%//=list.product_name_ch%></td>
+												<td align="center"><%//=list.price%></td>
+												<td align="center"><%//=list.quantity%></td>
 											</tr>
-											
+											 -->
 											<%} %>
-											</table>
+											</td>
+											<!-- </table> -->
 
 									</tr>
 									<%
@@ -174,7 +174,7 @@
 									if (o_start_num > o_PAGE_RANGE)
 									{
 									%>
-										<td class="text-center"><a href="back_order.jsp?ord=<%=r-o_PAGE_RANGE %>"><i class="glyphicon glyphicon-backward"></i></a></td>
+										<td class="text-center"><a href="back_ok.jsp?ord=<%=r-o_PAGE_RANGE %>"><i class="glyphicon glyphicon-backward"></i></a></td>
 										
 									<%
 									}else{
@@ -188,7 +188,7 @@
 								<% 
 								
 								if (ord != r) { %>
-								<td class="text-center" width="30px"> <a href="back_order.jsp?ord=<%=r %>"><%=r %></a> </td>
+								<td class="text-center" width="30px"> <a href="back_ok.jsp?ord=<%=r %>"><%=r %></a> </td>
 								<% } else { %>
 								<td class="text-center" width="30px"> <%=r %> </td>
 								<% } %>
@@ -198,7 +198,7 @@
 									if (o_TotalPages > o_end_num)
 									{
 									%>
-										<td class="text-center"><a href="back_order.jsp?ord=<%=r %>"><i class="glyphicon glyphicon-forward"></i></a></td>
+										<td class="text-center"><a href="back_ok.jsp?ord=<%=r %>"><i class="glyphicon glyphicon-forward"></i></a></td>
 									<%
 									}else{
 										%>
