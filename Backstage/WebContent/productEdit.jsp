@@ -60,8 +60,8 @@ function check44()//判斷欄位是否空白
 
 
    // ---------- Check ----------
-   var product_id = document.getElementById('product_id');
-   if(product_id.value=='')
+   var category_id = document.getElementById('category_id');
+   if(category_id.value=='')
    {
 	   var img1 = document.getElementById("img1");
 	   img1.src = "img/a1.png";
@@ -144,7 +144,7 @@ function check44()//判斷欄位是否空白
 										<label for="input3" class="col-sm-4 control-label">種類編號</label>
 									    <div class="col-sm-6">
 									      <input type="text" class="form-control" id="category_id" name="category_id" value="<%=stu.category_id%>" onblur="getData6()">
-									    	<input type="hidden" id="dup2" value="1" />
+									    	<input type="hidden" id="dup2" value="0" />
 									    </div>
 									    <div class="col-sm-2">
 						                	<img id="img2" src="img/aa.png" style="width:25px;height:25px;margin-top:5px;"/>
@@ -193,11 +193,11 @@ function check44()//判斷欄位是否空白
 									  </div>
 									 </form>
 							</div>
-							
-						<div class="col-md-2"></div>
 						</div>
+						</div>
+						<div class="col-md-2"></div>
+					
 					</div>
-			</div>
 					<div class="row">
 						<div class="col-md-2"></div>
 						<div class="col-md-8">
@@ -239,7 +239,7 @@ function check44()//判斷欄位是否空白
 		  </div>
 		  <div class="col-md-1"></div>
 		</div>
-    
+    </div>
     </div><!--標題列下方內文end-->
 
 </div><!--最外框end-->

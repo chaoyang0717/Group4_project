@@ -147,7 +147,7 @@
 									if (m_TotalPages > m_end_num)
 									{
 									%>
-										<td class="text-center"><a href="back_member.jsp?m=<%=k %>"><i class="glyphicon glyphicon-forward"></i></a></td>
+										<td class="text-center"><a href="back_member.jsp?ber=<%=k %>"><i class="glyphicon glyphicon-forward"></i></a></td>
 									<%
 									}else{
 										%>

@@ -25,7 +25,7 @@ public class MemberDAODBImpl implements MemberDAO{
             Class.forName(DRIVER_NAME);
             Connection conn = DriverManager.getConnection(CONN_STRING);
             PreparedStatement pstmt = conn.prepareStatement("Insert into member (member_id,member_account,member_password,member_tel,member_email) values (?,?,?,?,?)");
-            pstmt.setString(1, member.member_id);
+            pstmt.setInt(1, member.member_id);
             pstmt.setString(2, member.member_account);//account=email
             pstmt.setString(3, str);
             pstmt.setString(4, member.member_tel);
@@ -50,7 +50,7 @@ public class MemberDAODBImpl implements MemberDAO{
             pstmt.setString(2, member.member_password);
             pstmt.setString(3, member.member_tel);
             pstmt.setString(4, member.member_email);
-            pstmt.setString(5, member.member_id);
+            pstmt.setInt(5, member.member_id);
             pstmt.executeUpdate();
             pstmt.close();
             conn.close();
@@ -67,7 +67,7 @@ public class MemberDAODBImpl implements MemberDAO{
             Class.forName(DRIVER_NAME);
             Connection conn = DriverManager.getConnection(CONN_STRING);
             PreparedStatement pstmt = conn.prepareStatement("Delete From member Where member_id=?");
-            pstmt.setString(1, member.member_id);
+            pstmt.setInt(1, member.member_id);
             pstmt.executeUpdate();
             pstmt.close();
             conn.close();
@@ -88,7 +88,7 @@ public class MemberDAODBImpl implements MemberDAO{
             ResultSet rs = pstmt.executeQuery();
             if (rs.next())
             {
-                Member s = new Member(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5));
+                Member s = new Member(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5));
                 return s;
             }
             else
@@ -116,7 +116,7 @@ public class MemberDAODBImpl implements MemberDAO{
             
             while(rs.next())
             {
-                mylist.add(new Member(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5)));                
+                mylist.add(new Member(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5)));                
             }
             rs.close();
             stmt.close();
@@ -143,7 +143,7 @@ public class MemberDAODBImpl implements MemberDAO{
             
             while(rs.next())
             {
-                mylist.add(new Member(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5)));                
+                mylist.add(new Member(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5)));                
             }
             rs.close();
             stmt.close();
@@ -167,7 +167,7 @@ public class MemberDAODBImpl implements MemberDAO{
             ResultSet rs = pstmt.executeQuery();
             if (rs.next())
             {
-                Member s = new Member(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5));
+                Member s = new Member(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5));
                 return s;
             }
             else

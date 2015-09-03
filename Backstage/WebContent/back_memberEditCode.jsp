@@ -17,7 +17,7 @@ if(pwd.compareTo(mber.member_password)==0){ //字串判斷相等
 }
 
 
-Member ber = new Member(request.getParameter("member_id"), request.getParameter("member_account"), chk,request.getParameter("member_tel"),request.getParameter("member_email"));
+Member ber = new Member(Integer.valueOf(request.getParameter("id")), request.getParameter("member_account"), chk,request.getParameter("member_tel"),request.getParameter("member_email"));
 MemberDAO dao2 = new MemberDAODBImpl();
 dao2.update(ber);
 response.sendRedirect("back_member.jsp");
