@@ -676,7 +676,7 @@ jQuery(document).ready(function(){
         <hr><footer></footer>
         <h4> 金額總計: </h4>   
         <hr><footer></footer>   
-        <button input type="submit" class="btn btn-success">確認送出</button> 
+        <button input type="submit" class="btn btn-success" cation="self.jsp" method="post">確認送出</button> 
         <button type="button" class="btn btn-success" onclick="del()">清除清單</button> 
         </form>
         <hr><footer></footer>   
