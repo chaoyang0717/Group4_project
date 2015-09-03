@@ -283,6 +283,27 @@ public class OrderDAOImpl implements OrderDAO{
         return -1;
 	}
 
+    @Override
+    public void removeDetail(OrderList od) {
+        try {        
+            Class.forName(DRIVER_NAME);            
+            Connection conn = DriverManager.getConnection(CONN_STRING);
+            //conn.setAutoCommit(false);
+            PreparedStatement pstmt = conn.prepareStatement("Delete From orderlist Where idOrderList=?" );
+            pstmt.setInt(1, od.idOrderList);
+            pstmt.executeUpdate(); 
+            //conn.commit();
+            //conn.setAutoCommit(true);
+            pstmt.close();
+            conn.close();
+
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(OrderDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(OrderDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }   
+    }
+
 
 
 

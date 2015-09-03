@@ -11,4 +11,5 @@ public interface OrderDAO {
     public ArrayList<Order> getAllOrders();        
     public ArrayList<Order> getRangeOrders(int start, int size);
     public int getSize();
+    public void removeDetail(OrderList od);//删除訂單明細
 }
