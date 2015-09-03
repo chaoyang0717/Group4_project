@@ -1,4 +1,3 @@
-//package edu.pccu.student;
 package order.category;
 
 import java.sql.Connection;
@@ -136,7 +135,11 @@ public class MemberDAODBImpl implements MemberDAO{
             Class.forName(DRIVER_NAME);
             Connection conn = DriverManager.getConnection(CONN_STRING);    
             Statement stmt = conn.createStatement();
+<<<<<<< HEAD
             ResultSet rs = stmt.executeQuery("Select * from member Order By member_id " +  
+=======
+            ResultSet rs = stmt.executeQuery("Select * from Member Order By member_id " +  
+>>>>>>> 359f24f5a0c18ba9d32de49907a1c200569f1cde
                     "Limit " + (start-1) + "," + size);
             
             ArrayList<Member> mylist = new ArrayList();
@@ -181,6 +184,7 @@ public class MemberDAODBImpl implements MemberDAO{
             Logger.getLogger(MemberDAODBImpl.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
+<<<<<<< HEAD
     }
 
 	@Override
@@ -199,14 +203,36 @@ public class MemberDAODBImpl implements MemberDAO{
             stmt.close();
             conn.close();
             return size;
+=======
+    }        
+
+    @Override
+    public int getSize() {
+        try {
+            Class.forName(DRIVER_NAME);
+            Connection conn = DriverManager.getConnection(CONN_STRING);    
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery("Select count(*) from member");
+            
+            
+            ArrayList<Member> mylist = new ArrayList();
+            rs.next(); 
+            int size = rs.getInt(1); 
+            return size;
+
+>>>>>>> 359f24f5a0c18ba9d32de49907a1c200569f1cde
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(MemberDAODBImpl.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
             Logger.getLogger(MemberDAODBImpl.class.getName()).log(Level.SEVERE, null, ex);
         }
         return -1;
+<<<<<<< HEAD
 	}
 
        
+=======
+    }
+>>>>>>> 359f24f5a0c18ba9d32de49907a1c200569f1cde
     
 }

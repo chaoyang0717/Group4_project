@@ -242,7 +242,7 @@ jQuery(document).ready(function(){
 			<% 
 			ProductDAO dao=new ProductDAODBImpl();
 			ArrayList<Product> list=dao.getByCategoryId(1);
-			for (int i = 0; i < list.size(); i+=2) { %>
+			for (int i = 0; i < list.size(); i+=3) { %>
 	<center>
 	<table>
 		<tr>
@@ -319,7 +319,7 @@ jQuery(document).ready(function(){
 			<% 
 			ProductDAO dao2=new ProductDAODBImpl();
 			ArrayList<Product> list2=dao2.getByCategoryId(2);
-			for (int i = 0; i < list2.size(); i+=2) { %>
+			for (int i = 0; i < list2.size(); i+=3) { %>
 	<center>
 	<table>
 		<tr>
@@ -398,7 +398,7 @@ jQuery(document).ready(function(){
 			<% 
 			ProductDAO dao3=new ProductDAODBImpl();
 			ArrayList<Product> list3=dao3.getByCategoryId(3);
-			for (int i = 0; i < list3.size(); i+=2) { %>
+			for (int i = 0; i < list3.size(); i+=3) { %>
 	<center>
 	<table>
 		<tr>
@@ -479,7 +479,7 @@ jQuery(document).ready(function(){
 			<% 
 			ProductDAO dao4=new ProductDAODBImpl();
 			ArrayList<Product> list4=dao4.getByCategoryId(4);
-			for (int i = 0; i < list4.size(); i+=2) { %>
+			for (int i = 0; i < list4.size(); i+=3) { %>
 	<center>
 	<table>
 		<tr>
@@ -692,19 +692,19 @@ jQuery(document).ready(function(){
              <div class=row>
                <div class=col-md-4>
                  <h3>簡介</h3>
-                 <p>Java與Web整合程式設計師班</p>
+                 <h4><p>Java與Web整合程式設計師班</p>
                  <p>專題題目:線上點餐系統</p>
-                 <p>選定的餐點是義式料理</p>
+                 <p>選定的餐點是義式料理</p></h4>
                </div>
                <div class=col-md-4>
                  <h3>理念</h3>
-                 <p>"線上點餐系統"讓消費者可以經由網路在任何地方，透過網頁呈現方式，可以方便快速的在線上點餐，並可選擇外送或自取。</p>                
+                 <p><h4>"線上點餐系統"讓消費者經由網路在任何地方，透過網頁呈現方式，方便快速容易使用的網頁點餐。並且建立了後台管理系統，能管理菜單、會員、訂單等所有相關內容。</h4></p>                
                </div>
                <div class=col-md-4>
                <h3>成員</h3>
-               <p>文化大學推廣部建國分部 R202教室</p>
+               <h4><p>文化大學推廣部建國分部 R202教室</p>
                <p>林秀玲、黃芷萱、黃朝暘、鐘欣志</p>
-               <p>劉建宏、林靖凱、何宗庭</p>
+               <p>劉建宏、林靖凱、何宗庭</p></h4>
                </div>
              </div>
           </div>
