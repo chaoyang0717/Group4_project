@@ -1,6 +1,5 @@
 package order.category;
 
-import edu.pccu.student.*;
 import java.util.ArrayList;
 
 public interface MemberDAO {

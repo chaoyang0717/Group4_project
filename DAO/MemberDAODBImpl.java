@@ -1,6 +1,5 @@
 package order.category;
 
-import edu.pccu.student.*;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -15,7 +14,7 @@ public class MemberDAODBImpl implements MemberDAO{
     
     final String DRIVER_NAME = "com.mysql.jdbc.Driver";
     final String CONN_STRING = "jdbc:mysql://localhost:3306/mydb?" +
-                    "user=root&password=1234";
+                    "user=root&password=123456";
 
     @Override
     public void add(Member member) {
@@ -134,7 +133,7 @@ public class MemberDAODBImpl implements MemberDAO{
             Class.forName(DRIVER_NAME);
             Connection conn = DriverManager.getConnection(CONN_STRING);    
             Statement stmt = conn.createStatement();
-            ResultSet rs = stmt.executeQuery("Select * from students Order By student_id " +  
+            ResultSet rs = stmt.executeQuery("Select * from Member Order By member_id " +  
                     "Limit " + (start-1) + "," + size);
             
             ArrayList<Member> mylist = new ArrayList();
@@ -190,7 +189,7 @@ public class MemberDAODBImpl implements MemberDAO{
             ResultSet rs = stmt.executeQuery("Select count(*) from member");
             
             
-            ArrayList<Student> mylist = new ArrayList();
+            ArrayList<Member> mylist = new ArrayList();
             rs.next(); 
             int size = rs.getInt(1); 
             return size;
