@@ -23,7 +23,7 @@ DROP TABLE IF EXISTS `member`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `member` (
-  `member_id` varchar(8) NOT NULL,
+  `member_id` int(11) NOT NULL AUTO_INCREMENT,
   `member_account` varchar(20) DEFAULT NULL,
   `member_password` varchar(20) DEFAULT NULL,
   `member_tel` varchar(20) DEFAULT NULL,
@@ -50,4 +50,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-09-02 15:08:49
+-- Dump completed on 2015-09-03 15:12:54
