@@ -14,7 +14,7 @@ public class OrderList {
 
     public OrderList(int idOrderList, /*int order_id, String member_id,*/ String product_id, String product_name_ch, int price, int quantity) {
         this.idOrderList = idOrderList;
-        this.order_id = order_id;
+        //this.order_id = order_id;
         //this.member_id = member_id;
         this.product_id = product_id;
         this.product_name_ch = product_name_ch;

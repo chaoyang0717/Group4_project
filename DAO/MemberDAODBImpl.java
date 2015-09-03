@@ -15,17 +15,19 @@ public class MemberDAODBImpl implements MemberDAO{
     
     final String DRIVER_NAME = "com.mysql.jdbc.Driver";
     final String CONN_STRING = "jdbc:mysql://localhost:3306/mydb?" +
-                    "user=root&password=123456";
+                    "user=root&password=1234";
 
     @Override
     public void add(Member member) {
+    	MD5 md=new MD5();
+		String str=md.changepwd(member.member_password);
         try {
             Class.forName(DRIVER_NAME);
             Connection conn = DriverManager.getConnection(CONN_STRING);
             PreparedStatement pstmt = conn.prepareStatement("Insert into member (member_id,member_account,member_password,member_tel,member_email) values (?,?,?,?,?)");
             pstmt.setString(1, member.member_id);
             pstmt.setString(2, member.member_account);//account=email
-            pstmt.setString(3, member.member_password);
+            pstmt.setString(3, str);
             pstmt.setString(4, member.member_tel);
             pstmt.setString(5, member.member_email);
             pstmt.executeUpdate();
@@ -134,7 +136,7 @@ public class MemberDAODBImpl implements MemberDAO{
             Class.forName(DRIVER_NAME);
             Connection conn = DriverManager.getConnection(CONN_STRING);    
             Statement stmt = conn.createStatement();
-            ResultSet rs = stmt.executeQuery("Select * from students Order By student_id " +  
+            ResultSet rs = stmt.executeQuery("Select * from member Order By member_id " +  
                     "Limit " + (start-1) + "," + size);
             
             ArrayList<Member> mylist = new ArrayList();
@@ -148,9 +150,9 @@ public class MemberDAODBImpl implements MemberDAO{
             conn.close();
             return mylist;
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(StudentDAODBImpl.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(MemberDAODBImpl.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
-            Logger.getLogger(StudentDAODBImpl.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(MemberDAODBImpl.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
     }
@@ -174,11 +176,37 @@ public class MemberDAODBImpl implements MemberDAO{
             }
             
         } catch (SQLException ex) {
-            Logger.getLogger(StudentDAODBImpl.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(MemberDAODBImpl.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(StudentDAODBImpl.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(MemberDAODBImpl.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
-    }        
+    }
+
+	@Override
+	public int getSize()
+	{
+		try {
+            Class.forName(DRIVER_NAME);
+            Connection conn = DriverManager.getConnection(CONN_STRING); 
+            
+            Statement stmt = conn.createStatement();// 得到一個執行SQL
+            ResultSet rs = stmt.executeQuery("Select count(*) From member ");// 執行SQL
+            
+            rs.next();
+            int size=rs.getInt(1);
+            rs.close();
+            stmt.close();
+            conn.close();
+            return size;
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(MemberDAODBImpl.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(MemberDAODBImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return -1;
+	}
+
+       
     
 }

@@ -107,7 +107,7 @@ function check33()//判斷欄位是否空白
 						<div class="col-md-2"></div>
 						<div class="col-md-8">
 							<div class="panel panel-default" width="60px">
-							  <div class="panel-heading">種類新增</div>
+							  <div class="panel-heading">種類修改</div>
 								<div class="panel-body">
 								<%
 									String s = request.getParameter("id");

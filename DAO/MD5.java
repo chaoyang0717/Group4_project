@@ -10,7 +10,7 @@ public class MD5
 	public String str;
 
 	public String changepwd(String password){
-		this.plainText = password+"playcoo2002";
+		this.plainText = password+"pccu";
 		try
 		{	
 			MessageDigest mdAlgorithm = MessageDigest.getInstance("MD5");// 進行MD5轉碼

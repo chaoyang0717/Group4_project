@@ -11,11 +11,13 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import com.sun.corba.se.impl.protocol.giopmsgheaders.RequestMessage_1_2;
+
 public class OrderDAOImpl implements OrderDAO{
 
     final String DRIVER_NAME = "com.mysql.jdbc.Driver";
     final String CONN_STRING = "jdbc:mysql://localhost:3306/mydb?" +
-                    "user=root&password=123456";
+                    "user=root&password=1234";
     @Override
     public void add(Order o) {
         try {        
@@ -140,5 +142,149 @@ public class OrderDAOImpl implements OrderDAO{
             Logger.getLogger(OrderDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
         }   
     }
+
+	@Override
+	public Order findByOrderId(int order_id)
+	{
+		try {        
+            Class.forName(DRIVER_NAME);
+            Connection conn = DriverManager.getConnection(CONN_STRING);
+            
+            PreparedStatement pstmt = conn.prepareStatement("Select * from `order` where order_id = ?");
+            pstmt.setInt(1, order_id);
+            ResultSet rs = pstmt.executeQuery();
+
+            if (rs.next()) {
+            	Order o=new Order(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6));
+            	PreparedStatement pstmt2 = conn.prepareStatement("Select * from orderlist where order_id = ?");
+            	pstmt2.setInt(1, order_id);
+            	ResultSet rs2 = pstmt2.executeQuery();
+            	while (rs2.next()) {
+            		o.Detail.add(new OrderList(rs2.getInt(1), rs2.getString(3), rs2.getString(4), rs2.getInt(5), rs2.getInt(6)));
+             }
+            	rs2.close();
+            	pstmt2.close();
+            	return o;
+            } else {
+                return null;
+            }
+
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(OrderDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(OrderDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }  
+		return null;
+	}
+
+	@Override
+	public ArrayList<Order> getAllOrders()
+	{
+		try {        
+            Class.forName(DRIVER_NAME);
+            Connection conn = DriverManager.getConnection(CONN_STRING);
+            
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery("Select * from `Order` Order By order_id");
+            
+            ArrayList<Order> mylist = new ArrayList<>();
+            
+            while (rs.next()) {
+            	Order o=new Order(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6));
+                mylist.add(o);
+
+                	PreparedStatement pstmt = conn.prepareStatement("Select * from orderlist where order_id = ?");
+                	pstmt.setInt(1, o.order_id);
+                	ResultSet rs2 = pstmt.executeQuery();
+                	while (rs2.next()) {
+                		o.Detail.add(new OrderList(rs2.getInt(1), rs2.getString(3), rs2.getString(4), rs2.getInt(5), rs2.getInt(6)));
+                 }
+                	rs2.close();
+                	pstmt.close();
+            }
+                
+ 
+            rs.close();
+            stmt.close();
+            conn.close();
+            return mylist;
+
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(OrderDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(OrderDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }  
+		return null;
+	}
+
+	@Override
+	public ArrayList<Order> getRangeOrders(int start, int size)
+	{
+		try {        
+            Class.forName(DRIVER_NAME);
+            Connection conn = DriverManager.getConnection(CONN_STRING);
+            
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery("Select * from `Order` Order By order_id limit " + (start - 1) + "," + size);
+                       
+            ArrayList<Order> mylist = new ArrayList<>();
+            
+            while (rs.next()) {
+            	Order o=new Order(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6));
+                mylist.add(o);
+
+                	PreparedStatement pstmt = conn.prepareStatement("Select * from orderlist where order_id = ?");
+                	pstmt.setInt(1, o.order_id);
+                	ResultSet rs2 = pstmt.executeQuery();
+                	while (rs2.next()) {
+                		o.Detail.add(new OrderList(rs2.getInt(1), rs2.getString(3), rs2.getString(4), rs2.getInt(5), rs2.getInt(6)));
+                 }
+                	rs2.close();
+                	pstmt.close();
+            }
+                
+ 
+            rs.close();
+            stmt.close();
+            conn.close();
+            return mylist;
+
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(OrderDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(OrderDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }  
+		return null;
+	}
+
+	@Override
+	public int getSize()
+	{
+		try {
+            Class.forName(DRIVER_NAME);
+            Connection conn = DriverManager.getConnection(CONN_STRING);
+
+            Statement stmt = conn.createStatement();// 得到一個執行SQL
+            ResultSet rs = stmt.executeQuery("Select count(*) From `order` ");// 執行SQL
+
+            rs.next();
+
+            int size = rs.getInt(1);
+            rs.close();
+            stmt.close();
+            conn.close();
+            return size;
+
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return -1;
+	}
+
+
+
+
     
 }

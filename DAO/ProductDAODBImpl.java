@@ -148,7 +148,7 @@ public class ProductDAODBImpl implements ProductDAO {
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery("Select * from product Order By product_id");
 
-            ArrayList<Product> mylist = new ArrayList();
+            ArrayList<Product> mylist = new ArrayList<>();
 
             while (rs.next()) {
                 mylist.add(new Product(rs.getString(1), rs.getInt(2), rs.getString(3), rs.getString(4), rs.getInt(5), rs.getString(6), rs.getString(7), rs.getString(8)));

@@ -31,6 +31,7 @@
           <span class="sr-only"></span>
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
 
         </button>
         <a class="navbar-brand" href="Home.jsp"><span class="glyphicon glyphicon-bookmark"></span> 點餐後台管理</a>
@@ -42,6 +43,7 @@
           <li class="active"><a href="Home.jsp">Home</a></li>
           <li><a href="ok.jsp">Order</a></li>
           <li><a href="product.jsp">Menu</a></li>
+          <li><a href="back_member.jsp">Member</a></li>
 
         </ul>
       </div><!-- /.navbar-collapse -->
