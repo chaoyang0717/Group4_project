@@ -1,6 +1,6 @@
-//package edu.pccu.student;
 package order.category;
 
+import edu.pccu.student.*;
 import java.util.ArrayList;
 
 public interface MemberDAO {
@@ -11,4 +11,5 @@ public interface MemberDAO {
     public ArrayList<Member> getAllMembers();        
     public ArrayList<Member> getRangeMembers(int start, int size);
     public Member findByAccount(String member_account);
+    public int getSize();
 }
