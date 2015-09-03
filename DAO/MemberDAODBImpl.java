@@ -1,6 +1,6 @@
-//package edu.pccu.student;
 package order.category;
 
+import edu.pccu.student.*;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -15,7 +15,7 @@ public class MemberDAODBImpl implements MemberDAO{
     
     final String DRIVER_NAME = "com.mysql.jdbc.Driver";
     final String CONN_STRING = "jdbc:mysql://localhost:3306/mydb?" +
-                    "user=root&password=123456";
+                    "user=root&password=1234";
 
     @Override
     public void add(Member member) {
@@ -148,9 +148,9 @@ public class MemberDAODBImpl implements MemberDAO{
             conn.close();
             return mylist;
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(StudentDAODBImpl.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(MemberDAODBImpl.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
-            Logger.getLogger(StudentDAODBImpl.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(MemberDAODBImpl.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
     }
@@ -174,11 +174,33 @@ public class MemberDAODBImpl implements MemberDAO{
             }
             
         } catch (SQLException ex) {
-            Logger.getLogger(StudentDAODBImpl.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(MemberDAODBImpl.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(StudentDAODBImpl.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(MemberDAODBImpl.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
     }        
+
+    @Override
+    public int getSize() {
+        try {
+            Class.forName(DRIVER_NAME);
+            Connection conn = DriverManager.getConnection(CONN_STRING);    
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery("Select count(*) from member");
+            
+            
+            ArrayList<Student> mylist = new ArrayList();
+            rs.next(); 
+            int size = rs.getInt(1); 
+            return size;
+
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(MemberDAODBImpl.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(MemberDAODBImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return -1;
+    }
     
 }
