@@ -2,6 +2,6 @@
     pageEncoding="UTF-8"%>
 <%
 
-	session.setAttribute("Login", null);
+	session.setAttribute("mySignIn", null);
 	response.sendRedirect("index.jsp");
 %>
