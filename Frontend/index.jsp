@@ -787,11 +787,11 @@ jQuery(document).ready(function(){
       </div>
       <div class="modal-body">
       <div class="container">   <!-- Sign in /container start-->
-        <form class="form-signin" action="MemberAddCode.jsp">
+        <form class="form-signin" name="member" action="MemberAddCode.jsp">
          <div class="col-md-6 "> 
           <label for="inputAccount" class="sr-only">帳號</label>   
           <h5>帳號</h5>
-          <input type="account" id="addAccount" name="member_account" class="form-control" placeholder="帳號" required autofocus> 
+          <input type="account" id="addAccount" name="member_account" class="form-control" onblur="getData()" placeholder="帳號" required autofocus> 
           <img id="img1" width="20px" height="20px" />
           <p>
           <input type="hidden" id="dup" value="1" />

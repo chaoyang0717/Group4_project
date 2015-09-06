@@ -1,7 +1,8 @@
 <!-- 註冊會員檢查重覆 -->
 
 <%@ page language="java" contentType="text/html; charset=UTF-8" 
-    pageEncoding="UTF-8" import="order.category.*"%><%
+    pageEncoding="UTF-8" import="order.category.*,java.util.*"%>
+<%
     String m = request.getParameter("name");
     Member mem = null;
     if (m != null)
