@@ -9,7 +9,7 @@
     	try
     	{    		
     		MemberDAO dao = new MemberDAODBImpl();
-    		mem = dao.findByName(m);
+    		mem = dao.findByAccount(m);
     		
     	    if (mem == null)
     	    {

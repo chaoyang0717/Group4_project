@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8" import="order.category.*,java.util.*"%>
-
 	
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -38,11 +37,8 @@ table, th, td {
     border-width: 10px;
     width: 300px;
     text-align:center;
-    word-break: break-all;
-    
+    word-break: break-all;    
 }
-
-
 </style>
 
 <!--Shopping Cart Rolling Sticky 的CSS設定-->
@@ -55,49 +51,92 @@ table, th, td {
 } 
 </style>
 
-<script language="JavaScript">              //會員登入判斷
-var request
-function getData(){ //加入Ajax判斷
-	var memAcc=document.getElementById('memAcc')//取得使用者輸入的值
-	request=new XMLHttpRequest();//在記憶體內開啟一個網頁
-	request.open("GET", "mem_nameChk.jsp?name="+memAcc.value, true); //將名字的值傳入check的網頁判斷，有找到名字該網頁會顯示1(有重複)
+<script language="JavaScript">          //會員註冊
+var request;
+function getData()
+{
+	var addAccount = document.getElementById("addAccount");
+	request = new XMLHttpRequest();
+	request.open("GET", "MemberAddChk.jsp?name=" + addAccount.value, true);
 	// 這行是設定 request 要去哪取資料，尚未開始取
 	// 第三個參數打 true 可以想成，利用另外一個執行緒處理 Request
 	// 第三個參數打 false 可以想成，利用這一個執行緒處理 Request
 	
-	//var img1 = document.getElementById("img1");//抓取資料時，顯示運作中的圖
-	//img1.src = "img/wait.gif";
+	var img1 = document.getElementById("img1");
+	img1.src = "img/wait.gif";
 	
 	request.onreadystatechange = updateData;
 	// 當記憶體中的瀏覽器狀態改變時，呼叫 updateData 這個 function
-	 
-	 request.send(null);// 發動 request 去取資料
 	
+	request.send(null); // 發動 request 去取資料		
 }
 
-function updateData(){
-	
-	if(request.readyState==4){
+function updateData()
+{
+	if (request.readyState == 4)
+	{
+		// alert(request.responseText);
 		var dup = document.getElementById("dup");
 		dup.value = request.responseText.trim();
 		
-		//把check判斷抓取的值回送給dup，修改dup的value在進行判斷。trim<--消除左右空白以免判斷錯誤
-		
-		//if (dup.value == "0")//取得的值為1，則顯示打V的圖
-		//	{
-		//	var img1 = document.getElementById("img1");
-		//	img1.src = "img/a1.png";
-		//	}
-		//else
-		//	{
-		//	var img1 = document.getElementById("img1");
-		//	img1.src = "img/a0.png";
-		//	}
+		if (dup.value == "1")
+			{
+			var img1 = document.getElementById("img1");
+			img1.src = "img/a1.png";
+			}
+		else
+			{
+			var img1 = document.getElementById("img1");
+			img1.src = "img/a0.png";
+			}
+		// alert(dup.value);
 	}
 }
 </script>
 
-<script >           //使用 Shopping Cart Rolling Sticky
+<script language="JavaScript">              //會員登入判斷
+var requestlogin
+function getDatalogin(){ //加入Ajax判斷
+	var memAcc=document.getElementById('memAcc')//取得使用者輸入的值
+	requestlogin=new XMLHttpRequest();//在記憶體內開啟一個網頁
+	requestlogin.open("GET", "memloginChk.jsp?name="+memAcc.value, true); //將名字的值傳入check的網頁判斷，有找到名字該網頁會顯示1(有重複)
+	// 這行是設定 request 要去哪取資料，尚未開始取
+	// 第三個參數打 true 可以想成，利用另外一個執行緒處理 Request
+	// 第三個參數打 false 可以想成，利用這一個執行緒處理 Request
+	
+	var imglogin = document.getElementById("imglogin");//抓取資料時，顯示運作中的圖
+	imglogin.src = "img/wait.gif";
+	
+	requestlogin.onreadystatechange = updateDatalogin;
+	// 當記憶體中的瀏覽器狀態改變時，呼叫 updateDatalogin 這個 function
+	 
+	 requestlogin.send(null);// 發動 request 去取資料
+	
+}
+
+function updateDatalogin(){
+	
+	if(requestlogin.readyState==4){
+		var duplogin = document.getElementById("duplogin");
+		duplogin.value = requestlogin.responseText.trim();
+		
+		//把check判斷抓取的值回送給dup，修改dup的value在進行判斷。trim<--消除左右空白以免判斷錯誤
+		
+		if (duplogin.value == "0")//取得的值為1，則顯示打V的圖
+			{
+			var imglogin = document.getElementById("imglogin");
+			imglogin.src = "img/a1.png";
+			}
+		else
+			{
+			var imglogin = document.getElementById("imglogin");
+			imglogin.src = "img/a0.png";
+			}
+	}
+}
+</script>
+
+<script >           //點餐單-使用 Shopping Cart Rolling Sticky
 $(document).ready(function() {  
     // check where the shoppingcart-div is  
     var offset = $('#shopping-cart').offset();  
@@ -113,7 +152,6 @@ $(document).ready(function() {
 }); 
 </script>
 
-<script src="./js/jquery.js"></script>
 <script>      // 餐點類別折疊，第一個類別自動展開
 $(document).ready( function () {  
 
@@ -133,16 +171,15 @@ $(document).ready( function () {
 function add() {
       var ul = document.getElementById("list");
       var li = document.createElement("li");
-      var msg = document.getElementById("id");
+      var msg = document.getElementById("list.get(i).product_name");
       li.appendChild(document.createTextNode(msg.value));
       //li.innerHTML ="<button type='submit' onclick='del()'>X</button>";
-      //var quantity =document.getElementById("quantity_"+id);
+      var quantity =document.getElementById("list.get(i).product_id");
       //li.appendChild(document.createTextNode(msg[0].value+" 數量 : "+quantity.value));
       ul.appendChild(li);
     }
 function del(){
    var del = document.getElementById("list");
-
 }
 </script>
 
@@ -203,15 +240,7 @@ jQuery(document).ready(function(){
      </div>
         <div id=navbar class="navbar-collapse collapse">
           <form class="navbar-form navbar-right" role=form>
-            <div class=form-group>
-              <input placeholder=Email class=form-control>
-            </div>
-            &nbsp;
-            <div class=form-group>
-              <input type=password placeholder=Password class=form-control>
-            </div>
-            &nbsp;
-            <button type=submit class="btn btn-success">Sign in</button>
+            <button type=submit class="btn btn-success" data-toggle="modal" data-target="#mySignIn">Sign in</button>
           </form>
         </div>
      </div>
@@ -228,8 +257,7 @@ jQuery(document).ready(function(){
                   <class="breadcrumb">
                     <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#mySignIn">登入</a>&nbsp;
                     <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#myRegister">註冊會員</a>&nbsp;
-                    <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#myIntroduction">使用說明</a>
-                  
+                    <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#myIntroduction">使用說明</a>                  
                 </div>
        <p>
        
@@ -256,7 +284,7 @@ jQuery(document).ready(function(){
 		<input type='button' value='-' class='qtyminus' field='<%=list.get(i).product_name%>' />
         <input type='text' id='<%=list.get(i).product_id%>' name="<%=list.get(i).product_name%>" value='0' size="3" />
         <input type='button' value='+' class='qtyplus' field='<%=list.get(i).product_name%>' />
-		<button type="submit" id="<%=list.get(i).product_id%>" onclick="add()" value="<%=list.get(i).product_name%>"><i class="fa fa-cart-plus fa-2x"></i></button>
+		<button type="submit" id="<%=list.get(i).product_name%>" onclick="add()" value="<%=list.get(i).product_name%>"><i class="fa fa-cart-plus fa-2x"></i></button>
 	    <%}else{%>
 		<p></p><br/>
 	    <p></p><br/>
@@ -273,7 +301,7 @@ jQuery(document).ready(function(){
 		<input type='button' value='-' class='qtyminus'  field='<%=list.get(i+1).product_name%>' />
         <input type='text' id='<%=list.get(i+1).product_id%>' name="<%=list.get(i+1).product_name%>" value='0' size="3" />
         <input type='button' value='+' class='qtyplus'  field='<%=list.get(i+1).product_name%>' />
-		<button type="submit" id="<%=list.get(i+1).product_id%>" onclick="add()" value="<%=list.get(i+1).product_name%>"><i class="fa fa-cart-plus fa-2x"></i></button>
+		<button type="submit" id="<%=list.get(i+1).product_name%>" onclick="add()" value="<%=list.get(i+1).product_name%>"><i class="fa fa-cart-plus fa-2x"></i></button>
 		<%}else{%>
 		<p></p><br/>
 		<p></p><br/>
@@ -290,7 +318,7 @@ jQuery(document).ready(function(){
 		<input type='button' value='-' class='qtyminus' field='<%=list.get(i+2).product_name%>' />
         <input type='text' id='<%=list.get(i+2).product_id%>' name="<%=list.get(i+2).product_name%>" value='0' size="3" />
         <input type='button' value='+' class='qtyplus' field='<%=list.get(i+2).product_name%>' />
-		<button type="submit" id="<%=list.get(i+2).product_id%>" onclick="add()" value="<%=list.get(i+2).product_name%>"><i class="fa fa-cart-plus fa-2x"></i></button>		
+		<button type="submit" id="<%=list.get(i+2).product_name%>" onclick="add()" value="<%=list.get(i+2).product_name%>"><i class="fa fa-cart-plus fa-2x"></i></button>		
 		<%}else{%>
 		<p></p><br/>
 		<p></p><br/>
@@ -301,8 +329,7 @@ jQuery(document).ready(function(){
 		</td>	
 		</tr>
 			
-		<%} %>
-		
+		<%} %>		
 			
 </table>
 </center>
@@ -311,10 +338,9 @@ jQuery(document).ready(function(){
 </div>
 
 <h2><div class="bg-primary"> 義大利麵 Pasta</div></h2>
-
        <div style="display: block;">
        <div class=container>
-<div class="row">
+       <div class="row">
 
 			<% 
 			ProductDAO dao2=new ProductDAODBImpl();
@@ -333,7 +359,7 @@ jQuery(document).ready(function(){
 		<input type='button' value='-' class='qtyminus' field='<%=list2.get(i).product_name%>' />
         <input type='text' id='<%=list2.get(i).product_id%>' name="<%=list2.get(i).product_name%>" value='0' size="3" />
         <input type='button' value='+' class='qtyplus' field='<%=list2.get(i).product_name%>' />
-		<button type="submit" id="<%=list2.get(i).product_id%>" onclick="add()" value="<%=list2.get(i).product_name%>"><i class="fa fa-cart-plus fa-2x"></i></button>		
+		<button type="submit" id="<%=list2.get(i).product_name%>" onclick="add()" value="<%=list2.get(i).product_name%>"><i class="fa fa-cart-plus fa-2x"></i></button>		
 	<%}else{%>
 		<p></p><br/>
 		<p></p><br/>
@@ -350,7 +376,7 @@ jQuery(document).ready(function(){
 		<input type='button' value='-' class='qtyminus' field='<%=list2.get(i+1).product_name%>' />
         <input type='text' id='<%=list2.get(i+1).product_id%>' name="<%=list2.get(i+1).product_name%>" value='0' size="3" />
         <input type='button' value='+' class='qtyplus' field='<%=list2.get(i+1).product_name%>' />
-		<button type="submit" id="<%=list2.get(i+1).product_id%>" onclick="add()" value="<%=list2.get(i+1).product_name%>"><i class="fa fa-cart-plus fa-2x"></i></button>
+		<button type="submit" id="<%=list2.get(i+1).product_name%>" onclick="add()" value="<%=list2.get(i+1).product_name%>"><i class="fa fa-cart-plus fa-2x"></i></button>
 		
 		<%}else{%>
 
@@ -369,7 +395,7 @@ jQuery(document).ready(function(){
 		<input type='button' value='-' class='qtyminus' field='<%=list2.get(i+2).product_name%>'  />
         <input type='text' id='<%=list2.get(i+2).product_id%>' name="<%=list2.get(i+2).product_name%>" value='0' size="3" />
         <input type='button' value='+' class='qtyplus' field='quantity_1' />
-		<button type="submit" id="<%=list2.get(i+2).product_id%>" onclick="add()" value="<%=list2.get(i+2).product_name%>"><i class="fa fa-cart-plus fa-2x"></i></button>
+		<button type="submit" id="<%=list2.get(i+2).product_name%>" onclick="add()" value="<%=list2.get(i+2).product_name%>"><i class="fa fa-cart-plus fa-2x"></i></button>
 		<%}else{%>
 		<p></p><br/>
 		<p></p><br/>
@@ -412,7 +438,7 @@ jQuery(document).ready(function(){
 		<input type='button' value='-' class='qtyminus' field='<%=list3.get(i).product_name%>' />
         <input type='text' id='<%=list3.get(i).product_id%>' name="<%=list3.get(i).product_name%>" value='0' size="3" />
         <input type='button' value='+' class='qtyplus' field='<%=list3.get(i).product_name%>' />
-		<button type="submit" id="<%=list3.get(i).product_id%>" onclick="add()" value="<%=list3.get(i).product_name%>"><i class="fa fa-cart-plus fa-2x"></i></button>
+		<button type="submit" id="<%=list3.get(i).product_name%>" onclick="add()" value="<%=list3.get(i).product_name%>"><i class="fa fa-cart-plus fa-2x"></i></button>
 	<%}else{%>
 		<p></p><br/>
 		<p></p><br/>
@@ -429,7 +455,7 @@ jQuery(document).ready(function(){
 		<input type='button' value='-' class='qtyminus' field='quantity_1' />
         <input type='text' id='<%=list3.get(i+1).product_name%>' name="<%=list3.get(i+1).product_id%>" value='0' size="3" />
         <input type='button' value='+' class='qtyplus' field='quantity_1' />
-		<button type="submit" id="<%=list3.get(i+1).product_id%>" onclick="add()" value="<%=list3.get(i+1).product_name%>"><i class="fa fa-cart-plus fa-2x"></i></button>
+		<button type="submit" id="<%=list3.get(i+1).product_name%>" onclick="add()" value="<%=list3.get(i+1).product_name%>"><i class="fa fa-cart-plus fa-2x"></i></button>
 		
 		<%}else{%>
 
@@ -448,7 +474,7 @@ jQuery(document).ready(function(){
 		<input type='button' value='-' class='qtyminus' field='<%=list3.get(i+2).product_name%>' />
         <input type='text' id='<%=list3.get(i+2).product_id%>' name="<%=list3.get(i+2).product_name%>" value='0' size="3" />
         <input type='button' value='+' class='qtyplus' field='<%=list3.get(i+2).product_name%>' />
-		<button type="submit" id="<%=list3.get(i+2).product_id%>" onclick="add()" value="<%=list3.get(i+2).product_name%>"><i class="fa fa-cart-plus fa-2x"></i></button>
+		<button type="submit" id="<%=list3.get(i+2).product_name%>" onclick="add()" value="<%=list3.get(i+2).product_name%>"><i class="fa fa-cart-plus fa-2x"></i></button>
 		
 		<%}else{%>
 
@@ -493,7 +519,7 @@ jQuery(document).ready(function(){
 		<input type='button' value='-' class='qtyminus' field='<%=list4.get(i).product_name%>' />
         <input type='text' id='<%=list4.get(i).product_id%>'  name="<%=list4.get(i).product_name%>" value='0' size="3" />
         <input type='button' value='+' class='qtyplus' field='<%=list4.get(i).product_name%>' />
-		<button type="submit" id="<%=list4.get(i).product_id%>" onclick="add()" value="<%=list4.get(i).product_name%>"><i class="fa fa-cart-plus fa-2x"></i></button>
+		<button type="submit" id="<%=list4.get(i).product_name%>" onclick="add()" value="<%=list4.get(i).product_name%>"><i class="fa fa-cart-plus fa-2x"></i></button>
 	<%}else{%>
 		<p></p><br/>
 		<p></p><br/>
@@ -510,7 +536,7 @@ jQuery(document).ready(function(){
 		<input type='button' value='-' class='qtyminus' field='<%=list4.get(i+1).product_name%>' />
         <input type='text' id='<%=list4.get(i+1).product_id%>'  name="<%=list4.get(i+1).product_name%>" value='0' size="3" />
         <input type='button' value='+' class='qtyplus' field='<%=list4.get(i+1).product_name%>' />
-		<button type="submit" id="<%=list4.get(i+1).product_id%>" onclick="add()" value="<%=list4.get(i+1).product_name%>"><i class="fa fa-cart-plus fa-2x"></i></button>
+		<button type="submit" id="<%=list4.get(i+1).product_name%>" onclick="add()" value="<%=list4.get(i+1).product_name%>"><i class="fa fa-cart-plus fa-2x"></i></button>
 		
 		<%}else{%>
 
@@ -529,7 +555,7 @@ jQuery(document).ready(function(){
 		<input type='button' value='-' class='qtyminus' field='<%=list4.get(i+2).product_name%>' />
         <input type='text' id='<%=list4.get(i+2).product_id%>' name="<%=list4.get(i+2).product_name%>" value='0' size="3" />
         <input type='button' value='+' class='qtyplus' field='<%=list4.get(i+2).product_name%>' />
-		<button type="submit" id="<%=list4.get(i+2).product_id%>" onclick="add()" value="<%=list4.get(i+2).product_name%>"><i class="fa fa-cart-plus fa-2x"></i></button>
+		<button type="submit" id="<%=list4.get(i+2).product_name%>" onclick="add()" value="<%=list4.get(i+2).product_name%>"><i class="fa fa-cart-plus fa-2x"></i></button>
 		
 		<%}else{%>
 
@@ -698,7 +724,7 @@ jQuery(document).ready(function(){
                </div>
                <div class=col-md-4>
                  <h3>理念</h3>
-                 <p><h4>"線上點餐系統"讓消費者經由網路在任何地方，透過網頁呈現方式，方便快速容易使用的網頁點餐。並且建立了後台管理系統，能管理菜單、會員、訂單等所有相關內容。</h4></p>                
+                 <p><h4>"線上點餐系統"讓消費者經由網路在任何地方，透過網頁呈現方式，方便快速容易使用的網頁點餐。並且建立了後台管理系統，能管理菜單、會員、訂單等所有相關資料庫內容。</h4></p>                
                </div>
                <div class=col-md-4>
                <h3>成員</h3>
@@ -712,7 +738,7 @@ jQuery(document).ready(function(){
           <footer>
           <p>&copy; Copyright : The 4th Group 2015</footer>
 
-<!-- Modal Sign in按鈕 -->
+<!-- 會員登入 Modal Sign in按鈕 -->
 <div class="modal fade" id="mySignIn" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -724,10 +750,12 @@ jQuery(document).ready(function(){
       <div class="container">   <!-- Sign in /container start-->
         <form class="form-signin" action="memberChk.jsp">
           <div class="col-md-6" >
-          <h5>電子信箱</h5>
-          <label for="inputEmail" class="sr-only">Email address</label>
-          <input type="email" name="memAcc" id="memAcc" class="form-control" placeholder="電子信箱" required autofocus onblur="getData()"> 
+          <h5>帳號</h5>
+          <label for="inputAccount" class="sr-only">Account</label>
+          <input type="account" name="memAcc" id="memAcc" class="form-control" placeholder="帳號" required autofocus onblur="getDatalogin()"> 
+          <img id="imglogin" src="img/aa.png" width="20px" height="20px" />
           <br>
+          <input type="hidden" id="duplogin" value="0" />
           <label for="inputPassword" class="sr-only">Password</label>
           <input type="password" name="memPSW" id="memPSW" class="form-control" placeholder="密碼" required>
           <br>
@@ -749,7 +777,7 @@ jQuery(document).ready(function(){
   </div>
 </div>  <!-- Sign in按鈕結束-->
 
-<!-- Modal Register 按鈕 -->
+<!--會員註冊  Modal Register 按鈕 -->
 <div class="modal fade" id="myRegister" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -759,23 +787,25 @@ jQuery(document).ready(function(){
       </div>
       <div class="modal-body">
       <div class="container">   <!-- Sign in /container start-->
-        <form class="form-signin " >
+        <form class="form-signin" action="MemberAddCode.jsp">
          <div class="col-md-6 "> 
-          <label for="inputEmail" class="sr-only">ID number</label>  <!-- Email address = ID number -->
-          <h5>電子信箱</h5>
-          <input type="email" id="inputEmail" class="form-control" placeholder="電子信箱" required autofocus> 
+          <label for="inputAccount" class="sr-only">帳號</label>   
+          <h5>帳號</h5>
+          <input type="account" id="addAccount" name="member_account" class="form-control" placeholder="帳號" required autofocus> 
+          <img id="img1" width="20px" height="20px" />
           <p>
+          <input type="hidden" id="dup" value="1" />
           <label for="inputPassword" class="sr-only">Password</label>
           <h5>密碼</h5>
-          <input type="password" id="inputPassword" class="form-control" placeholder="密碼" required>
+          <input type="password" id="addPassword" name="member_password" class="form-control" placeholder="密碼" required >
           <p>
-          <label for="inputPassword" class="sr-only">CheckPassword</label>
-          <h5>確認密碼</h5>
-          <input type="password" id="inputPassword" class="form-control" placeholder="請再輸入一次密碼" required>
+          <label for="inputEmail" class="sr-only">ID number</label>   
+          <h5>電子信箱</h5>
+          <input type="email" id="addEmail" name="member_email" class="form-control" placeholder="電子信箱" required > 
           <p>
-          <label for="inputPassword" class="sr-only">PhoneNO</label>
-          <h5>行動電話號碼</h5>
-          <input type="password" id="inputPassword" class="form-control" placeholder="行動電話號碼" required>
+          <label for="inputTelNo" class="sr-only">PhoneNO</label>
+          <h5>電話號碼</h5>
+          <input type="TelphoneNo" id="addTelphoneNo" name="member_tel" class="form-control" placeholder="電話號碼" required>
           <br>
           <button class="btn btn-lg btn-primary btn-block" type="submit">註冊</button>
          </div>
