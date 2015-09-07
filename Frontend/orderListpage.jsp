@@ -37,18 +37,6 @@
     <h4>
     <li class="list-group-item">
     <table class="table" >
-
-<%
-	String s1[] = request.getParameterValues("msg");
-	out.println(s1.length);
-	
-	for (String s : s1)
-	{
-		String tmp = new String(s.getBytes("ISO-8859-1"), "UTF-8");
-		out.println(tmp);	
-	}
-%>
-
     <thead>
       <tr>
         <th>餐點菜名</th>
@@ -75,15 +63,50 @@
     </tbody>
     </table>
     </li>
-    <li class="list-group-item"><i class="fa fa-motorcycle">取餐方式 : 外送</i></li>
     <p>
-    <li class="list-group-item">外送地址 : 台北市大安區建國南路二段231號</li>
+    <li class="list-group-item"><i class="fa fa-motorcycle">取餐方式 : 
+         <form>
+         <select id="takeSelect" onchange="takeFunction()">
+         <option>請選自取或外送</option>
+         <option id="takeself" value="takeself">自取</option>
+         <option id="delivery" value="delivery">外送</option>
+         </select>
+         </form> 
+         <!--  加到另一頁中  
+         <p id="demo"></p></i></li>
+         <script>
+         function takeFunction() {     
+         var ddl = document.getElementById("takeSelect");
+         var selectedValue = ddl.options[ddl.selectedIndex].value;
+            if (selectedValue == "takeself")
+           {
+            	document.getElementById("demo").innerHTML = "自取地址:台北市大安區建國南路二段231號";
+           }
+         </script>
+         -->
     <p>
-    <li class="list-group-item">連絡電話 : 0227005858</li>
+    <li class="list-group-item">請輸入外送地址 : <input type="text" id="address" name="address" value=""></li>
+    <p>    
+    <li class="list-group-item">請輸入連絡電話 : <input type="text" id="custom_tel" name="custom_tel" value=""></li>   
     <p>
     </h4>
     <li class="list-group-item"><h4>金額總計<span class="glyphicon glyphicon-usd" aria-hidden="true"  />2000</h4></li>
   </ul>
+  <script>
+  function checkinfo() {
+	  document.getElementById("address").value;
+
+	  var x;
+	  if(confirm(document.getElementById("address").value;)==true
+      {
+		  x ="已經收到您的訂單";
+	  }else{
+		  x ="您取消了訂單";
+	  }
+			  
+  }
+  </script>
+  <button input type="submit" class="btn btn-success" onclick="checkinfo()">確認送出</button> 
 </div>
 </div>
           <div class=container>
