@@ -37,6 +37,18 @@
     <h4>
     <li class="list-group-item">
     <table class="table" >
+
+<%
+	String s1[] = request.getParameterValues("msg");
+	out.println(s1.length);
+	
+	for (String s : s1)
+	{
+		String tmp = new String(s.getBytes("ISO-8859-1"), "UTF-8");
+		out.println(tmp);	
+	}
+%>
+
     <thead>
       <tr>
         <th>餐點菜名</th>
