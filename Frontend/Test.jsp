@@ -175,10 +175,20 @@ function add(id) {
     var msg = document.getElementById("Append_" + id);
     var quantity = document.getElementById("quantity_" + id);
     ul.appendChild(li);
-    li.appendChild(document.createTextNode(msg.value + " 數量 : " + quantity.value));
+    li.appendChild(document.createTextNode(msg.name + " 數量 : " + quantity.value));
+    //計算金額加總
+    var price = document.getElementById(msg.value);
+    var items = document.getElementsByTagName(li);                                //取得加入項目
+    var itemCount = items.length;                                                                  //取得項目個數
+    var totalprice = 0;                                                                                      //宣告總金額
+    for(var i = 0; i < itemCount; i++)                                                               //計算金額
+    {
+	    totalprice = totalprice +  parseInt(quantity*price);               //totalprice = totalprice +  parseInt(items[i].quantity*items[i].price);      
+	}
+    document.getElementById("money").innerHTML = totalprice.innerHTML;     //印出金額  
   }
 function del(){                            //清空點餐單
-    var div = document.getElementById("div")
+    var div = document.getElementById("div");
     var ul = document.getElementById("ul");      
     var li = document.getElementById("li");   
     ul.parentNode.removeChild(ul);
@@ -186,6 +196,7 @@ function del(){                            //清空點餐單
     rul.id="ul";
     div.appendChild(rul);
  }
+  
 </script>
 
 <script>                          //使用button +1與-1  http://jsfiddle.net/laelitenetwork/puJ6G/
@@ -289,7 +300,8 @@ jQuery(document).ready(function(){
 		<input type='button' value='-' class='qtyminus' field='quantity_<%=list.get(i).product_id%>' />
         <input type='text' id='quantity_<%=list.get(i).product_id%>' name="quantity_<%=list.get(i).product_id%>" value='0' size="3" />
         <input type='button' value='+' class='qtyplus' field='quantity_<%=list.get(i).product_id%>' />
-		<button type="submit" id="Append_<%=list.get(i).product_id%>" onclick="add('<%=list.get(i).product_id%>')" value="<%=list.get(i).product_name%>"><i class="fa fa-cart-plus fa-2x"></i></button>
+		<!-- <button type="submit" id="Append_<%=list.get(i).product_id%>" onclick="add('<%=list.get(i).product_id%>')" value="<%=list.get(i).product_name%>"><i class="fa fa-cart-plus fa-2x"></i></button> -->	
+		 <button type="submit" id="Append_<%=list.get(i).product_id%>" onclick="add('<%=list.get(i).product_id%>')" value="<%=list.get(i).price%>" name="<%=list.get(i).product_name%>"><i class="fa fa-cart-plus fa-2x"></i></button> 
 	    <%}else{%>
 		<p></p><br/>
 	    <p></p><br/>
@@ -306,7 +318,8 @@ jQuery(document).ready(function(){
 		<input type='button' value='-' class='qtyminus'  field='quantity_<%=list.get(i+1).product_id%>' />
         <input type='text' id='quantity_<%=list.get(i+1).product_id%>' name="quantity_<%=list.get(i+1).product_id%>" value='0' size="3" />
         <input type='button' value='+' class='qtyplus'  field='quantity_<%=list.get(i+1).product_id%>' />
-		<button type="submit" id="Append_<%=list.get(i+1).product_id%>" onclick="add('<%=list.get(i+1).product_id%>')" value="<%=list.get(i+1).product_name%>"><i class="fa fa-cart-plus fa-2x"></i></button>
+		<!--  <button type="submit" id="Append_<%=list.get(i+1).product_id%>" onclick="add('<%=list.get(i+1).product_id%>')" value="<%=list.get(i+1).product_name%>"><i class="fa fa-cart-plus fa-2x"></i></button> -->
+		<button type="submit" id="Append_<%=list.get(i+1).product_id%>" onclick="add('<%=list.get(i+1).product_id%>')" value="<%=list.get(i+1).price%>" name="<%=list.get(i+1).product_name%>"><i class="fa fa-cart-plus fa-2x"></i></button> 
 		<%}else{%>
 		<p></p><br/>
 		<p></p><br/>
@@ -323,7 +336,8 @@ jQuery(document).ready(function(){
 		<input type='button' value='-' class='qtyminus' field='quantity_<%=list.get(i+2).product_id%>' />
         <input type='text' id='quantity_<%=list.get(i+2).product_id%>' name="quantity_<%=list.get(i+2).product_id%>" value='0' size="3" />
         <input type='button' value='+' class='qtyplus' field='quantity_<%=list.get(i+2).product_id%>' />
-		<button type="submit" id="Append_<%=list.get(i+2).product_id%>" onclick="add('<%=list.get(i+2).product_id%>')" value="<%=list.get(i+2).product_name%>"><i class="fa fa-cart-plus fa-2x"></i></button>		
+		<!--  <button type="submit" id="Append_<%=list.get(i+2).product_id%>" onclick="add('<%=list.get(i+2).product_id%>')" value="<%=list.get(i+2).product_name%>"><i class="fa fa-cart-plus fa-2x"></i></button>-->		
+		<button type="submit" id="Append_<%=list.get(i+2).product_id%>" onclick="add('<%=list.get(i+2).product_id%>')" value="<%=list.get(i+2).price%>" name="<%=list.get(i+2).product_name%>"><i class="fa fa-cart-plus fa-2x"></i></button> 
 		<%}else{%>
 		<p></p><br/>
 		<p></p><br/>
@@ -364,7 +378,8 @@ jQuery(document).ready(function(){
 		<input type='button' value='-' class='qtyminus' field='quantity_<%=list1.get(i).product_id%>' />
         <input type='text' id='quantity_<%=list1.get(i).product_id%>' name="quantity_<%=list1.get(i).product_id%>" value='0' size="3" />
         <input type='button' value='+' class='qtyplus' field='quantity_<%=list1.get(i).product_id%>' />
-		<button type="submit" id="Append_<%=list1.get(i).product_id%>" onclick="add('<%=list1.get(i).product_id%>')" value="<%=list1.get(i).product_name%>"><i class="fa fa-cart-plus fa-2x"></i></button>		
+		<!--  <button type="submit" id="Append_<%=list1.get(i).product_id%>" onclick="add('<%=list1.get(i).product_id%>')" value="<%=list1.get(i).product_name%>"><i class="fa fa-cart-plus fa-2x"></i></button> -->
+		<button type="submit" id="Append_<%=list1.get(i).product_id%>" onclick="add('<%=list1.get(i).product_id%>')" value="<%=list1.get(i).price%>" name="<%=list1.get(i).product_name%>"><i class="fa fa-cart-plus fa-2x"></i></button> 		
 	<%}else{%>
 		<p></p><br/>
 		<p></p><br/>
@@ -381,7 +396,8 @@ jQuery(document).ready(function(){
 		<input type='button' value='-' class='qtyminus' field='quantity_<%=list1.get(i+1).product_id%>' />
         <input type='text' id='quantity_<%=list1.get(i+1).product_id%>' name="quantity_<%=list1.get(i+1).product_id%>" value='0' size="3" />
         <input type='button' value='+' class='qtyplus' field='quantity_<%=list1.get(i+1).product_id%>' />
-		<button type="submit" id="Append_<%=list1.get(i+1).product_id%>" onclick="add('<%=list1.get(i+1).product_id%>')" value="<%=list1.get(i+1).product_name%>"><i class="fa fa-cart-plus fa-2x"></i></button>
+		<!--  <button type="submit" id="Append_<%=list1.get(i+1).product_id%>" onclick="add('<%=list1.get(i+1).product_id%>')" value="<%=list1.get(i+1).product_name%>"><i class="fa fa-cart-plus fa-2x"></i></button> -->
+		<button type="submit" id="Append_<%=list1.get(i+1).product_id%>" onclick="add('<%=list1.get(i+1).product_id%>')" value="<%=list1.get(i+1).price%>" name="<%=list1.get(i+1).product_name%>"><i class="fa fa-cart-plus fa-2x"></i></button> 		
 		
 		<%}else{%>
 
@@ -400,7 +416,8 @@ jQuery(document).ready(function(){
 		<input type='button' value='-' class='qtyminus' field='quantity_<%=list1.get(i+2).product_id%>'  />
         <input type='text' id='quantity_<%=list1.get(i+2).product_id%>' name="quantity_<%=list1.get(i+2).product_id%>" value='0' size="3" />
         <input type='button' value='+' class='qtyplus' field='quantity_<%=list1.get(i+2).product_id%>' />
-		<button type="submit" id="Append_<%=list1.get(i+2).product_id%>" onclick="add('<%=list1.get(i+2).product_id%>')" value="<%=list1.get(i+2).product_name%>"><i class="fa fa-cart-plus fa-2x"></i></button>
+		<!--  <button type="submit" id="Append_<%=list1.get(i+2).product_id%>" onclick="add('<%=list1.get(i+2).product_id%>')" value="<%=list1.get(i+2).product_name%>"><i class="fa fa-cart-plus fa-2x"></i></button> -->
+		<button type="submit" id="Append_<%=list1.get(i+2).product_id%>" onclick="add('<%=list1.get(i+2).product_id%>')" value="<%=list1.get(i+2).price%>" name="<%=list1.get(i+2).product_name%>"><i class="fa fa-cart-plus fa-2x"></i></button> 		
 		<%}else{%>
 		<p></p><br/>
 		<p></p><br/>
@@ -443,7 +460,8 @@ jQuery(document).ready(function(){
 		<input type='button' value='-' class='qtyminus' field='quantity_<%=list2.get(i).product_id%>' />
         <input type='text' id='quantity_<%=list2.get(i).product_id%>' name="quantity_<%=list2.get(i).product_id%>" value='0' size="3" />
         <input type='button' value='+' class='qtyplus' field='quantity_<%=list2.get(i).product_id%>' />
-		<button type="submit" id="Append_<%=list2.get(i).product_id%>" onclick="add('<%=list2.get(i).product_id%>')" value="<%=list2.get(i).product_name%>"><i class="fa fa-cart-plus fa-2x"></i></button>
+		<!--  <button type="submit" id="Append_<%=list2.get(i).product_id%>" onclick="add('<%=list2.get(i).product_id%>')" value="<%=list2.get(i).product_name%>"><i class="fa fa-cart-plus fa-2x"></i></button> -->
+		<button type="submit" id="Append_<%=list2.get(i).product_id%>" onclick="add('<%=list2.get(i).product_id%>')" value="<%=list2.get(i).price%>" name="<%=list2.get(i).product_name%>"><i class="fa fa-cart-plus fa-2x"></i></button> 		
 	<%}else{%>
 		<p></p><br/>
 		<p></p><br/>
@@ -460,10 +478,9 @@ jQuery(document).ready(function(){
 		<input type='button' value='-' class='qtyminus' field='quantity_<%=list2.get(i+1).product_id%>' />
         <input type='text' id='quantity_<%=list2.get(i+1).product_id%>' name="quantity_<%=list2.get(i+1).product_id%>" value='0' size="3" />
         <input type='button' value='+' class='qtyplus' field='quantity_<%=list2.get(i+1).product_id%>' />
-		<button type="submit" id="Append_<%=list2.get(i+1).product_id%>" onclick="add('<%=list2.get(i+1).product_id%>')" value="<%=list2.get(i+1).product_name%>"><i class="fa fa-cart-plus fa-2x"></i></button>
-		
+		<!--  <button type="submit" id="Append_<%=list2.get(i+1).product_id%>" onclick="add('<%=list2.get(i+1).product_id%>')" value="<%=list2.get(i+1).product_name%>"><i class="fa fa-cart-plus fa-2x"></i></button>-->
+		<button type="submit" id="Append_<%=list2.get(i+1).product_id%>" onclick="add('<%=list2.get(i+1).product_id%>')" value="<%=list2.get(i+1).price%>" name="<%=list2.get(i+1).product_name%>"><i class="fa fa-cart-plus fa-2x"></i></button> 		
 		<%}else{%>
-
 		<p></p><br/>
 		<p></p><br/>
 		<p></p><br/>
@@ -479,10 +496,9 @@ jQuery(document).ready(function(){
 		<input type='button' value='-' class='qtyminus' field='quantity_<%=list2.get(i+2).product_id%>' />
         <input type='text' id='quantity_<%=list2.get(i+2).product_id%>' name="quantity_<%=list2.get(i+2).product_id%>" value='0' size="3" />
         <input type='button' value='+' class='qtyplus' field='quantity_<%=list2.get(i+2).product_id%>' />
-		<button type="submit" id="Append_<%=list2.get(i+2).product_id%>" onclick="add('<%=list2.get(i+2).product_id%>')" value="<%=list2.get(i+2).product_name%>"><i class="fa fa-cart-plus fa-2x"></i></button>
-		
+		<!--  <button type="submit" id="Append_<%=list2.get(i+2).product_id%>" onclick="add('<%=list2.get(i+2).product_id%>')" value="<%=list2.get(i+2).product_name%>"><i class="fa fa-cart-plus fa-2x"></i></button> -->
+		<button type="submit" id="Append_<%=list2.get(i+2).product_id%>" onclick="add('<%=list2.get(i+2).product_id%>')" value="<%=list2.get(i+2).price%>" name="<%=list2.get(i+2).product_name%>"><i class="fa fa-cart-plus fa-2x"></i></button> 				
 		<%}else{%>
-
 		<p></p><br/>
 		<p></p><br/>
 		<p></p><br/>
@@ -490,10 +506,8 @@ jQuery(document).ready(function(){
 		<%
 			}%>
 		</td>	
-		</tr>
-			
-		<%} %>
-		
+		</tr>			
+		<%} %>	
 			
 </table>
 </center>
@@ -524,7 +538,9 @@ jQuery(document).ready(function(){
 		<input type='button' value='-' class='qtyminus' field='quantity_<%=list3.get(i).product_id%>' />
         <input type='text' id='quantity_<%=list3.get(i).product_id%>'  name="quantity_<%=list3.get(i).product_id%>" value='0' size="3" />
         <input type='button' value='+' class='qtyplus' field='quantity_<%=list3.get(i).product_id%>' />
-		<button type="submit" id="Append_<%=list3.get(i).product_id%>" onclick="add('<%=list3.get(i).product_id%>')" value="<%=list3.get(i).product_name%>"><i class="fa fa-cart-plus fa-2x"></i></button>
+		<!--  <button type="submit" id="Append_<%=list3.get(i).product_id%>" onclick="add('<%=list3.get(i).product_id%>')" value="<%=list3.get(i).product_name%>"><i class="fa fa-cart-plus fa-2x"></i></button> -->
+		<button type="submit" id="Append_<%=list3.get(i).product_id%>" onclick="add('<%=list3.get(i).product_id%>')" value="<%=list3.get(i).price%>" name="<%=list3.get(i).product_name%>"><i class="fa fa-cart-plus fa-2x"></i></button> 		
+		
 	<%}else{%>
 		<p></p><br/>
 		<p></p><br/>
@@ -541,8 +557,8 @@ jQuery(document).ready(function(){
 		<input type='button' value='-' class='qtyminus' field='quantity_<%=list3.get(i+1).product_id%>' />
         <input type='text' id='quantity_<%=list3.get(i+1).product_id%>'  name="quantity_<%=list3.get(i+1).product_id%>" value='0' size="3" />
         <input type='button' value='+' class='qtyplus' field='quantity_<%=list3.get(i+1).product_id%>' />
-		<button type="submit" id="Append_<%=list3.get(i+1).product_id%>" onclick="add('<%=list3.get(i+1).product_id%>')" value="<%=list3.get(i+1).product_name%>"><i class="fa fa-cart-plus fa-2x"></i></button>
-		
+		<!--  <button type="submit" id="Append_<%=list3.get(i+1).product_id%>" onclick="add('<%=list3.get(i+1).product_id%>')" value="<%=list3.get(i+1).product_name%>"><i class="fa fa-cart-plus fa-2x"></i></button> -->
+		<button type="submit" id="Append_<%=list3.get(i+1).product_id%>" onclick="add('<%=list3.get(i+1).product_id%>')" value="<%=list3.get(i+1).price%>" name="<%=list3.get(i+1).product_name%>"><i class="fa fa-cart-plus fa-2x"></i></button> 				
 		<%}else{%>
 
 		<p></p><br/>
@@ -560,8 +576,8 @@ jQuery(document).ready(function(){
 		<input type='button' value='-' class='qtyminus' field='quantity_<%=list3.get(i+2).product_id%>' />
         <input type='text' id='quantity_<%=list3.get(i+2).product_id%>' name="quantity_<%=list3.get(i+2).product_id%>" value='0' size="3" />
         <input type='button' value='+' class='qtyplus' field='quantity_<%=list3.get(i+2).product_id%>' />
-		<button type="submit" id="Append_<%=list3.get(i+2).product_id%>" onclick="add('<%=list3.get(i+2).product_id%>')" value="<%=list3.get(i+2).product_name%>"><i class="fa fa-cart-plus fa-2x"></i></button>
-		
+		<!--  <button type="submit" id="Append_<%=list3.get(i+2).product_id%>" onclick="add('<%=list3.get(i+2).product_id%>')" value="<%=list3.get(i+2).product_name%>"><i class="fa fa-cart-plus fa-2x"></i></button> -->
+		<button type="submit" id="Append_<%=list3.get(i+2).product_id%>" onclick="add('<%=list3.get(i+2).product_id%>')" value="<%=list3.get(i+2).price%>" name="<%=list3.get(i+2).product_name%>"><i class="fa fa-cart-plus fa-2x"></i></button> 				
 		<%}else{%>
 
 		<p></p><br/>
@@ -611,7 +627,7 @@ jQuery(document).ready(function(){
             </select>
         </td></h4>
         <hr><footer></footer>
-        <h4> 金額總計: </h4>   
+       金額總計:<h4 id="money">  </h4>   
         <hr><footer></footer>   
         <button input type="submit" class="btn btn-success" action="orderListpage.jsp">確認送出</button> 
         <button type="button" class="btn btn-success" onclick="del()">清除清單</button> 
