@@ -244,8 +244,8 @@ jQuery(document).ready(function(){
         <a class=navbar-brand href=#>R202義式料理線上點餐系統</a>
      </div>
         <div id=navbar class="navbar-collapse collapse">
-          <form class="navbar-form navbar-right" role=form>
-            <button type=submit class="btn btn-success" data-toggle="modal" data-target="#mySignIn">Sign in</button>
+          <form class="navbar-form navbar-right" role=form action="memlogout.jsp">
+            <button type=submit class="btn btn-success">登出</button>
           </form>
         </div>
      </div>
@@ -260,8 +260,6 @@ jQuery(document).ready(function(){
      <div class="col-xs-6">
                 <div class="container clearfix">              
                   <class="breadcrumb">
-                    <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#mySignIn">登入</a>&nbsp;
-                    <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#myRegister">註冊會員</a>&nbsp;
                     <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#myIntroduction">使用說明</a>                  
                 </div>
        <p>

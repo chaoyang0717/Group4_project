@@ -15,6 +15,13 @@
    text-align: center;   
   }
   </style>
+  
+  <script>
+    function takeFunction() {
+        var x = document.getElementById("takeSelect").value;
+        document.getElementById("demo").innerHTML = "您選擇的是: " + x;
+    }
+    </script>  
 </head>
 <body  align="center">
     <nav class="navbar navbar-inverse navbar-fixed-top">
@@ -64,51 +71,24 @@
     </table>
     </li>
     <p>
-    <li class="list-group-item"><i class="fa fa-motorcycle">取餐方式 : </i>
+    <li class="list-group-item list-group-item-info"><i class="fa fa-motorcycle">取餐方式 : </i>
          <form>
          <select id="takeSelect" onchange="takeFunction()">
          <option>請選自取或外送</option>
-         <option id="takeself" value="takeself">自取</option>
-         <option id="delivery" value="delivery">外送</option>
+         <option id="takeself" value="自取">自取</option>
+         <option id="delivery" value="外送(外送服務請填入下方資料)">外送</option>
          </select>
          </form> 
-    </li>  
-         <!--  加到另一頁中  
-         <p id="demo"></p>
-         <script>
-         function takeFunction() {     
-         var ddl = document.getElementById("takeSelect");
-         var selectedValue = ddl.options[ddl.selectedIndex].value;
-            if (selectedValue == "takeself")
-           {
-            	document.getElementById("demo").innerHTML = "自取地址:台北市大安區建國南路二段231號";
-           }
-         </script>
-         -->
+    <p id="demo"></p> </li>
     <p>
-    <li class="list-group-item">請輸入外送地址 : <input type="text" id="address" name="address" value=""></li>
+    <li class="list-group-item list-group-item-info">請輸入外送地址 : <input type="text" id="address" name="address" value="" size="50"></li>
     <p>    
-    <li class="list-group-item">請輸入連絡電話 : <input type="text" id="custom_tel" name="custom_tel" value=""></li>   
+    <li class="list-group-item list-group-item-info">請輸入連絡電話 : <input type="text" id="custom_tel" name="custom_tel" value=""></li>   
     <p>
     </h4>
-    <li class="list-group-item"><h4>金額總計<span class="glyphicon glyphicon-usd" aria-hidden="true"  />1900</h4></li>
+    <li class="list-group-item list-group-item-danger"><h4>金額總計<span class="glyphicon glyphicon-usd" aria-hidden="true"  />1900</h4></li>
   </ul>
-<!--  
-  <script>
-  function checkinfo() {
-	  document.getElementById("address").value;
-
-	  var x;
-	  if(confirm(document.getElementById("address").value;)==true
-      {
-		  x ="已經收到您的訂單";
-	  }else{
-		  x ="您取消了訂單";
-	  }
-			  
-  }
-  </script>-->
-  <button input type="submit" class="btn btn-success" onclick="checkinfo()">確認送出</button> 
+  <button input type="submit" class="btn btn-success" formaction="orderListpageOK.jsp" method="post">確認送出</button> 
 </div>
 </div>
           <div class=container>

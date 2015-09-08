@@ -15,6 +15,20 @@
    text-align: center;   
   }
   </style>
+  
+  <script>
+    function takeFunction() {
+        var select = document.getElementById("takeSelect").value;
+        var address = document.getElementById("address");
+    	var custom_tel = document.getElementById("custom_tel");
+        document.getElementById("demo").innerHTML = "您選擇的是: " + select;
+        info1 = 
+        info2 = document.createTextNode(address.value);
+    	info3 = document.createTextNode(custom_tel.value);
+        
+    }
+  </script>
+    
 </head>
 <body  align="center">
     <nav class="navbar navbar-inverse navbar-fixed-top">
@@ -33,7 +47,7 @@
  <img src="images/banner-01.jpg" >
 <div class="container">
   <ul class="list-group">
-    <li class="list-group-item active"><h3><i class="fa fa-thumbs-o-up"></i>&nbsp;已收到您的訂單</h3></li>
+    <li class="list-group-item active"><h3><i class="fa fa-cutlery"></i>&nbsp;您的點餐訂單&nbsp;<i class="fa fa-coffee"></i></h3></li>
     <h4>
     <li class="list-group-item">
     <table class="table" >
@@ -63,18 +77,25 @@
     </tbody>
     </table>
     </li>
-    
-    <li class="list-group-item"><i class="fa fa-motorcycle">取餐方式 : 外送</i></li>
     <p>
-    <% String addr[] = request.getParameterValues("address"); %>
-    <li class="list-group-item">外送地址 : 台北市大安區建國南路二段231號 <% out.print("addr"); %></li>
+    <li class="list-group-item list-group-item-info"><i class="fa fa-motorcycle">取餐方式 : </i>
+         <form>
+         <select id="takeSelect" onchange="takeFunction()">
+         <option>請選自取或外送</option>
+         <option id="takeself" value="自取">自取</option>
+         <option id="delivery" value="外送(外送服務請填入下方資料)">外送</option>
+         </select>
+         </form> 
+    <p id="demo"></p> </li>
     <p>
-    <% String tel[] = request.getParameterValues("custom_tel"); %>
-    <li class="list-group-item">連絡電話 : 0227005858<% out.print("tel"); %></li>
+    <li class="list-group-item list-group-item-info">請輸入外送地址 : <input type="text" id="address" name="address" value="" size="50"></li>
+    <p>    
+    <li class="list-group-item list-group-item-info">請輸入連絡電話 : <input type="text" id="custom_tel" name="custom_tel" value=""></li>   
     <p>
     </h4>
-    <li class="list-group-item"><h4>金額總計<span class="glyphicon glyphicon-usd" aria-hidden="true"  />1900 元</h4></li>
+    <li class="list-group-item list-group-item-danger"><h4>金額總計<span class="glyphicon glyphicon-usd" aria-hidden="true"  />1900</h4></li>
   </ul>
+  <button input type="submit" class="btn btn-success" formaction="orderListpageOK.jsp" method="post">確認送出</button> 
 </div>
 </div>
           <div class=container>
