@@ -693,7 +693,7 @@ jQuery(document).ready(function(){
       </div>
       <div class="modal-body">
       <div class="container">   <!-- Sign in /container start-->
-        <form class="form-signin" name="member" action="MemberAddCode.jsp">
+        <form class="form-signin" name="member" action="MemberAddCode_MD5.jsp">
          <div class="col-md-6 "> 
           <label for="inputAccount" class="sr-only">帳號</label>   
           <h5>帳號</h5>
