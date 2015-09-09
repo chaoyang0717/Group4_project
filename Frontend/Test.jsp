@@ -173,20 +173,42 @@ function add(id) {
     var li = document.createElement("li");
     li.id="li";
     var msg = document.getElementById("Append_" + id);
+    
     var quantity = document.getElementById("quantity_" + id);
     ul.appendChild(li);
-    li.appendChild(document.createTextNode(msg.name + " 數量 : " + quantity.value));
+    li.appendChild(document.createTextNode(msg.name + " 數量 : " + quantity.value));      // msg.name是菜名，quantity.value是數量
+    
+    var cart = document.getElementById("cart");
+	var product = document.createElement("input");
+	var count = document.createElement("input");
+	var price = document.createElement("input"); //價錢
+	//將input隱藏
+    product.type = "hidden";
+    count.type = "hidden";
+    price.type = "hidden";
+    product.name = "product";
+    product.value = msg.name;    
+    count.name = "count";
+    price.name="price";
+    price.value = msg.value;
+    
+    count.value = quantity.value;
+    cart.appendChild(product);
+    cart.appendChild(count);
+    cart.appendChild(price);
+    
     //計算金額加總
-    var price = document.getElementById(msg.value);
-    var items = document.getElementsByTagName(li);                                //取得加入項目
-    var itemCount = items.length;                                                                  //取得項目個數
-    var totalprice = 0;                                                                                      //宣告總金額
-    for(var i = 0; i < itemCount; i++)                                                               //計算金額
-    {
-	    totalprice = totalprice +  parseInt(quantity*price);               //totalprice = totalprice +  parseInt(items[i].quantity*items[i].price);      
-	}
-    document.getElementById("money").innerHTML = totalprice.innerHTML;     //印出金額  
-  }
+    //alert(price);
+    //var items = []; 
+    //items= document.getElementsByTagName(input);//取得加入項目
+    //var itemCount = items.length;                                            //取得項目個數
+    //var totalprice = 0;                                                      //宣告總金額
+    //for(var i = 0; i < itemCount; i++)                                       //計算金額
+    //{
+	  //totalprice = totalprice + parseInt(items[i].price * items[i].count);            //totalprice = totalprice +  parseInt(quantity*price);      
+	//}
+    document.getElementById("money").innerHTML = price.innerHTML;     //印出金額  
+   }
 function del(){                            //清空點餐單
     var div = document.getElementById("div");
     var ul = document.getElementById("ul");      
@@ -618,18 +640,9 @@ jQuery(document).ready(function(){
              </p>
  
            </h4>
-        <form>   
-        <h4><i class="fa fa-motorcycle"></i>
-        <td><select name="s1" id="s1">
-            <option value="X" SELECTED>請選擇外送或自取</option>
-            <option value="1">外送(加收服務費)</option>
-            <option value="2">自取</option>
-            </select>
-        </td></h4>
         <hr><footer></footer>
-       金額總計:<h4 id="money">  </h4>   
-        <hr><footer></footer>   
-        <button input type="submit" class="btn btn-success" action="orderListpage.jsp">確認送出</button> 
+        <form id="cart" action="orderListpage.jsp" method="post">
+       <button input type="submit" class="btn btn-success">確認送出</button>
         <button type="button" class="btn btn-success" onclick="del()">清除清單</button> 
         </form>
         <hr><footer></footer>   

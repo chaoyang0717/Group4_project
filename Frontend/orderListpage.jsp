@@ -9,20 +9,15 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
   <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+  <script src= "http://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
   
   <style>
   .table td,th,tr {
    text-align: center;   
   }
   </style>
-  
-  <script>
-    function takeFunction() {
-        var x = document.getElementById("takeSelect").value;
-        document.getElementById("demo").innerHTML = "您選擇的是: " + x;
-    }
-    </script>  
 </head>
+
 <body  align="center">
     <nav class="navbar navbar-inverse navbar-fixed-top">
       <div class="container">
@@ -52,43 +47,85 @@
     </thead>
     <tbody>
       <tr>
-        <td>明太子雞肉芝麻葉比薩</td>
-        <td>1</td>
+        <td><%
+        String p1[] = request.getParameterValues("product");
+	
+	for (String p : p1)
+	{
+		String product = new String(p.getBytes("ISO-8859-1"), "UTF-8");
+		out.println(product);
+		
+	}
+
+       %> </td>
+         <td><%
+	String c1[] = request.getParameterValues("count");
+	//out.println(s1.length);
+	
+	for (String c : c1)
+	{
+		String count = new String(c.getBytes("ISO-8859-1"), "UTF-8");
+		out.println(count);
+		
+	}
+
+     %>  
+        </td>
+      </tr>
+      
+      <tr>
+        <td></td>
+        <td></td>
       </tr>
       <tr>
-        <td>蒜香白酒干貝蛤蜊義大利麵</td>
-        <td>2</td>
+        <td></td>
+        <td></td>
       </tr>
       <tr>
-        <td>松露風野菇起士燉飯</td>
-        <td>3</td>
-      </tr>
-      <tr>
-        <td>冰焦糖奶茶</td>
-        <td>4</td>
-      </tr>
+        <td></td>
+        <td></td>
+      </tr>  
     </tbody>
     </table>
     </li>
     <p>
-    <li class="list-group-item list-group-item-info"><i class="fa fa-motorcycle">取餐方式 : </i>
+    <li class="list-group-item"><i class="fa fa-motorcycle">取餐方式 : </i>
          <form>
          <select id="takeSelect" onchange="takeFunction()">
          <option>請選自取或外送</option>
-         <option id="takeself" value="自取">自取</option>
-         <option id="delivery" value="外送(外送服務請填入下方資料)">外送</option>
+         <option id="takeself" value="takeself">自取</option>
+         <option id="delivery" value="delivery">外送</option>
          </select>
          </form> 
-    <p id="demo"></p> </li>
+    </li>  
     <p>
-    <li class="list-group-item list-group-item-info">請輸入外送地址 : <input type="text" id="address" name="address" value="" size="50"></li>
+    <div ng-app="">  <!-- 使用AngularJS效果 -->
+    <li class="list-group-item">請輸入外送地址 : <input type="text" id="address" name="address" value="" size="50" ng-model="addr"></li>
+           您的地址是 : {{addr}}
     <p>    
-    <li class="list-group-item list-group-item-info">請輸入連絡電話 : <input type="text" id="custom_tel" name="custom_tel" value=""></li>   
+    <li class="list-group-item">請輸入連絡電話 : <input type="text" id="custom_tel" name="custom_tel" value="" ng-model="tel"></li>  
+           您的電話是: {{tel}}
     <p>
+    </div>
     </h4>
-    <li class="list-group-item list-group-item-danger"><h4>金額總計<span class="glyphicon glyphicon-usd" aria-hidden="true"  />1900</h4></li>
+    <li class="list-group-item">
+    <h4>金額總計<span class="glyphicon glyphicon-usd" aria-hidden="true"  />
+    <%
+        String price1[] = request.getParameterValues("price");
+	
+	for (String pri : price1)
+	{
+		String price = new String(pri.getBytes("ISO-8859-1"), "UTF-8");
+		out.println(price);
+		
+	}
+
+       %>
+    </h4></li>
   </ul>
-  <button input type="submit" class="btn btn-success" formaction="orderListpageOK.jsp" method="post">確認送出</button> 
+  <form action="orderListpage.jsp" method="post">
+  <button input type="submit" class="btn btn-success" action="orderListpageOK.jsp">確認送出</button>
+  </form> 
 </div>
 </div>
           <div class=container>

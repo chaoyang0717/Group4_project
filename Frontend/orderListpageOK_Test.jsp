@@ -1,5 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8" import="order.category.*,java.util.*"%>
+<%   //Order
+Order o = new Order(0,request.getParameter("member_id"),request.getParameter("custom_name"),request.getParameter("custom_tel"),request.getParameter("take"),request.getParameter("address"));
+OrderDAO dao = new OrderDAOImpl();
+dao.add(o);
+// response.sendRedirect("indexok.jsp");       
+%>   
+
+<%      //OrderList
+Order ol = new Order(0,request.getParameter("order_id"),request.getParameter("product_id"),request.getParameter("product_name_ch"),request.getParameter("price"),request.getParameter("quantity"));
+OrderDAO dao2 = new OrderDAOImpl();
+dao2.add(ol);
+// response.sendRedirect("indexok.jsp");       
+%>
 
 <!DOCTYPE html>
 <html>
@@ -35,31 +48,7 @@
   <ul class="list-group">
     <li class="list-group-item active"><h3><i class="fa fa-thumbs-o-up"></i>&nbsp;已收到您的訂單</h3></li>
     <h4>
-    <li class="list-group-item">
-    <table class="table" >
-    <thead>
-      <tr>
-        <th>餐點菜名</th>
-        <th>數量</th>
-      </tr>
-    </thead>
-    <tbody>
-      
-      <tr>
-        <td>蒜香白酒干貝蛤蜊義大利麵</td>
-        <td>2</td>
-      </tr>
-      <tr>
-        <td>松露風野菇起士燉飯</td>
-        <td>3</td>
-      </tr>
-      <tr>
-        <td>冰焦糖奶茶</td>
-        <td>4</td>
-      </tr>
-    </tbody>
-    </table>
-    </li>
+    <li class="list-group-item">已收到您的訂單(處理中)</li>
     
     <li class="list-group-item"><i class="fa fa-motorcycle">取餐方式 : 外送</i></li>
     <p>
