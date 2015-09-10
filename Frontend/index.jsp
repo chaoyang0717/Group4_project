@@ -641,7 +641,7 @@ jQuery(document).ready(function(){
  
            </h4>
         <hr><footer></footer>
-        <form id="cart" action="orderListpage.jsp" method="post">
+        <form id="cart" action="" method="post">
        <button input type="submit" class="btn btn-success">確認送出</button>
         <button type="button" class="btn btn-success" onclick="del()">清除清單</button> 
         </form>
