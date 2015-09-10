@@ -89,7 +89,7 @@
     </table>
     </li>
     <p>
-    <li class="list-group-item"><i class="fa fa-motorcycle">取餐方式 : </i>
+    <li class="list-group-item list-group-item-info"><i class="fa fa-motorcycle">取餐方式 : </i>
          <form>
          <select id="takeSelect" onchange="takeFunction()">
          <option>請選自取或外送</option>
@@ -100,15 +100,15 @@
     </li>  
     <p>
     <div ng-app="">  <!-- 使用AngularJS效果 -->
-    <li class="list-group-item">請輸入外送地址 : <input type="text" id="address" name="address" value="" size="50" ng-model="addr"></li>
+    <li class="list-group-item list-group-item-info">請輸入外送地址 : <input type="text" id="address" name="address" value="" size="50" ng-model="addr"></li>
            您的地址是 : {{addr}}
     <p>    
-    <li class="list-group-item">請輸入連絡電話 : <input type="text" id="custom_tel" name="custom_tel" value="" ng-model="tel"></li>  
+    <li class="list-group-item list-group-item-info">請輸入連絡電話 : <input type="text" id="custom_tel" name="custom_tel" value="" ng-model="tel"></li>  
            您的電話是: {{tel}}
     <p>
     </div>
     </h4>
-    <li class="list-group-item">
+    <li class="list-group-item list-group-item-danger">
     <h4>金額總計<span class="glyphicon glyphicon-usd" aria-hidden="true"  />
     <%
         String price1[] = request.getParameterValues("price");
@@ -123,7 +123,7 @@
        %>
     </h4></li>
   </ul>
-  <form action="orderListpage.jsp" method="post">
+  <form action="orderListpageOK.jsp" method="post">
   <button input type="submit" class="btn btn-success" action="orderListpageOK.jsp">確認送出</button>
   </form> 
 </div>

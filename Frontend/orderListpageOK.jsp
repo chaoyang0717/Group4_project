@@ -44,7 +44,10 @@
       </tr>
     </thead>
     <tbody>
-      
+      <tr>
+        <td>明太子雞肉芝麻葉比薩</td>
+        <td>1</td>
+      </tr>      
       <tr>
         <td>蒜香白酒干貝蛤蜊義大利麵</td>
         <td>2</td>
@@ -63,24 +66,14 @@
     
     <li class="list-group-item"><i class="fa fa-motorcycle">取餐方式 : 外送</i></li>
     <p>
-    <%
-        String addr1[] = request.getParameterValues("address");
-	
-	for (String a : addr1)
-	{
-		String address = new String(a.getBytes("ISO-8859-1"), "UTF-8"); %>					
+    			
       
-    <li class="list-group-item">外送地址 : <%out.println(address);%></li>
-    <%}%>
+    <li class="list-group-item">外送地址 : 台北市大安區建國南路二段231號</li>
+   
     <p>
-    <%
-        String tel1[] = request.getParameterValues("custom_tel");
-    for (String t : tel1)
-	{
-		String custom_tel = new String(t.getBytes("ISO-8859-1"), "UTF-8"); %>
-
-    <li class="list-group-item">連絡電話 : <% out.println("custom_tel"); %></li>
-    <%}%>
+    
+    <li class="list-group-item">連絡電話 : 0227005858</li>
+   
     <p>
     </h4>
     <li class="list-group-item"><h4>金額總計<span class="glyphicon glyphicon-usd" aria-hidden="true"  />1900 元</h4></li>
