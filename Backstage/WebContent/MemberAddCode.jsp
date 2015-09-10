@@ -4,5 +4,5 @@
 Member m = new Member(0,request.getParameter("member_account"), request.getParameter("member_password"),request.getParameter("member_tel"),request.getParameter("member_email"));
 MemberDAO dao = new MemberDAODBImpl();
 dao.add(m);
-response.sendRedirect("index.jsp");       
+response.sendRedirect("indexok.jsp");       
 %>    

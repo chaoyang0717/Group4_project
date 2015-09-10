@@ -47,7 +47,7 @@
       <tr>
         <td>明太子雞肉芝麻葉比薩</td>
         <td>1</td>
-      </tr>
+      </tr>      
       <tr>
         <td>蒜香白酒干貝蛤蜊義大利麵</td>
         <td>2</td>
@@ -63,11 +63,17 @@
     </tbody>
     </table>
     </li>
+    
     <li class="list-group-item"><i class="fa fa-motorcycle">取餐方式 : 外送</i></li>
     <p>
+    			
+      
     <li class="list-group-item">外送地址 : 台北市大安區建國南路二段231號</li>
+   
     <p>
+    
     <li class="list-group-item">連絡電話 : 0227005858</li>
+   
     <p>
     </h4>
     <li class="list-group-item"><h4>金額總計<span class="glyphicon glyphicon-usd" aria-hidden="true"  />1900 元</h4></li>

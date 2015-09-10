@@ -51,91 +51,6 @@ table, th, td {
 } 
 </style>
 
-<script language="JavaScript">          //會員註冊
-var request;
-function getData()
-{
-	var addAccount = document.getElementById("addAccount");
-	request = new XMLHttpRequest();
-	request.open("GET", "MemberAddChk.jsp?name=" + addAccount.value, true);
-	// 這行是設定 request 要去哪取資料，尚未開始取
-	// 第三個參數打 true 可以想成，利用另外一個執行緒處理 Request
-	// 第三個參數打 false 可以想成，利用這一個執行緒處理 Request
-	
-	var img1 = document.getElementById("img1");
-	img1.src = "img/wait.gif";
-	
-	request.onreadystatechange = updateData;
-	// 當記憶體中的瀏覽器狀態改變時，呼叫 updateData 這個 function
-	
-	request.send(null); // 發動 request 去取資料		
-}
-
-function updateData()
-{
-	if (request.readyState == 4)
-	{
-		// alert(request.responseText);
-		var dup = document.getElementById("dup");
-		dup.value = request.responseText.trim();
-		
-		if (dup.value == "1")
-			{
-			var img1 = document.getElementById("img1");
-			img1.src = "img/a1.png";
-			}
-		else
-			{
-			var img1 = document.getElementById("img1");
-			img1.src = "img/a0.png";
-			}
-		// alert(dup.value);
-	}
-}
-</script>
-
-<script language="JavaScript">              //會員登入判斷
-var request
-function getDatalogin(){ //加入Ajax判斷
-	var memAcc=document.getElementById('memAcc')//取得使用者輸入的值
-	request=new XMLHttpRequest();//在記憶體內開啟一個網頁
-	request.open("GET", "memloginChk.jsp?name="+memAcc.value, true); //將名字的值傳入check的網頁判斷，有找到名字該網頁會顯示1(有重複)
-	// 這行是設定 request 要去哪取資料，尚未開始取
-	// 第三個參數打 true 可以想成，利用另外一個執行緒處理 Request
-	// 第三個參數打 false 可以想成，利用這一個執行緒處理 Request
-	
-	var imglogin = document.getElementById("imglogin");//抓取資料時，顯示運作中的圖
-	imglogin.src = "img/wait.gif";
-	
-	request.onreadystatechange = updateDatalogin;
-	// 當記憶體中的瀏覽器狀態改變時，呼叫 updateDatalogin 這個 function
-	 
-	 request.send(null);// 發動 request 去取資料
-	
-}
-
-function updateDatalogin(){
-	
-	if(request.readyState==4){
-		var dup = document.getElementById("dup");
-		dup.value = request.responseText.trim();
-		
-		//把check判斷抓取的值回送給dup，修改dup的value在進行判斷。trim<--消除左右空白以免判斷錯誤
-		
-		if (dup.value == "0")//取得的值為1，則顯示打V的圖
-			{
-			var imglogin = document.getElementById("imglogin");
-			imglogin.src = "img/a1.png";
-			}
-		else
-			{
-			var imglogin = document.getElementById("imglogin");
-			imglogin.src = "img/a0.png";
-			}
-	}
-}
-</script>
-
 <script >           //點餐單-使用 Shopping Cart Rolling Sticky
 $(document).ready(function() {  
     // check where the shoppingcart-div is  
@@ -168,19 +83,57 @@ $(document).ready( function () {
 </script>
 
 <script type="text/javascript">             //使用Javascript加入id的value內容至點餐單
-function add() {
-      var ul = document.getElementById("list");
-      var li = document.createElement("li");
-      var msg = document.getElementById("list.get(i).product_name");
-      li.appendChild(document.createTextNode(msg.value));
-      //li.innerHTML ="<button type='submit' onclick='del()'>X</button>";
-      var quantity =document.getElementById("list.get(i).product_id");
-      //li.appendChild(document.createTextNode(msg[0].value+" 數量 : "+quantity.value));
-      ul.appendChild(li);
-    }
-function del(){
-   var del = document.getElementById("list");
-}
+function add(id) { 
+    var ul = document.getElementById("ul");    
+    var li = document.createElement("li");
+    li.id="li";
+    var msg = document.getElementById("Append_" + id);
+    
+    var quantity = document.getElementById("quantity_" + id);
+    ul.appendChild(li);
+    li.appendChild(document.createTextNode(msg.name + " 數量 : " + quantity.value));      // msg.name是菜名，quantity.value是數量
+    
+    var cart = document.getElementById("cart");
+	var product = document.createElement("input");
+	var count = document.createElement("input");
+	var price = document.createElement("input"); //價錢
+	//將input隱藏
+    product.type = "hidden";
+    count.type = "hidden";
+    price.type = "hidden";
+    product.name = "product";
+    product.value = msg.name;    
+    count.name = "count";
+    price.name="price";
+    price.value = msg.value;
+    
+    count.value = quantity.value;
+    cart.appendChild(product);
+    cart.appendChild(count);
+    cart.appendChild(price);
+    
+    //計算金額加總
+    //alert(price);
+    //var items = []; 
+    //items= document.getElementsByTagName(input);//取得加入項目
+    //var itemCount = items.length;                                            //取得項目個數
+    //var totalprice = 0;                                                      //宣告總金額
+    //for(var i = 0; i < itemCount; i++)                                       //計算金額
+    //{
+	  //totalprice = totalprice + parseInt(items[i].price * items[i].count);            //totalprice = totalprice +  parseInt(quantity*price);      
+	//}
+    document.getElementById("money").innerHTML = price.innerHTML;     //印出金額  
+   }
+function del(){                            //清空點餐單
+    var div = document.getElementById("div");
+    var ul = document.getElementById("ul");      
+    var li = document.getElementById("li");   
+    ul.parentNode.removeChild(ul);
+    var rul =document.createElement("ul");
+    rul.id="ul";
+    div.appendChild(rul);
+ }
+  
 </script>
 
 <script>                          //使用button +1與-1  http://jsfiddle.net/laelitenetwork/puJ6G/
@@ -232,7 +185,9 @@ jQuery(document).ready(function(){
      <div class=navbar-header>
         <button type=button class="navbar-toggle collapsed" data-toggle=collapse data-target=#navbar aria-expanded=false aria-controls=navbar> 
           <span class=sr-only>Toggle navigation</span> 
-          <span class=icon-bar></span>            
+          <span class=icon-bar></span> 
+          <span class=icon-bar></span> 
+          <span class=icon-bar></span> 
         </button> 
         <a class=navbar-brand href=#>R202義式料理線上點餐系統</a>
      </div>
@@ -277,10 +232,11 @@ jQuery(document).ready(function(){
 		<a href="upload/<%=list.get(i).filename_big%>" rel="lightbox" title="<%=list.get(i).product_name%>" ><img src="upload/<%=list.get(i).filename_small%>" /><br/></a>
 		<h4>金額<span class="glyphicon glyphicon-usd" aria-hidden="true"><%=list.get(i).price%></span></h4><br/>
 		<h4><%=list.get(i).summary%></h4><br/>
-		<input type='button' value='-' class='qtyminus' field='<%=list.get(i).product_name%>' />
-        <input type='text' id='<%=list.get(i).product_id%>' name="<%=list.get(i).product_name%>" value='0' size="3" />
-        <input type='button' value='+' class='qtyplus' field='<%=list.get(i).product_name%>' />
-		<button type="submit" id="<%=list.get(i).product_name%>" onclick="add()" value="<%=list.get(i).product_name%>"><i class="fa fa-cart-plus fa-2x"></i></button>
+		<input type='button' value='-' class='qtyminus' field='quantity_<%=list.get(i).product_id%>' />
+        <input type='text' id='quantity_<%=list.get(i).product_id%>' name="quantity_<%=list.get(i).product_id%>" value='0' size="3" />
+        <input type='button' value='+' class='qtyplus' field='quantity_<%=list.get(i).product_id%>' />
+		<!-- <button type="submit" id="Append_<%=list.get(i).product_id%>" onclick="add('<%=list.get(i).product_id%>')" value="<%=list.get(i).product_name%>"><i class="fa fa-cart-plus fa-2x"></i></button> -->	
+		 <button type="submit" id="Append_<%=list.get(i).product_id%>" onclick="add('<%=list.get(i).product_id%>')" value="<%=list.get(i).price%>" name="<%=list.get(i).product_name%>"><i class="fa fa-cart-plus fa-2x"></i></button> 
 	    <%}else{%>
 		<p></p><br/>
 	    <p></p><br/>
@@ -294,10 +250,11 @@ jQuery(document).ready(function(){
 		<a href="upload/<%=list.get(i+1).filename_big%>" rel="lightbox" title="<%=list.get(i+1).product_name%>" ><img src="upload/<%=list.get(i+1).filename_small%>" /><br/></a>
 		<h4>金額<span class="glyphicon glyphicon-usd" aria-hidden="true"><%=list.get(i+1).price%></span></h4><br/>
 		<h4><%=list.get(i+1).summary%></h4><br/>
-		<input type='button' value='-' class='qtyminus'  field='<%=list.get(i+1).product_name%>' />
-        <input type='text' id='<%=list.get(i+1).product_id%>' name="<%=list.get(i+1).product_name%>" value='0' size="3" />
-        <input type='button' value='+' class='qtyplus'  field='<%=list.get(i+1).product_name%>' />
-		<button type="submit" id="<%=list.get(i+1).product_name%>" onclick="add()" value="<%=list.get(i+1).product_name%>"><i class="fa fa-cart-plus fa-2x"></i></button>
+		<input type='button' value='-' class='qtyminus'  field='quantity_<%=list.get(i+1).product_id%>' />
+        <input type='text' id='quantity_<%=list.get(i+1).product_id%>' name="quantity_<%=list.get(i+1).product_id%>" value='0' size="3" />
+        <input type='button' value='+' class='qtyplus'  field='quantity_<%=list.get(i+1).product_id%>' />
+		<!--  <button type="submit" id="Append_<%=list.get(i+1).product_id%>" onclick="add('<%=list.get(i+1).product_id%>')" value="<%=list.get(i+1).product_name%>"><i class="fa fa-cart-plus fa-2x"></i></button> -->
+		<button type="submit" id="Append_<%=list.get(i+1).product_id%>" onclick="add('<%=list.get(i+1).product_id%>')" value="<%=list.get(i+1).price%>" name="<%=list.get(i+1).product_name%>"><i class="fa fa-cart-plus fa-2x"></i></button> 
 		<%}else{%>
 		<p></p><br/>
 		<p></p><br/>
@@ -311,10 +268,11 @@ jQuery(document).ready(function(){
 		<a href="upload/<%=list.get(i+2).filename_big%>" rel="lightbox" title="<%=list.get(i+2).product_name%>" ><img src="upload/<%=list.get(i+2).filename_small%>" /><br/></a>
 		<h4>金額<span class="glyphicon glyphicon-usd" aria-hidden="true"><%=list.get(i+2).price%></span></h4><br/>
 		<h4><%=list.get(i+2).summary%></h4><br/>
-		<input type='button' value='-' class='qtyminus' field='<%=list.get(i+2).product_name%>' />
-        <input type='text' id='<%=list.get(i+2).product_id%>' name="<%=list.get(i+2).product_name%>" value='0' size="3" />
-        <input type='button' value='+' class='qtyplus' field='<%=list.get(i+2).product_name%>' />
-		<button type="submit" id="<%=list.get(i+2).product_name%>" onclick="add()" value="<%=list.get(i+2).product_name%>"><i class="fa fa-cart-plus fa-2x"></i></button>		
+		<input type='button' value='-' class='qtyminus' field='quantity_<%=list.get(i+2).product_id%>' />
+        <input type='text' id='quantity_<%=list.get(i+2).product_id%>' name="quantity_<%=list.get(i+2).product_id%>" value='0' size="3" />
+        <input type='button' value='+' class='qtyplus' field='quantity_<%=list.get(i+2).product_id%>' />
+		<!--  <button type="submit" id="Append_<%=list.get(i+2).product_id%>" onclick="add('<%=list.get(i+2).product_id%>')" value="<%=list.get(i+2).product_name%>"><i class="fa fa-cart-plus fa-2x"></i></button>-->		
+		<button type="submit" id="Append_<%=list.get(i+2).product_id%>" onclick="add('<%=list.get(i+2).product_id%>')" value="<%=list.get(i+2).price%>" name="<%=list.get(i+2).product_name%>"><i class="fa fa-cart-plus fa-2x"></i></button> 
 		<%}else{%>
 		<p></p><br/>
 		<p></p><br/>
@@ -340,22 +298,23 @@ jQuery(document).ready(function(){
 
 			<% 
 			ProductDAO dao2=new ProductDAODBImpl();
-			ArrayList<Product> list2=dao2.getByCategoryId(2);
-			for (int i = 0; i < list2.size(); i+=3) { %>
+			ArrayList<Product> list1=dao2.getByCategoryId(2);
+			for (int i = 0; i < list1.size(); i+=3) { %>
 	<center>
 	<table>
 		<tr>
 		<td>
-		<%if((i)<list2.size()){
+		<%if((i)<list1.size()){
 		%>
-		<h3><%=list2.get(i).product_name%></h3><br/>
-		<a href="upload/<%=list2.get(i).filename_big%>" rel="lightbox" title="<%=list2.get(i).product_name%>" ><img src="upload/<%=list2.get(i).filename_small%>" /><br/></a>
-		<h4>金額<span class="glyphicon glyphicon-usd" aria-hidden="true"><%=list2.get(i).price%></span></h4><br/>
-		<h4><%=list2.get(i).summary%></h4><br/>
-		<input type='button' value='-' class='qtyminus' field='<%=list2.get(i).product_name%>' />
-        <input type='text' id='<%=list2.get(i).product_id%>' name="<%=list2.get(i).product_name%>" value='0' size="3" />
-        <input type='button' value='+' class='qtyplus' field='<%=list2.get(i).product_name%>' />
-		<button type="submit" id="<%=list2.get(i).product_name%>" onclick="add()" value="<%=list2.get(i).product_name%>"><i class="fa fa-cart-plus fa-2x"></i></button>		
+		<h3><%=list1.get(i).product_name%></h3><br/>
+		<a href="upload/<%=list1.get(i).filename_big%>" rel="lightbox" title="<%=list1.get(i).product_name%>" ><img src="upload/<%=list1.get(i).filename_small%>" /><br/></a>
+		<h4>金額<span class="glyphicon glyphicon-usd" aria-hidden="true"><%=list1.get(i).price%></span></h4><br/>
+		<h4><%=list1.get(i).summary%></h4><br/>
+		<input type='button' value='-' class='qtyminus' field='quantity_<%=list1.get(i).product_id%>' />
+        <input type='text' id='quantity_<%=list1.get(i).product_id%>' name="quantity_<%=list1.get(i).product_id%>" value='0' size="3" />
+        <input type='button' value='+' class='qtyplus' field='quantity_<%=list1.get(i).product_id%>' />
+		<!--  <button type="submit" id="Append_<%=list1.get(i).product_id%>" onclick="add('<%=list1.get(i).product_id%>')" value="<%=list1.get(i).product_name%>"><i class="fa fa-cart-plus fa-2x"></i></button> -->
+		<button type="submit" id="Append_<%=list1.get(i).product_id%>" onclick="add('<%=list1.get(i).product_id%>')" value="<%=list1.get(i).price%>" name="<%=list1.get(i).product_name%>"><i class="fa fa-cart-plus fa-2x"></i></button> 		
 	<%}else{%>
 		<p></p><br/>
 		<p></p><br/>
@@ -364,15 +323,16 @@ jQuery(document).ready(function(){
 		<%} %>
 		</td>
 		<td>
-		<% if((i+1)<list2.size()){%>
-		<h3><%=list2.get(i+1).product_name%></h3><br/>
-		<a href="upload/<%=list2.get(i+1).filename_big%>" rel="lightbox" title="<%=list2.get(i+1).product_name%>" ><img src="upload/<%=list2.get(i+1).filename_small%>" /><br/></a>
-		<h4>金額<span class="glyphicon glyphicon-usd" aria-hidden="true"><%=list2.get(i+1).price%></span></h4><br/>
-		<h4><%=list2.get(i+1).summary%></h4><br/>
-		<input type='button' value='-' class='qtyminus' field='<%=list2.get(i+1).product_name%>' />
-        <input type='text' id='<%=list2.get(i+1).product_id%>' name="<%=list2.get(i+1).product_name%>" value='0' size="3" />
-        <input type='button' value='+' class='qtyplus' field='<%=list2.get(i+1).product_name%>' />
-		<button type="submit" id="<%=list2.get(i+1).product_name%>" onclick="add()" value="<%=list2.get(i+1).product_name%>"><i class="fa fa-cart-plus fa-2x"></i></button>
+		<% if((i+1)<list1.size()){%>
+		<h3><%=list1.get(i+1).product_name%></h3><br/>
+		<a href="upload/<%=list1.get(i+1).filename_big%>" rel="lightbox" title="<%=list1.get(i+1).product_name%>" ><img src="upload/<%=list1.get(i+1).filename_small%>" /><br/></a>
+		<h4>金額<span class="glyphicon glyphicon-usd" aria-hidden="true"><%=list1.get(i+1).price%></span></h4><br/>
+		<h4><%=list1.get(i+1).summary%></h4><br/>
+		<input type='button' value='-' class='qtyminus' field='quantity_<%=list1.get(i+1).product_id%>' />
+        <input type='text' id='quantity_<%=list1.get(i+1).product_id%>' name="quantity_<%=list1.get(i+1).product_id%>" value='0' size="3" />
+        <input type='button' value='+' class='qtyplus' field='quantity_<%=list1.get(i+1).product_id%>' />
+		<!--  <button type="submit" id="Append_<%=list1.get(i+1).product_id%>" onclick="add('<%=list1.get(i+1).product_id%>')" value="<%=list1.get(i+1).product_name%>"><i class="fa fa-cart-plus fa-2x"></i></button> -->
+		<button type="submit" id="Append_<%=list1.get(i+1).product_id%>" onclick="add('<%=list1.get(i+1).product_id%>')" value="<%=list1.get(i+1).price%>" name="<%=list1.get(i+1).product_name%>"><i class="fa fa-cart-plus fa-2x"></i></button> 		
 		
 		<%}else{%>
 
@@ -383,15 +343,16 @@ jQuery(document).ready(function(){
 		<%} %>
 		</td>
 		<td>
-		<%if((i+2)<list2.size()){%>
-		<h3><%=list2.get(i+2).product_name%></h3></p><br/>
-		<a href="upload/<%=list2.get(i+2).filename_big%>" rel="lightbox" title="<%=list2.get(i+2).product_name%>" ><img src="upload/<%=list2.get(i+2).filename_small%>" /><br/></a>
-		<h4>金額<span class="glyphicon glyphicon-usd" aria-hidden="true"><%=list2.get(i+2).price%></span></h4><br/>
-		<h4><%=list2.get(i+2).summary%></h4><br/>
-		<input type='button' value='-' class='qtyminus' field='<%=list2.get(i+2).product_name%>'  />
-        <input type='text' id='<%=list2.get(i+2).product_id%>' name="<%=list2.get(i+2).product_name%>" value='0' size="3" />
-        <input type='button' value='+' class='qtyplus' field='quantity_1' />
-		<button type="submit" id="<%=list2.get(i+2).product_name%>" onclick="add()" value="<%=list2.get(i+2).product_name%>"><i class="fa fa-cart-plus fa-2x"></i></button>
+		<%if((i+2)<list1.size()){%>
+		<h3><%=list1.get(i+2).product_name%></h3></p><br/>
+		<a href="upload/<%=list1.get(i+2).filename_big%>" rel="lightbox" title="<%=list1.get(i+2).product_name%>" ><img src="upload/<%=list1.get(i+2).filename_small%>" /><br/></a>
+		<h4>金額<span class="glyphicon glyphicon-usd" aria-hidden="true"><%=list1.get(i+2).price%></span></h4><br/>
+		<h4><%=list1.get(i+2).summary%></h4><br/>
+		<input type='button' value='-' class='qtyminus' field='quantity_<%=list1.get(i+2).product_id%>'  />
+        <input type='text' id='quantity_<%=list1.get(i+2).product_id%>' name="quantity_<%=list1.get(i+2).product_id%>" value='0' size="3" />
+        <input type='button' value='+' class='qtyplus' field='quantity_<%=list1.get(i+2).product_id%>' />
+		<!--  <button type="submit" id="Append_<%=list1.get(i+2).product_id%>" onclick="add('<%=list1.get(i+2).product_id%>')" value="<%=list1.get(i+2).product_name%>"><i class="fa fa-cart-plus fa-2x"></i></button> -->
+		<button type="submit" id="Append_<%=list1.get(i+2).product_id%>" onclick="add('<%=list1.get(i+2).product_id%>')" value="<%=list1.get(i+2).price%>" name="<%=list1.get(i+2).product_name%>"><i class="fa fa-cart-plus fa-2x"></i></button> 		
 		<%}else{%>
 		<p></p><br/>
 		<p></p><br/>
@@ -419,22 +380,23 @@ jQuery(document).ready(function(){
 
 			<% 
 			ProductDAO dao3=new ProductDAODBImpl();
-			ArrayList<Product> list3=dao3.getByCategoryId(3);
-			for (int i = 0; i < list3.size(); i+=3) { %>
+			ArrayList<Product> list2=dao3.getByCategoryId(3);
+			for (int i = 0; i < list2.size(); i+=3) { %>
 	<center>
 	<table>
 		<tr>
 		<td>
-		<%if((i)<list3.size()){
+		<%if((i)<list2.size()){
 		%>
-		<h3><%=list3.get(i).product_name%></h3><br/>
-		<a href="upload/<%=list3.get(i).filename_big%>" rel="lightbox" title="<%=list3.get(i).product_name%>" ><img src="upload/<%=list3.get(i).filename_small%>" /><br/></a>
-		<h4>金額<span class="glyphicon glyphicon-usd" aria-hidden="true"><%=list3.get(i).price%></span></h4><br/>
-		<h4><%=list3.get(i).summary%></h4><br/>
-		<input type='button' value='-' class='qtyminus' field='<%=list3.get(i).product_name%>' />
-        <input type='text' id='<%=list3.get(i).product_id%>' name="<%=list3.get(i).product_name%>" value='0' size="3" />
-        <input type='button' value='+' class='qtyplus' field='<%=list3.get(i).product_name%>' />
-		<button type="submit" id="<%=list3.get(i).product_name%>" onclick="add()" value="<%=list3.get(i).product_name%>"><i class="fa fa-cart-plus fa-2x"></i></button>
+		<h3><%=list2.get(i).product_name%></h3><br/>
+		<a href="upload/<%=list2.get(i).filename_big%>" rel="lightbox" title="<%=list2.get(i).product_name%>" ><img src="upload/<%=list2.get(i).filename_small%>" /><br/></a>
+		<h4>金額<span class="glyphicon glyphicon-usd" aria-hidden="true"><%=list2.get(i).price%></span></h4><br/>
+		<h4><%=list2.get(i).summary%></h4><br/>
+		<input type='button' value='-' class='qtyminus' field='quantity_<%=list2.get(i).product_id%>' />
+        <input type='text' id='quantity_<%=list2.get(i).product_id%>' name="quantity_<%=list2.get(i).product_id%>" value='0' size="3" />
+        <input type='button' value='+' class='qtyplus' field='quantity_<%=list2.get(i).product_id%>' />
+		<!--  <button type="submit" id="Append_<%=list2.get(i).product_id%>" onclick="add('<%=list2.get(i).product_id%>')" value="<%=list2.get(i).product_name%>"><i class="fa fa-cart-plus fa-2x"></i></button> -->
+		<button type="submit" id="Append_<%=list2.get(i).product_id%>" onclick="add('<%=list2.get(i).product_id%>')" value="<%=list2.get(i).price%>" name="<%=list2.get(i).product_name%>"><i class="fa fa-cart-plus fa-2x"></i></button> 		
 	<%}else{%>
 		<p></p><br/>
 		<p></p><br/>
@@ -443,18 +405,17 @@ jQuery(document).ready(function(){
 		<%} %>
 		</td>
 		<td>
-		<% if((i+1)<list3.size()){%>
-		<h3><%=list3.get(i+1).product_name%></h3><br/>
-		<a href="upload/<%=list3.get(i+1).filename_big%>" rel="lightbox" title="<%=list3.get(i+1).product_name%>" ><img src="upload/<%=list3.get(i+1).filename_small%>" /><br/></a>
-		<h4>金額<span class="glyphicon glyphicon-usd" aria-hidden="true"><%=list3.get(i+1).price%></span></h4><br/>
-		<h4><%=list3.get(i+1).summary%></h4><br/>
-		<input type='button' value='-' class='qtyminus' field='quantity_1' />
-        <input type='text' id='<%=list3.get(i+1).product_name%>' name="<%=list3.get(i+1).product_id%>" value='0' size="3" />
-        <input type='button' value='+' class='qtyplus' field='quantity_1' />
-		<button type="submit" id="<%=list3.get(i+1).product_name%>" onclick="add()" value="<%=list3.get(i+1).product_name%>"><i class="fa fa-cart-plus fa-2x"></i></button>
-		
+		<% if((i+1)<list2.size()){%>
+		<h3><%=list2.get(i+1).product_name%></h3><br/>
+		<a href="upload/<%=list2.get(i+1).filename_big%>" rel="lightbox" title="<%=list2.get(i+1).product_name%>" ><img src="upload/<%=list2.get(i+1).filename_small%>" /><br/></a>
+		<h4>金額<span class="glyphicon glyphicon-usd" aria-hidden="true"><%=list2.get(i+1).price%></span></h4><br/>
+		<h4><%=list2.get(i+1).summary%></h4><br/>
+		<input type='button' value='-' class='qtyminus' field='quantity_<%=list2.get(i+1).product_id%>' />
+        <input type='text' id='quantity_<%=list2.get(i+1).product_id%>' name="quantity_<%=list2.get(i+1).product_id%>" value='0' size="3" />
+        <input type='button' value='+' class='qtyplus' field='quantity_<%=list2.get(i+1).product_id%>' />
+		<!--  <button type="submit" id="Append_<%=list2.get(i+1).product_id%>" onclick="add('<%=list2.get(i+1).product_id%>')" value="<%=list2.get(i+1).product_name%>"><i class="fa fa-cart-plus fa-2x"></i></button>-->
+		<button type="submit" id="Append_<%=list2.get(i+1).product_id%>" onclick="add('<%=list2.get(i+1).product_id%>')" value="<%=list2.get(i+1).price%>" name="<%=list2.get(i+1).product_name%>"><i class="fa fa-cart-plus fa-2x"></i></button> 		
 		<%}else{%>
-
 		<p></p><br/>
 		<p></p><br/>
 		<p></p><br/>
@@ -462,18 +423,17 @@ jQuery(document).ready(function(){
 		<%} %>
 		</td>
 		<td>
-		<%if((i+2)<list3.size()){%>
-		<h3><%=list3.get(i+2).product_name%></h3><br/>
-		<a href="upload/<%=list3.get(i+2).filename_big%>" rel="lightbox" title="<%=list3.get(i+2).product_name%>" ><img src="upload/<%=list3.get(i+2).filename_small%>" /><br/></a>
-		<h4>金額<span class="glyphicon glyphicon-usd" aria-hidden="true"><%=list3.get(i+2).price%></span></h4><br/>
-		<h4><%=list3.get(i+2).summary%></h4><br/>
-		<input type='button' value='-' class='qtyminus' field='<%=list3.get(i+2).product_name%>' />
-        <input type='text' id='<%=list3.get(i+2).product_id%>' name="<%=list3.get(i+2).product_name%>" value='0' size="3" />
-        <input type='button' value='+' class='qtyplus' field='<%=list3.get(i+2).product_name%>' />
-		<button type="submit" id="<%=list3.get(i+2).product_name%>" onclick="add()" value="<%=list3.get(i+2).product_name%>"><i class="fa fa-cart-plus fa-2x"></i></button>
-		
+		<%if((i+2)<list2.size()){%>
+		<h3><%=list2.get(i+2).product_name%></h3><br/>
+		<a href="upload/<%=list2.get(i+2).filename_big%>" rel="lightbox" title="<%=list2.get(i+2).product_name%>" ><img src="upload/<%=list2.get(i+2).filename_small%>" /><br/></a>
+		<h4>金額<span class="glyphicon glyphicon-usd" aria-hidden="true"><%=list2.get(i+2).price%></span></h4><br/>
+		<h4><%=list2.get(i+2).summary%></h4><br/>
+		<input type='button' value='-' class='qtyminus' field='quantity_<%=list2.get(i+2).product_id%>' />
+        <input type='text' id='quantity_<%=list2.get(i+2).product_id%>' name="quantity_<%=list2.get(i+2).product_id%>" value='0' size="3" />
+        <input type='button' value='+' class='qtyplus' field='quantity_<%=list2.get(i+2).product_id%>' />
+		<!--  <button type="submit" id="Append_<%=list2.get(i+2).product_id%>" onclick="add('<%=list2.get(i+2).product_id%>')" value="<%=list2.get(i+2).product_name%>"><i class="fa fa-cart-plus fa-2x"></i></button> -->
+		<button type="submit" id="Append_<%=list2.get(i+2).product_id%>" onclick="add('<%=list2.get(i+2).product_id%>')" value="<%=list2.get(i+2).price%>" name="<%=list2.get(i+2).product_name%>"><i class="fa fa-cart-plus fa-2x"></i></button> 				
 		<%}else{%>
-
 		<p></p><br/>
 		<p></p><br/>
 		<p></p><br/>
@@ -481,10 +441,8 @@ jQuery(document).ready(function(){
 		<%
 			}%>
 		</td>	
-		</tr>
-			
-		<%} %>
-		
+		</tr>			
+		<%} %>	
 			
 </table>
 </center>
@@ -500,22 +458,24 @@ jQuery(document).ready(function(){
 
 			<% 
 			ProductDAO dao4=new ProductDAODBImpl();
-			ArrayList<Product> list4=dao4.getByCategoryId(4);
-			for (int i = 0; i < list4.size(); i+=3) { %>
+			ArrayList<Product> list3=dao4.getByCategoryId(4);
+			for (int i = 0; i < list3.size(); i+=3) { %>
 	<center>
 	<table>
 		<tr>
 		<td>
-		<%if((i)<list4.size()){
+		<%if((i)<list3.size()){
 		%>
-		<h3><%=list4.get(i).product_name%></h3><br/>
-		<a href="upload/<%=list4.get(i).filename_big%>" rel="lightbox" title="<%=list4.get(i).product_name%>" ><img src="upload/<%=list4.get(i).filename_small%>" /><br/></a>
-		<h4>金額<span class="glyphicon glyphicon-usd" aria-hidden="true"><%=list4.get(i).price%></span></h4><br/>
-		<h4><%=list4.get(i).summary%></h4><br/>
-		<input type='button' value='-' class='qtyminus' field='<%=list4.get(i).product_name%>' />
-        <input type='text' id='<%=list4.get(i).product_id%>'  name="<%=list4.get(i).product_name%>" value='0' size="3" />
-        <input type='button' value='+' class='qtyplus' field='<%=list4.get(i).product_name%>' />
-		<button type="submit" id="<%=list4.get(i).product_name%>" onclick="add()" value="<%=list4.get(i).product_name%>"><i class="fa fa-cart-plus fa-2x"></i></button>
+		<h3><%=list3.get(i).product_name%></h3><br/>
+		<a href="upload/<%=list3.get(i).filename_big%>" rel="lightbox" title="<%=list3.get(i).product_name%>" ><img src="upload/<%=list3.get(i).filename_small%>" /><br/></a>
+		<h4>金額<span class="glyphicon glyphicon-usd" aria-hidden="true"><%=list3.get(i).price%></span></h4><br/>
+		<h4><%=list3.get(i).summary%></h4><br/>
+		<input type='button' value='-' class='qtyminus' field='quantity_<%=list3.get(i).product_id%>' />
+        <input type='text' id='quantity_<%=list3.get(i).product_id%>'  name="quantity_<%=list3.get(i).product_id%>" value='0' size="3" />
+        <input type='button' value='+' class='qtyplus' field='quantity_<%=list3.get(i).product_id%>' />
+		<!--  <button type="submit" id="Append_<%=list3.get(i).product_id%>" onclick="add('<%=list3.get(i).product_id%>')" value="<%=list3.get(i).product_name%>"><i class="fa fa-cart-plus fa-2x"></i></button> -->
+		<button type="submit" id="Append_<%=list3.get(i).product_id%>" onclick="add('<%=list3.get(i).product_id%>')" value="<%=list3.get(i).price%>" name="<%=list3.get(i).product_name%>"><i class="fa fa-cart-plus fa-2x"></i></button> 		
+		
 	<%}else{%>
 		<p></p><br/>
 		<p></p><br/>
@@ -524,16 +484,16 @@ jQuery(document).ready(function(){
 		<%} %>
 		</td>
 		<td>
-		<% if((i+1)<list4.size()){%>
-		<h3><%=list4.get(i+1).product_name%></h3><br/>
-		<a href="upload/<%=list4.get(i+1).filename_big%>" rel="lightbox" title="<%=list4.get(i+1).product_name%>" ><img src="upload/<%=list4.get(i+1).filename_small%>" /><br/></a>
-		<h4>金額<span class="glyphicon glyphicon-usd" aria-hidden="true"><%=list4.get(i+1).price%></span></h4><br/>
-		<h4><%=list4.get(i+1).summary%></h4><br/>
-		<input type='button' value='-' class='qtyminus' field='<%=list4.get(i+1).product_name%>' />
-        <input type='text' id='<%=list4.get(i+1).product_id%>'  name="<%=list4.get(i+1).product_name%>" value='0' size="3" />
-        <input type='button' value='+' class='qtyplus' field='<%=list4.get(i+1).product_name%>' />
-		<button type="submit" id="<%=list4.get(i+1).product_name%>" onclick="add()" value="<%=list4.get(i+1).product_name%>"><i class="fa fa-cart-plus fa-2x"></i></button>
-		
+		<% if((i+1)<list3.size()){%>
+		<h3><%=list3.get(i+1).product_name%></h3><br/>
+		<a href="upload/<%=list3.get(i+1).filename_big%>" rel="lightbox" title="<%=list3.get(i+1).product_name%>" ><img src="upload/<%=list3.get(i+1).filename_small%>" /><br/></a>
+		<h4>金額<span class="glyphicon glyphicon-usd" aria-hidden="true"><%=list3.get(i+1).price%></span></h4><br/>
+		<h4><%=list3.get(i+1).summary%></h4><br/>
+		<input type='button' value='-' class='qtyminus' field='quantity_<%=list3.get(i+1).product_id%>' />
+        <input type='text' id='quantity_<%=list3.get(i+1).product_id%>'  name="quantity_<%=list3.get(i+1).product_id%>" value='0' size="3" />
+        <input type='button' value='+' class='qtyplus' field='quantity_<%=list3.get(i+1).product_id%>' />
+		<!--  <button type="submit" id="Append_<%=list3.get(i+1).product_id%>" onclick="add('<%=list3.get(i+1).product_id%>')" value="<%=list3.get(i+1).product_name%>"><i class="fa fa-cart-plus fa-2x"></i></button> -->
+		<button type="submit" id="Append_<%=list3.get(i+1).product_id%>" onclick="add('<%=list3.get(i+1).product_id%>')" value="<%=list3.get(i+1).price%>" name="<%=list3.get(i+1).product_name%>"><i class="fa fa-cart-plus fa-2x"></i></button> 				
 		<%}else{%>
 
 		<p></p><br/>
@@ -543,16 +503,16 @@ jQuery(document).ready(function(){
 		<%} %>
 		</td>
 		<td>
-		<%if((i+2)<list4.size()){%>
-		<h3><%=list4.get(i+2).product_name%></h3><br/>
-		<a href="upload/<%=list4.get(i+2).filename_big%>" rel="lightbox" title="<%=list4.get(i+2).product_name%>" ><img src="upload/<%=list4.get(i+2).filename_small%>" /><br/></a>
-		<h4>金額<span class="glyphicon glyphicon-usd" aria-hidden="true"><%=list4.get(i+2).price%></span></h4><br/>
-		<h4><%=list4.get(i+2).summary%></h4><br/>
-		<input type='button' value='-' class='qtyminus' field='<%=list4.get(i+2).product_name%>' />
-        <input type='text' id='<%=list4.get(i+2).product_id%>' name="<%=list4.get(i+2).product_name%>" value='0' size="3" />
-        <input type='button' value='+' class='qtyplus' field='<%=list4.get(i+2).product_name%>' />
-		<button type="submit" id="<%=list4.get(i+2).product_name%>" onclick="add()" value="<%=list4.get(i+2).product_name%>"><i class="fa fa-cart-plus fa-2x"></i></button>
-		
+		<%if((i+2)<list3.size()){%>
+		<h3><%=list3.get(i+2).product_name%></h3><br/>
+		<a href="upload/<%=list3.get(i+2).filename_big%>" rel="lightbox" title="<%=list3.get(i+2).product_name%>" ><img src="upload/<%=list3.get(i+2).filename_small%>" /><br/></a>
+		<h4>金額<span class="glyphicon glyphicon-usd" aria-hidden="true"><%=list3.get(i+2).price%></span></h4><br/>
+		<h4><%=list3.get(i+2).summary%></h4><br/>
+		<input type='button' value='-' class='qtyminus' field='quantity_<%=list3.get(i+2).product_id%>' />
+        <input type='text' id='quantity_<%=list3.get(i+2).product_id%>' name="quantity_<%=list3.get(i+2).product_id%>" value='0' size="3" />
+        <input type='button' value='+' class='qtyplus' field='quantity_<%=list3.get(i+2).product_id%>' />
+		<!--  <button type="submit" id="Append_<%=list3.get(i+2).product_id%>" onclick="add('<%=list3.get(i+2).product_id%>')" value="<%=list3.get(i+2).product_name%>"><i class="fa fa-cart-plus fa-2x"></i></button> -->
+		<button type="submit" id="Append_<%=list3.get(i+2).product_id%>" onclick="add('<%=list3.get(i+2).product_id%>')" value="<%=list3.get(i+2).price%>" name="<%=list3.get(i+2).product_name%>"><i class="fa fa-cart-plus fa-2x"></i></button> 				
 		<%}else{%>
 
 		<p></p><br/>
@@ -573,106 +533,7 @@ jQuery(document).ready(function(){
 </div>
 </div>
 
-<!-- 網頁假資料做樣版用 
-       <h2><div class="bg-primary"> 義大利麵 Pasta</div></h2>
-       <div style="display: block;">
-       <div class=container>
-       <div class="row">
-         <div class="col-xs-6 col-lg-4">  
-           <h3>義大利麵A</h3>
-           <p>
-           <a href="images_b/01.jpg" rel="lightbox" title="義大利麵" ><img src="images_s/01.jpg" width="150" height="94" /></a>
-           </p> 
-           <h4>簡介</h4>
-           <h4>金額&nbsp;
-           <span class="glyphicon glyphicon-usd" aria-hidden="true">123</span>
-           </h4>&nbsp;&nbsp;
-           <input type='button' value='-' class='qtyminus' field='quantity_1' />
-           <input type='text' id='quantity_1' name="quantity_1" value='0' size="3" />
-           <input type='button' value='+' class='qtyplus' field='quantity_1' />
-           <button type="submit" id="Append_1" onclick="add(1)" value="義大利麵A"><i class="fa fa-cart-plus fa-2x"></i></button>
-            
-         </div>
-         <div class="col-xs-6 col-lg-4">
-           <h3>義大利麵B</h3>
-           <p>
-           <a href="images_b/02.jpg" rel="lightbox" title="義大利麵"><img src="images_s/02.jpg" width="150" height="94"  /></a>
-           </p> 
-           <h4>簡介</h4>
-           <h4>金額&nbsp;
-           <span class="glyphicon glyphicon-usd" aria-hidden="true">123</span>
-           </h4>&nbsp;&nbsp;
-           <input type='button' value='-' class='qtyminus' field='quantity_2' />
-           <input type='text' id='quantity_2' name="quantity_2" value='0' size="3" />
-           <input type='button' value='+' class='qtyplus' field='quantity_2' />
-           <button type="submit" id="Append_2" onclick="add(2)" value="義大利麵B"><i class="fa fa-cart-plus fa-2x"></i></button>
-         </div>
-         <div class="col-xs-6 col-lg-4">
-           <h3>義大利麵C</h3>
-           <p>
-           <a href="images_b/03.jpg" rel="lightbox" title="義大利麵"><img src="images_s/03.jpg" width="150" height="94"  /></a>
-           </p>
-           <h4>簡介</h4>
-           <h4>金額&nbsp;
-           <span class="glyphicon glyphicon-usd" aria-hidden="true">123</span>
-           </h4>&nbsp;&nbsp;
-           <input type='button' value='-' class='qtyminus' field='quantity_3' />
-            <input type='text' id='quantity_3' name="quantity_3" value='0' size="3" />
-            <input type='button' value='+' class='qtyplus' field='quantity_3' />
-           <button type="submit" id="Append_3" onclick="add(3)" value="義大利麵C"><i class="fa fa-cart-plus fa-2x"></i></button>
-
-         </div>
-         </div>
-      <div class="row">
-         <div class="col-xs-6 col-lg-4">
-           <h3>義大利麵D</h3>
-           <p>
-           <a href="images_b/04.jpg" rel="lightbox" title="義大利麵"><img src="images_s/04.jpg" width="150" height="94"  /></a>
-           </p>
-           <h4>簡介</h4>
-           <h4>金額&nbsp;
-           <span class="glyphicon glyphicon-usd" aria-hidden="true">123</span>
-           </h4>&nbsp;&nbsp;
-           <input type='button' value='-' class='qtyminus' field='quantity_4' />
-            <input type='text' id='quantity_4' name="quantity_4" value='0' size="3" />
-            <input type='button' value='+' class='qtyplus' field='quantity_4' />
-           <button type="submit" id="Append_4" onclick="add(4)" value="義大利麵D"><i class="fa fa-cart-plus fa-2x"></i></button>
-         </div>
-
-         <div class="col-xs-6 col-lg-4">
-           <h3>義大利麵E</h3>
-           <p>
-           <a href="images_b/05.jpg" rel="lightbox" title="義大利麵"><img src="images_s/05.jpg" width="150" height="94"  /></a>
-           </p>
-           <h4>簡介</h4>
-           <h4>金額&nbsp;
-           <span class="glyphicon glyphicon-usd" aria-hidden="true">123</span>
-           </h4>&nbsp;&nbsp;
-           <input type='button' value='-' class='qtyminus' field='quantity_5' />
-            <input type='text' id='quantity_5' name="quantity_5" value='0' size="3" />
-            <input type='button' value='+' class='qtyplus' field='quantity_5' />
-            <button type="submit" id="Append_5" onclick="add(5)" value="義大利麵E"><i class="fa fa-cart-plus fa-2x"></i></button>
-         </div>
-         <div class="col-xs-6 col-lg-4">
-           <h3>義大利麵F</h3>
-           <p>
-           <a href="images_b/07.jpg" rel="lightbox" title="義大利麵"><img src="images_s/07.jpg" width="150" height="94"  /></a>
-           </p>
-           <h4>簡介</h4>
-           <h4>金額&nbsp;
-           <span class="glyphicon glyphicon-usd" aria-hidden="true">123</span>
-           </h4>&nbsp;&nbsp;
-           <input type='button' value='-' class='qtyminus' field='quantity_6' />
-            <input type='text' id='quantity_6' name="quantity_6" value='0' size="3" />
-            <input type='button' value='+' class='qtyplus' field='quantity_6' />
-           <button type="submit" id="Append_6" onclick="add(6)" value="義大利麵F"><i class="fa fa-cart-plus fa-2x"></i></button>
-         </div>
-
-      </div>
-       </div>
-       </div>
--->
-       <p>  
+<p>  
    
      </div>
      
@@ -682,23 +543,19 @@ jQuery(document).ready(function(){
         <span class="glyphicon glyphicon-cutlery" aria-hidden="true"></span>&nbsp;您 的 點 餐 單&nbsp;<i class="fa fa-coffee"></i></h3>
         <hr>
            <h4>
-           <ul id="list">
+           
              <p><li><font color="Red">已加入的餐點 :</font>
-             </li></p>
-           </ul>
+             </li>
+             <div id="div">
+             <ul id="ul">
+             </ul>
+             </div>
+             </p>
+ 
            </h4>
-        <form>   
-        <h4><i class="fa fa-motorcycle"></i>
-        <td><select name="s1" id="s1">
-            <option value="X" SELECTED>請選擇外送或自取</option>
-            <option value="1">外送(加收服務費)</option>
-            <option value="2">自取</option>
-            </select>
-        </td></h4>
         <hr><footer></footer>
-        <h4> 金額總計: </h4>   
-        <hr><footer></footer>   
-        <button input type="submit" class="btn btn-success">確認送出</button> 
+        <form id="cart" action="orderListpage.jsp" method="post">
+       <button input type="submit" class="btn btn-success">確認送出</button>
         <button type="button" class="btn btn-success" onclick="del()">清除清單</button> 
         </form>
         <hr><footer></footer>   
@@ -720,7 +577,7 @@ jQuery(document).ready(function(){
                </div>
                <div class=col-md-4>
                  <h3>理念</h3>
-                 <p><h4>"線上點餐系統"讓消費者經由網路在任何地方，透過網頁呈現方式，方便快速容易使用的網頁點餐。並且建立了後台管理系統，能管理菜單、會員、訂單等所有相關內容。</h4></p>                
+                 <p><h4>"線上點餐系統"讓消費者經由網路在任何地方，透過網頁呈現方式，方便快速容易使用的網頁點餐。並且建立了後台管理系統，能管理菜單、會員、訂單等所有相關資料庫內容。</h4></p>                
                </div>
                <div class=col-md-4>
                <h3>成員</h3>
